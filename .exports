@@ -11,3 +11,6 @@ export EDITOR="$VISUAL"
 export S3_WS_BUCKET="workspace default bucket name"
 export AWS_MFA_SERIAL_NUMBER="arn:aws:iam::123456789012:mfa/<user-name>"
 export AWS_ROLE_TO_ASSUME="arn:aws:iam::123456789012:role/<role-name>"
+
+# Enable docker BuildKit 
+export DOCKER_BUILDKIT=1
