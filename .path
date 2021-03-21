@@ -1,0 +1,5 @@
+# Add `~/.local/bin` to the `$PATH`
+export PATH="$HOME/.local/bin:$PATH";
+
+# Add Visual Studio Code (code) - macOS
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH";

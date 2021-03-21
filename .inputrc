@@ -1,0 +1,4 @@
+# Settings in .inputrc affect all the programs that use the GNU readline library. 
+
+# Set the editing mode to vi.
+set editing-mode vi

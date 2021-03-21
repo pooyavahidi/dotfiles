@@ -1,0 +1,58 @@
+{
+  //// Workbench
+  "workbench.activityBar.visible": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "One Monokai",
+
+  //// Window
+  "window.zoomLevel": 1,
+  "window.menuBarVisibility": "toggle",
+
+  //// Editor
+  "editor.renderWhitespace": "none",
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80],
+  "editor.cursorBlinking": "solid",
+  "editor.fontSize": 14,
+  // Changing the default "Menlo, Monaco, ‘Courier New', monospace"
+  "editor.fontFamily": "Monaco, monospace",
+  // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
+  "editor.acceptSuggestionOnEnter": "off",
+  "[markdown]":{
+	  "editor.formatOnSave": true,
+	  "editor.wordWrap": "on"
+  },
+  //// Terminal panel
+  "terminal.integrated.fontSize": 13,
+
+  //// Others
+  "files.eol": "\n",
+  "breadcrumbs.enabled": true,
+  "remote.SSH.configFile": "${env:HOME}/.ssh/config",
+  
+  //// vscodevim extension keybindings
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["J", "J"],
+      "after": ["<Esc>"],
+      "commands":[":w"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+        "before": [
+            "p"
+        ], 
+        "after": [
+            "p",
+            "g",
+            "v",
+            "y"
+        ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Navigations
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~"
+alias -- -="cd -"
+
+# Shortcuts
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias ws="cd $WORKSPACE"
+alias temp="cd $WORKSPACE/temp"
+alias g="git"
+alias d="docker"
+
+# General aliases
+alias ll="ls -lahG"
+
+# Always enable colored `grep` output
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Quick notes in vscode
+alias qn='code ${WORKSPACE}/quick_notes/$(date +"%y%m%d_%H%M%S").md'

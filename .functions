@@ -1,0 +1,117 @@
+#!/bin/sh
+
+# Open a new terminal
+function term () {
+	# If macos then use open command
+	if [[ $(uname -s) =~ "Darwin" ]]; then
+		open -a Terminal .
+	# If gnome then use gnome command
+	elif [[ ${XDG_CURRENT_DESKTOP} =~ "GNOME" ]]; then
+		gnome-terminal
+	fi
+}
+
+# Open the graphical files explorer 
+function open-files {
+    dir=$1
+    [[ -z $dir ]] && dir='.'
+
+    # If it's macOS
+	if [[ $(uname -s) =~ "Darwin" ]]; then
+		open $dir
+    # If it's gnome
+	elif [[ ${XDG_CURRENT_DESKTOP} =~ "GNOME" ]]; then
+		xdg-open $dir
+	fi
+	unset dir;
+}
+
+# Ping tcp ports 
+function ping-tcp {
+    # $1 = host, $2 = port
+    echo > /dev/tcp/$1/$2 && echo "$1:$2 is open."
+}
+
+# Ping udp ports
+function ping-udp {
+    # $1 = host, $2 = port
+    echo > /dev/udp/$1/$2 && echo "$1:$2 is open."
+}
+
+
+#################################
+# Docker related functins
+#################################
+
+# Reset network and docker service. 
+# If this OS is running in VM, in cases that host goes to sleep, the 
+# networking of the VM stops working. Hence, restart the network and docker
+# to restart the docker network.
+function reset-network {
+    sudo systemctl restart NetworkManager
+    sudo systemctl restart docker
+}
+
+function docker-prune-all(){
+    docker container prune -f
+    docker image prune -f
+}
+
+function docker-remove-all-containers {
+    docker container ls -a | awk 'NR>1 {print $1}' | xargs docker container rm
+}
+
+function docker-reset {
+    sudo systemctl restart docker
+}
+
+
+#################################
+# AWS related functions
+# Functions to make working with
+# awscli easier.
+#################################
+
+function aws-sts-assume-role {
+    . sts_assume_role.sh \
+        $AWS_MFA_SERIAL_NUMBER \
+        $AWS_ROLE_TO_ASSUME \
+        "assume_role_session_$(date +"%y%m%d_%H%M%S")"
+}
+function aws-user-elevate-to-poweruser {
+    aws iam add-user-to-group --user-name $1 --group-name PowerUsers
+}
+
+function aws-user-elevate-to-readonly {
+    aws iam add-user-to-group --user-name $1 --group-name ReadOnlyUsers
+}
+
+function aws-user-elevate-to-admin {
+    aws iam add-user-to-group --user-name $1 --group-name Admins
+}
+
+function aws-echo-credential {
+    echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    echo AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
+    echo AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
+}
+
+# sync workspace directory to the workspace bucket in s3
+function s3-upload-ws {
+    aws s3 sync ${WORKSPACE} s3://${S3_WS_BUCKET}/ \
+        --exclude '*.git/*' \
+        --exclude '*.env/*' \
+		--exclude '.DS_Store' \
+        --delete
+}
+
+function s3-upload {
+	aws s3 cp $1 s3://${S3_WS_BUCKET}
+}
+function s3-ls {
+	aws s3 ls s3://${S3_WS_BUCKET}
+}
+function s3-download {
+	aws s3 cp s3://${S3_WS_BUCKET}/$1
+}
