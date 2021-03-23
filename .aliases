@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# This file is based on the solid work of @mathiasbynens, thanks!
+# https://github.com/mathiasbynens/dotfiles/blob/main/.aliases
+
 # Navigations
 alias ..="cd .."
 alias ...="cd ../.."
@@ -16,8 +19,27 @@ alias temp="cd $WORKSPACE/temp"
 alias g="git"
 alias d="docker"
 
-# General aliases
-alias ll="ls -lahG"
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+else # macOS `ls`
+	colorflag="-G"
+fi
+
+# List all files colorized in long format
+alias l="ls -lFh ${colorflag}"
+
+# List all files colorized in long format, excluding . and ..
+alias ll="ls -lAFh ${colorflag}"
+
+# List all files 
+alias la="ls -laF ${colorflag}"
+
+# List only directories
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+ 
+# Always use color output for `ls`
+alias ls="command ls ${colorflag}"
 
 # Always enable colored `grep` output
 alias grep='grep --color=auto'
