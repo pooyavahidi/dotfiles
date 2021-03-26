@@ -9,3 +9,11 @@ for file in ~/.{path,shell_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+# Completions
+##############################
+# Set the completion for awscli
+if __aws_comp=$(which aws_completer); then
+	complete -C ${__aws_comp} aws
+fi;
+unset __aws_comp;

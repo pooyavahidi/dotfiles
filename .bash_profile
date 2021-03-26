@@ -1,3 +1,6 @@
+# Set the $SHELL if not already
+[[ -z $SHELL ]] && SHELL='/bin/bash'
+
 source ~/.shell_profile
 
 # Add bash specific here
