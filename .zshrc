@@ -1,5 +1,5 @@
-# Set $SHELL if not already
-[[ -z $SHELL ]] && SHELL='/bin/zsh'
+# Set SHELL if it's empty
+[[ -z $SHELL ]] && export SHELL='/bin/zsh'
 
 # load the tab completion 
 autoload -Uz compinit && compinit
