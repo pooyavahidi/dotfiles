@@ -26,8 +26,20 @@ set shiftwidth=4
 " Copy indent from the current line when starting a new line
 set autoindent
 
-" Highlight current line
-"set cursorline
+" Always show the status line
+set laststatus=2
+
+" Highlight searches
+set hlsearch
+
+" Ignore case of searches
+set ignorecase
+
+" Highlight dynamically as pattern is typed
+set incsearch
+
+" Enable mouse in all modes
+set mouse=a
 
 " Mappings for insert mode
 """"""""""""""""""""""""""""""""""""""

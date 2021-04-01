@@ -17,7 +17,6 @@ alias dt="cd ~/Desktop"
 alias ws="cd $WORKSPACE"
 alias temp="cd $WORKSPACE/temp"
 alias g="git"
-alias d="docker"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -48,3 +47,25 @@ alias egrep='egrep --color=auto'
 
 # Quick notes in vscode
 alias qn='code ${WORKSPACE}/quick_notes/$(date +"%y%m%d_%H%M%S").md'
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
+# tmux aliases
+##############################
+# tmux
+alias t='tmux'
+
+# tmux attach to session by its tag
+alias tat='tmux attach -t'
+
+# tmux list of sessions
+alias tl='tmux ls'
+
+# tmux attach to the last session or create a new one
+alias ta='tmux attach || tmux new-session'
+
+# docker aliases
+##############################
+# docker
+alias d='docker'

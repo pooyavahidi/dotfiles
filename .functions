@@ -57,11 +57,22 @@ function docker-prune-all(){
     docker image prune -f
 }
 
-function docker-remove-all-containers {
-    docker container ls -a | awk 'NR>1 {print $1}' | xargs docker container rm
+function docker-remove-containers {
+    docker container ls -a | awk 'NR>1 {print $1}' | xargs docker container rm -f
 }
 
-function docker-reset {
+function docker-remove-all {
+	# Stop all the containers
+    docker container ls | awk 'NR>1 {print $1}' | xargs docker container stop
+
+	# Remove all the containers
+	docker-remove-containers
+
+	# Remove all the images 
+    docker image ls | awk 'NR>1 {print $3}' | xargs docker image rm -f
+}
+
+function docker-restart {
     sudo systemctl restart docker
 }
 
