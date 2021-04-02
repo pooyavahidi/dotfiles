@@ -1,7 +1,7 @@
 [
     // Keybindings for vscodevim extension
     {
-        "key": "ctrl+j ctrl+l",
+        "key": "ctrl+; l",
         "command": "workbench.action.showCommands"
     },
     {
@@ -9,7 +9,7 @@
         "command": "-workbench.action.showCommands"
     },
     {
-        "key": "ctrl+j ctrl+k",
+        "key": "ctrl+; j",
         "command": "workbench.action.quickOpen"
     },
     {
@@ -17,7 +17,7 @@
         "command": "-workbench.action.quickOpen"
     },
     {
-        "key": "ctrl+j ctrl+'",
+        "key": "ctrl+; '",
         "command": "workbench.action.terminal.toggleTerminal"
     },
     {
@@ -33,11 +33,11 @@
         "command": "-workbench.action.terminal.new"
     },
     {
-        "key": "ctrl+j ctrl+o",
+        "key": "ctrl+; f",
         "command": "workbench.files.action.focusFilesExplorer"
     },
     {
-        "key": "ctrl+j ctrl+p",
+        "key": "ctrl+; s",
         "command": "workbench.action.toggleSidebarVisibility"
     },
     {
@@ -45,7 +45,7 @@
         "command": "-workbench.action.toggleSidebarVisibility"
     },
     {
-        "key": "ctrl+j ctrl+i",
+        "key": "ctrl+; e",
         "command": "workbench.action.focusFirstEditorGroup"
     },
     {
@@ -67,7 +67,7 @@
         "when": "terminalFocus && terminalProcessSupported"
     },
     {
-        "key": "ctrl+j a",
+        "key": "ctrl+; a",
         "command": "editor.action.selectAll"
     },
     {
@@ -75,7 +75,7 @@
         "command": "-editor.action.selectAll"
     },
     {
-        "key": "ctrl+j c",
+        "key": "ctrl+; c",
         "command": "editor.action.clipboardCopyAction"
     },
     {
@@ -83,7 +83,7 @@
         "command": "-editor.action.clipboardCopyAction"
     },
     {
-        "key": "ctrl+j v",
+        "key": "ctrl+; v",
         "command": "editor.action.clipboardPasteAction"
     },
     {
@@ -91,11 +91,19 @@
         "command": "-editor.action.clipboardPasteAction"
     },
     {
-        "key": "ctrl+j x",
+        "key": "ctrl+; x",
         "command": "editor.action.clipboardCutAction"
     },
     {
         "key": "ctrl+x",
         "command": "-editor.action.clipboardCutAction"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl+; m",
+        "command": "workbench.action.toggleMaximizedPanel"
     }
 ]
