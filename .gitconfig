@@ -1,0 +1,18 @@
+[alias]
+	# View the current status in the short format
+	s = status --short
+	
+	# branch
+	b = branch
+
+	# List all branches
+	ba = branch --all
+	
+	# commit
+	ci = commit
+
+	# checkout
+	co = checkout
+
+	# Commit all changes using verbose commit
+	ca = !git add -A && git commit -av
