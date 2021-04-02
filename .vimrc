@@ -45,3 +45,8 @@ set mouse=a
 """"""""""""""""""""""""""""""""""""""
 " Map jj to Esc 
 imap jj <Esc>
+
+" Mappings for normal mode
+""""""""""""""""""""""""""""""""""""""
+" This will remove the search highlight after hitting return
+nnoremap <CR> :noh<CR><CR>
