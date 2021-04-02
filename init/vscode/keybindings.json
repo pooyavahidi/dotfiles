@@ -17,10 +17,6 @@
         "command": "-workbench.action.quickOpen"
     },
     {
-        "key": "ctrl+; '",
-        "command": "workbench.action.terminal.toggleTerminal"
-    },
-    {
         "key": "ctrl+`",
         "command": "-workbench.action.terminal.toggleTerminal"
     },
@@ -105,5 +101,17 @@
     {
         "key": "ctrl+; m",
         "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "ctrl+; '",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+; z",
+        "command": "workbench.action.toggleZenMode"
+    },
+    {
+        "key": "ctrl+k z",
+        "command": "-workbench.action.toggleZenMode"
     }
 ]
