@@ -56,14 +56,15 @@ alias path='echo -e ${PATH//:/\\n}'
 # tmux
 alias t='tmux'
 
-# tmux attach to session by its tag
-alias tat='tmux attach -t'
-
 # tmux list of sessions
 alias tl='tmux ls'
 
-# tmux attach to the last session or create a new one
-alias ta='tmux attach || tmux new-session'
+# tmux attach to the last session
+alias ta='tmux attach'
+
+# tmux attach to session or create a new one
+alias tat='tmux attach -t $1 > /dev/null 2>&1 || tmux new-session -s $1'
+
 
 # docker aliases
 ##############################
