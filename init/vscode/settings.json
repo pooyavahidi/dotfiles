@@ -41,7 +41,7 @@
   "breadcrumbs.enabled": true,
   "remote.SSH.configFile": "${env:HOME}/.ssh/config",
   
-  //// vscodevim extension keybindings
+  //// vscodevim extension settings
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "j"],
@@ -65,5 +65,16 @@
             "y"
         ]
     }
-  ]
+  ],
+
+  //// python extension settings
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+      "--enable=F,E,W,R,C",
+      "--disable=no-absolute-import",
+      "--max-line-length=80"
+  ],
+  "python.linting.mypyEnabled": true,
+  "python.linting.pycodestyleEnabled": true,
+  "python.linting.lintOnSave": true
 }
