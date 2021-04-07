@@ -29,11 +29,11 @@
         "command": "-workbench.action.terminal.new"
     },
     {
-        "key": "ctrl+; f",
+        "key": "ctrl+; s",
         "command": "workbench.files.action.focusFilesExplorer"
     },
     {
-        "key": "ctrl+; s",
+        "key": "ctrl+; shift+s",
         "command": "workbench.action.toggleSidebarVisibility"
     },
     {
@@ -119,7 +119,7 @@
         "command": "workbench.action.focusNextGroup"
     },
     {
-        "key": "ctrl+; '",
+        "key": "ctrl+; shift+;",
         "command": "workbench.action.terminal.toggleTerminal"
     },
     {
