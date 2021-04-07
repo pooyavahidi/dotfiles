@@ -1,6 +1,6 @@
 [alias]
 	# View the current status in the short format
-	s = status --short
+	s = status --short --branch
 	
 	# branch
 	b = branch
