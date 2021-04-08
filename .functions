@@ -101,12 +101,15 @@ function aws-user-elevate-to-admin {
     aws iam add-user-to-group --user-name $1 --group-name Admins
 }
 
-function aws-echo-credential {
+function aws-list-env-variables {
+    echo AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
+	echo AWS_REGION=$AWS_REGION
+	echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
     echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
     echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
     echo AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
-    echo AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
 }
+
 
 # sync workspace directory to the workspace bucket in s3
 function s3-upload-ws {
