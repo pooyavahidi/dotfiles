@@ -123,9 +123,15 @@ function s3-upload-ws {
 function s3-upload {
 	aws s3 cp $1 s3://${S3_WS_BUCKET}
 }
+
 function s3-ls {
 	aws s3 ls s3://${S3_WS_BUCKET}
 }
+
 function s3-download {
-	aws s3 cp s3://${S3_WS_BUCKET}/$1
+	[[ -z $1 || -z $2 ]] \
+		&& echo "Usage: s3-download <source> <destination>" \
+		&& return
+
+	aws s3 sync s3://${S3_WS_BUCKET}/$1 $2
 }
