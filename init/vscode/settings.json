@@ -24,12 +24,12 @@
 
   //// markdown settings
   "[markdown]":{
-	  "editor.formatOnSave": true,
-	  "editor.wordWrap": "on",
+	"editor.formatOnSave": true,
+	"editor.wordWrap": "on",
     "editor.quickSuggestions": {
-        "other": true,
-        "comments": false,
-        "strings": true
+      "other": true,
+      "comments": false,
+      "strings": true
     }
   },
 
@@ -67,14 +67,15 @@
     }
   ],
 
-  //// python extension settings
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": [
-      "--enable=F,E,W,R,C",
-      "--disable=no-absolute-import",
-      "--max-line-length=80"
+  //// python settings
+  "[python]": {
+    "editor.formatOnSave": true
+  },
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": [
+      "--line-length", "79"
   ],
-  "python.linting.mypyEnabled": true,
+  "python.linting.pylintEnabled": true,
   "python.linting.pycodestyleEnabled": true,
   "python.linting.lintOnSave": true
 }
