@@ -64,7 +64,8 @@ disable=
     missing-docstring,
     protected-access,
     too-few-public-methods,
-	no-absolute-import
+	no-absolute-import,
+	no-self-use
 
 
 [REPORTS]
