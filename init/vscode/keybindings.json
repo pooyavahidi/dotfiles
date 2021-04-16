@@ -157,5 +157,17 @@
     {
         "key": "ctrl+k ctrl+shift+w",
         "command": "-workbench.action.closeAllGroups"
+    },
+    {
+        "key": "ctrl+; f",
+        "command": "workbench.view.search.focus"
+    },
+    {
+        "key": "ctrl+-",
+        "command": "-workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+=",
+        "command": "-workbench.action.zoomIn"
     }
 ]
