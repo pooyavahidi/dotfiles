@@ -74,5 +74,10 @@
   ],
   "python.linting.pylintEnabled": true,
   "python.linting.pycodestyleEnabled": true,
-  "python.linting.lintOnSave": true
+  "python.linting.lintOnSave": true,
+
+  //// docker settings
+  "[dockerfile]": {
+    "editor.formatOnSave": false
+  }
 }
