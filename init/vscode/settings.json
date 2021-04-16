@@ -21,10 +21,10 @@
   "editor.fontFamily": "Monaco, monospace",
   // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
   "editor.acceptSuggestionOnEnter": "off",
+  "editor.formatOnSave": true,
 
   //// markdown settings
   "[markdown]":{
-	"editor.formatOnSave": true,
 	"editor.wordWrap": "on",
     "editor.quickSuggestions": {
       "other": true,
@@ -68,9 +68,6 @@
   ],
 
   //// python settings
-  "[python]": {
-    "editor.formatOnSave": true
-  },
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": [
       "--line-length", "79"
