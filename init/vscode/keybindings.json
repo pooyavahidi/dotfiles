@@ -9,10 +9,6 @@
         "command": "-workbench.action.showCommands"
     },
     {
-        "key": "ctrl+; j",
-        "command": "workbench.action.quickOpen"
-    },
-    {
         "key": "ctrl+p",
         "command": "-workbench.action.quickOpen"
     },
@@ -103,7 +99,7 @@
         "command": "workbench.action.toggleMaximizedPanel"
     },
     {
-        "key": "ctrl+; ;",
+        "key": "ctrl+; '",
         "command": "workbench.action.terminal.focus"
     },
     {
@@ -119,7 +115,7 @@
         "command": "workbench.action.focusNextGroup"
     },
     {
-        "key": "ctrl+; shift+;",
+        "key": "ctrl+; shift+'",
         "command": "workbench.action.terminal.toggleTerminal"
     },
     {
@@ -169,5 +165,29 @@
     {
         "key": "ctrl+=",
         "command": "-workbench.action.zoomIn"
+    },
+    {
+        "key": "ctrl+; ctrl+j",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+; j",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+; ctrl+l",
+        "command": "workbench.action.showCommands"
+    },
+    {
+        "key": "ctrl+; ctrl+'",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+; ctrl+e",
+        "command": "workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": "ctrl+; r",
+        "command": "workbench.action.tasks.reRunTask"
     }
 ]
