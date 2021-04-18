@@ -40,6 +40,10 @@ alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
 
+# Easier to clear screen and see the lists
+alias cl="clear"
+alias cll="clear && ls -lAFh ${colorflag}"
+
 # Always enable colored `grep` output
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
