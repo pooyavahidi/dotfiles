@@ -4,8 +4,6 @@
 mfa_serial_number=$1 #"arn:aws:iam::trusted_account_id:mfa/myuser"
 role_arn=$2 #"arn:aws:iam::trusting_account_id:role/role_name"
 
-set -u
-
 # Reset the environment variables
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
