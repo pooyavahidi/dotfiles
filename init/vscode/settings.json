@@ -1,83 +1,98 @@
 {
-  //// Workbench
-  "workbench.activityBar.visible": true,
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "One Monokai",
-
-  //// Window
-  "window.zoomLevel": 1,
-  "window.menuBarVisibility": "toggle",
-
-  //// Editor
-  "editor.renderWhitespace": "none",
-  "editor.minimap.enabled": false,
-  "editor.rulers": [80],
-  "editor.cursorBlinking": "solid",
-  "editor.fontSize": 14,
-  "editor.tabSize": 4,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  // Changing the default "Menlo, Monaco, ‘Courier New', monospace"
-  "editor.fontFamily": "Monaco, monospace",
-  // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
-  "editor.acceptSuggestionOnEnter": "off",
-  "editor.formatOnSave": true,
-
-  //// markdown settings
-  "[markdown]":{
-	"editor.wordWrap": "on",
-    "editor.quickSuggestions": {
-      "other": true,
-      "comments": false,
-      "strings": true
-    }
-  },
-
-  //// Terminal panel
-  "terminal.integrated.fontSize": 13,
-
-  //// Others
-  "files.eol": "\n",
-  "breadcrumbs.enabled": true,
-  "remote.SSH.configFile": "${env:HOME}/.ssh/config",
-  
-  //// vscodevim extension settings
-  "vim.insertModeKeyBindings": [
-    {
-      "before": ["j", "j"],
-      "after": ["<Esc>"]
+    //// Workbench
+    "workbench.activityBar.visible": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "One Monokai",
+    //// Window
+    "window.zoomLevel": 1,
+    "window.menuBarVisibility": "toggle",
+    //// Editor
+    "editor.renderWhitespace": "none",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [
+        80
+    ],
+    "editor.cursorBlinking": "solid",
+    "editor.fontSize": 14,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    // Changing the default "Menlo, Monaco, ‘Courier New', monospace"
+    "editor.fontFamily": "Monaco, monospace",
+    // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.formatOnSave": true,
+    //// markdown settings
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        }
     },
-    {
-      "before": ["J", "J"],
-      "after": ["<Esc>"],
-      "commands":[":w"]
+    //// Terminal panel
+    "terminal.integrated.fontSize": 13,
+    //// Others
+    "files.eol": "\n",
+    "breadcrumbs.enabled": true,
+    "remote.SSH.configFile": "${env:HOME}/.ssh/config",
+    //// vscodevim extension settings
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
+                "J",
+                "J"
+            ],
+            "after": [
+                "<Esc>"
+            ],
+            "commands": [
+                ":w"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "p"
+            ],
+            "after": [
+                "p",
+                "g",
+                "v",
+                "y"
+            ]
+        }
+    ],
+    //// python settings
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "79"
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.lintOnSave": true,
+    //// docker settings
+    "[dockerfile]": {
+        "editor.formatOnSave": false
+    },
+    //// json
+    "[json]": {
+        "editor.tabSize": 2,
+    },
+    //// json with comments
+    "[jsonc]": {
+        "editor.tabSize": 2
     }
-  ],
-  "vim.visualModeKeyBindingsNonRecursive": [
-    {
-        "before": [
-            "p"
-        ], 
-        "after": [
-            "p",
-            "g",
-            "v",
-            "y"
-        ]
-    }
-  ],
-
-  //// python settings
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": [
-      "--line-length", "79"
-  ],
-  "python.linting.pylintEnabled": true,
-  "python.linting.pycodestyleEnabled": true,
-  "python.linting.lintOnSave": true,
-
-  //// docker settings
-  "[dockerfile]": {
-    "editor.formatOnSave": false
-  }
 }
