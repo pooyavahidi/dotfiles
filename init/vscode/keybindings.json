@@ -1,193 +1,193 @@
 [
-    // Keybindings for vscodevim extension
-    {
-        "key": "ctrl+; l",
-        "command": "workbench.action.showCommands"
-    },
-    {
-        "key": "ctrl+shift+p",
-        "command": "-workbench.action.showCommands"
-    },
-    {
-        "key": "ctrl+p",
-        "command": "-workbench.action.quickOpen"
-    },
-    {
-        "key": "ctrl+`",
-        "command": "-workbench.action.terminal.toggleTerminal"
-    },
-    {
-        "key": "ctrl+shift+'",
-        "command": "workbench.action.terminal.new"
-    },
-    {
-        "key": "ctrl+shift+`",
-        "command": "-workbench.action.terminal.new"
-    },
-    {
-        "key": "ctrl+; s",
-        "command": "workbench.files.action.focusFilesExplorer"
-    },
-    {
-        "key": "ctrl+; shift+s",
-        "command": "workbench.action.toggleSidebarVisibility"
-    },
-    {
-        "key": "ctrl+b",
-        "command": "-workbench.action.toggleSidebarVisibility"
-    },
-    {
-        "key": "ctrl+; e",
-        "command": "workbench.action.focusFirstEditorGroup"
-    },
-    {
-        "key": "ctrl+1",
-        "command": "-workbench.action.focusFirstEditorGroup"
-    },
-    {
-        "key": "ctrl+,",
-        "command": "-workbench.action.openSettings"
-    },
-    {
-        "key": "ctrl+'",
-        "command": "workbench.action.terminal.focusNextPane",
-        "when": "terminalFocus && terminalProcessSupported"
-    },
-    {
-        "key": "alt+down",
-        "command": "-workbench.action.terminal.focusNextPane",
-        "when": "terminalFocus && terminalProcessSupported"
-    },
-    {
-        "key": "ctrl+; a",
-        "command": "editor.action.selectAll"
-    },
-    {
-        "key": "ctrl+a",
-        "command": "-editor.action.selectAll"
-    },
-    {
-        "key": "ctrl+; c",
-        "command": "editor.action.clipboardCopyAction"
-    },
-    {
-        "key": "ctrl+c",
-        "command": "-editor.action.clipboardCopyAction"
-    },
-    {
-        "key": "ctrl+; v",
-        "command": "editor.action.clipboardPasteAction"
-    },
-    {
-        "key": "ctrl+v",
-        "command": "-editor.action.clipboardPasteAction"
-    },
-    {
-        "key": "ctrl+; x",
-        "command": "editor.action.clipboardCutAction"
-    },
-    {
-        "key": "ctrl+x",
-        "command": "-editor.action.clipboardCutAction"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "-workbench.action.togglePanel"
-    },
-    {
-        "key": "ctrl+; m",
-        "command": "workbench.action.toggleMaximizedPanel"
-    },
-    {
-        "key": "ctrl+; '",
-        "command": "workbench.action.terminal.focus"
-    },
-    {
-        "key": "ctrl+; z",
-        "command": "workbench.action.toggleZenMode"
-    },
-    {
-        "key": "ctrl+k z",
-        "command": "-workbench.action.toggleZenMode"
-    },
-    {
-        "key": "ctrl+; o",
-        "command": "workbench.action.focusNextGroup"
-    },
-    {
-        "key": "ctrl+; shift+'",
-        "command": "workbench.action.terminal.toggleTerminal"
-    },
-    {
-        "key": "ctrl+; x",
-        "command": "workbench.action.closeEditorsAndGroup"
-    },
-    {
-        "key": "ctrl+; shift+p",
-        "command": "workbench.action.openPreviousEditorFromHistory"
-    },
-    {
-        "key": "ctrl+; p",
-        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
-    },
-    {
-        "key": "ctrl+; n",
-        "command": "workbench.action.nextEditorInGroup"
-    },
-    {
-        "key": "ctrl+k ctrl+pagedown",
-        "command": "-workbench.action.nextEditorInGroup"
-    },
-    {
-        "key": "ctrl+w",
-        "command": "-workbench.action.closeActiveEditor"
-    },
-    {
-        "key": "ctrl+; shift+x",
-        "command": "workbench.action.closeAllEditors"
-    },
-    {
-        "key": "ctrl+k ctrl+w",
-        "command": "-workbench.action.closeAllEditors"
-    },
-    {
-        "key": "ctrl+k ctrl+shift+w",
-        "command": "-workbench.action.closeAllGroups"
-    },
-    {
-        "key": "ctrl+; f",
-        "command": "workbench.view.search.focus"
-    },
-    {
-        "key": "ctrl+-",
-        "command": "-workbench.action.zoomOut"
-    },
-    {
-        "key": "ctrl+=",
-        "command": "-workbench.action.zoomIn"
-    },
-    {
-        "key": "ctrl+; ctrl+j",
-        "command": "workbench.action.quickOpen"
-    },
-    {
-        "key": "ctrl+; j",
-        "command": "workbench.action.quickOpen"
-    },
-    {
-        "key": "ctrl+; ctrl+l",
-        "command": "workbench.action.showCommands"
-    },
-    {
-        "key": "ctrl+; ctrl+'",
-        "command": "workbench.action.terminal.focus"
-    },
-    {
-        "key": "ctrl+; ctrl+e",
-        "command": "workbench.action.focusFirstEditorGroup"
-    },
-    {
-        "key": "ctrl+; r",
-        "command": "workbench.action.tasks.reRunTask"
-    }
+  // Keybindings for vscodevim extension
+  {
+    "key": "ctrl+; l",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "-workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+`",
+    "command": "-workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+shift+'",
+    "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+shift+`",
+    "command": "-workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+; s",
+    "command": "workbench.files.action.focusFilesExplorer"
+  },
+  {
+    "key": "ctrl+; shift+s",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+; e",
+    "command": "workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "ctrl+1",
+    "command": "-workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "ctrl+,",
+    "command": "-workbench.action.openSettings"
+  },
+  {
+    "key": "ctrl+'",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+down",
+    "command": "-workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+; a",
+    "command": "editor.action.selectAll"
+  },
+  {
+    "key": "ctrl+a",
+    "command": "-editor.action.selectAll"
+  },
+  {
+    "key": "ctrl+; c",
+    "command": "editor.action.clipboardCopyAction"
+  },
+  {
+    "key": "ctrl+c",
+    "command": "-editor.action.clipboardCopyAction"
+  },
+  {
+    "key": "ctrl+; v",
+    "command": "editor.action.clipboardPasteAction"
+  },
+  {
+    "key": "ctrl+v",
+    "command": "-editor.action.clipboardPasteAction"
+  },
+  {
+    "key": "ctrl+; x",
+    "command": "editor.action.clipboardCutAction"
+  },
+  {
+    "key": "ctrl+x",
+    "command": "-editor.action.clipboardCutAction"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+; m",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  {
+    "key": "ctrl+; '",
+    "command": "workbench.action.terminal.focus"
+  },
+  {
+    "key": "ctrl+; z",
+    "command": "workbench.action.toggleZenMode"
+  },
+  {
+    "key": "ctrl+k z",
+    "command": "-workbench.action.toggleZenMode"
+  },
+  {
+    "key": "ctrl+; o",
+    "command": "workbench.action.focusNextGroup"
+  },
+  {
+    "key": "ctrl+; shift+'",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+; x",
+    "command": "workbench.action.closeEditorsAndGroup"
+  },
+  {
+    "key": "ctrl+; shift+p",
+    "command": "workbench.action.openPreviousEditorFromHistory"
+  },
+  {
+    "key": "ctrl+; p",
+    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
+  },
+  {
+    "key": "ctrl+; n",
+    "command": "workbench.action.nextEditorInGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+pagedown",
+    "command": "-workbench.action.nextEditorInGroup"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+; shift+x",
+    "command": "workbench.action.closeAllEditors"
+  },
+  {
+    "key": "ctrl+k ctrl+w",
+    "command": "-workbench.action.closeAllEditors"
+  },
+  {
+    "key": "ctrl+k ctrl+shift+w",
+    "command": "-workbench.action.closeAllGroups"
+  },
+  {
+    "key": "ctrl+; f",
+    "command": "workbench.view.search.focus"
+  },
+  {
+    "key": "ctrl+-",
+    "command": "-workbench.action.zoomOut"
+  },
+  {
+    "key": "ctrl+=",
+    "command": "-workbench.action.zoomIn"
+  },
+  {
+    "key": "ctrl+; ctrl+j",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+; j",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+; ctrl+l",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+; ctrl+'",
+    "command": "workbench.action.terminal.focus"
+  },
+  {
+    "key": "ctrl+; ctrl+e",
+    "command": "workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "ctrl+; r",
+    "command": "workbench.action.tasks.reRunTask"
+  }
 ]
