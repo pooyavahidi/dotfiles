@@ -189,5 +189,25 @@
   {
     "key": "ctrl+; r",
     "command": "workbench.action.tasks.reRunTask"
+  },
+  {
+    "key": "ctrl+; d",
+    "command": "workbench.action.debug.start",
+    "when": "debuggersAvailable && debugState != 'initializing'"
+  },
+  {
+    "key": "ctrl+; d",
+    "command": "workbench.action.debug.continue",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+; shift+d",
+    "command": "workbench.action.debug.stop",
+    "when": "inDebugMode && !focusedSessionIsAttach"
+  },
+  {
+    "key": "ctrl+; shift+d",
+    "command": "workbench.action.debug.disconnect",
+    "when": "focusedSessionIsAttach && inDebugMode"
   }
 ]
