@@ -94,5 +94,6 @@
   //// json with comments
   "[jsonc]": {
     "editor.tabSize": 2
-  }
+  },
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}"
 }
