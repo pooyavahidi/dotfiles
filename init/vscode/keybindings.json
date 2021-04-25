@@ -191,23 +191,51 @@
     "command": "workbench.action.tasks.reRunTask"
   },
   {
-    "key": "ctrl+; d",
+    "key": "ctrl+\\",
     "command": "workbench.action.debug.start",
     "when": "debuggersAvailable && debugState != 'initializing'"
   },
   {
-    "key": "ctrl+; d",
+    "key": "ctrl+\\",
     "command": "workbench.action.debug.continue",
     "when": "inDebugMode"
   },
   {
-    "key": "ctrl+; shift+d",
+    "key": "ctrl+shift+\\",
     "command": "workbench.action.debug.stop",
     "when": "inDebugMode && !focusedSessionIsAttach"
   },
   {
-    "key": "ctrl+; shift+d",
+    "key": "ctrl+shift+\\",
     "command": "workbench.action.debug.disconnect",
     "when": "focusedSessionIsAttach && inDebugMode"
+  },
+  {
+    "key": "ctrl+shift+\\",
+    "command": "-editor.action.jumpToBracket",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+; shift+\\",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "-workbench.action.splitEditor"
+  },
+  {
+    "key": "o",
+    "command": "workbench.action.debug.stepOver",
+    "when": "debugState == 'stopped'"
+  },
+  {
+    "key": "i",
+    "command": "workbench.action.debug.stepInto",
+    "when": "debugState != 'inactive'"
+  },
+  {
+    "key": "shift+i",
+    "command": "workbench.action.debug.stepOut",
+    "when": "debugState == 'stopped'"
   }
 ]
