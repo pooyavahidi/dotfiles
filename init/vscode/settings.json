@@ -1,12 +1,12 @@
 {
-  //// Workbench
+  //// workbench
   "workbench.activityBar.visible": true,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "One Monokai",
-  //// Window
+  //// window
   "window.zoomLevel": 1,
   "window.menuBarVisibility": "toggle",
-  //// Editor
+  //// editor
   "editor.renderWhitespace": "none",
   "editor.minimap.enabled": false,
   "editor.rulers": [
@@ -22,18 +22,11 @@
   // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
   "editor.acceptSuggestionOnEnter": "off",
   "editor.formatOnSave": true,
-  //// markdown settings
-  "[markdown]": {
-    "editor.wordWrap": "on",
-    "editor.quickSuggestions": {
-      "other": true,
-      "comments": false,
-      "strings": true
-    }
-  },
-  //// Terminal panel
+  //// debug settings
+  "debug.onTaskErrors": "showErrors",
+  //// terminal panel
   "terminal.integrated.fontSize": 13,
-  //// Others
+  //// others
   "files.eol": "\n",
   "breadcrumbs.enabled": true,
   "remote.SSH.configFile": "${env:HOME}/.ssh/config",
@@ -74,6 +67,15 @@
       ]
     }
   ],
+  //// markdown settings
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    }
+  },
   //// python settings
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": [
@@ -95,5 +97,7 @@
   "[jsonc]": {
     "editor.tabSize": 2
   },
+  //// c/c++ settings
   "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}"
 }
+
