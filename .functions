@@ -38,6 +38,11 @@ function ping-udp {
     echo > /dev/udp/$1/$2 && echo "$1:$2 is open."
 }
 
+# Create a new python project using scaffolding templates
+function scaffold-python-project {
+	python3 ${HOME}/bin/python_scaffolding.py
+}
+
 
 #################################
 # Docker related functins
