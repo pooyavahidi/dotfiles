@@ -16,3 +16,5 @@
 
 	# Commit all changes using verbose commit
 	ca = !git add -A && git commit -av
+[pull]
+	ff = only
