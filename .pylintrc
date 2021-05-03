@@ -61,7 +61,6 @@ disable=
     attribute-defined-outside-init,
     duplicate-code,
     invalid-name,
-    missing-docstring,
     protected-access,
     too-few-public-methods,
 	no-absolute-import,
