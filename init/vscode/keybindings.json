@@ -222,20 +222,6 @@
   {
     "key": "ctrl+\\",
     "command": "-workbench.action.splitEditor"
-  },
-  {
-    "key": "o",
-    "command": "workbench.action.debug.stepOver",
-    "when": "debugState == 'stopped'"
-  },
-  {
-    "key": "i",
-    "command": "workbench.action.debug.stepInto",
-    "when": "debugState != 'inactive'"
-  },
-  {
-    "key": "shift+i",
-    "command": "workbench.action.debug.stepOut",
-    "when": "debugState == 'stopped'"
   }
 ]
+
