@@ -63,7 +63,7 @@ function sw {
                 shift
            	    ;;
             *)
-                return
+                break
                 ;;
       esac
     done
@@ -73,7 +73,7 @@ function sw {
         echo $__usage
         return 
     fi
-    
+
     # Run the given command in indefinite loop until user stops the process
     while true; do
         clear
