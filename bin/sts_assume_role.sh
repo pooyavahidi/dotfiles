@@ -32,9 +32,10 @@ credentials=$(aws sts assume-role \
 --token-code ${token_code} \
 )
 
-export AWS_ACCESS_KEY_ID=$(echo $credentials | cut -d' ' -f1)
-export AWS_SECRET_ACCESS_KEY=$(echo $credentials | cut -d' ' -f2)
-export AWS_SESSION_TOKEN=$(echo $credentials| cut -d' ' -f3)
+# Replace tabs (if there is any) to space, and then split the string by spaces.
+export AWS_ACCESS_KEY_ID=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f1)
+export AWS_SECRET_ACCESS_KEY=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f2)
+export AWS_SESSION_TOKEN=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f3)
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 
 # get caller identity after the assume role
