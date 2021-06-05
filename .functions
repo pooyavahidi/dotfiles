@@ -130,9 +130,7 @@ function docker-restart {
 #################################
 
 function aws-sts-assume-role {
-    source sts_assume_role.sh \
-        $AWS_MFA_SERIAL_NUMBER \
-        $AWS_ROLE_TO_ASSUME
+    source sts_assume_role.sh $AWS_MFA_SERIAL_NUMBER $1
 }
 function aws-user-elevate-to-poweruser {
     aws iam add-user-to-group --user-name $1 --group-name PowerUsers
