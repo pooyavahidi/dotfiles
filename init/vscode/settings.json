@@ -18,7 +18,7 @@
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
   // Changing the default "Menlo, Monaco, ‘Courier New', monospace"
-  "editor.fontFamily": "Monaco, monospace",
+  "editor.fontFamily": "Monaco, Cascadia Mono, Consolas, monospace",
   // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
   "editor.acceptSuggestionOnEnter": "off",
   "editor.formatOnSave": true,
