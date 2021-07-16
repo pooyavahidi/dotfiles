@@ -10,4 +10,4 @@ autoload bashcompinit && bashcompinit
 source ~/.shell_profile
 
 # Setting the prompt similar to default macOS terminal prompt
-export PROMPT="%F{green}%n@%m%f %1~ %# "
+export PROMPT="%B%F{green}%n@%m%f %1~ %b%# "
