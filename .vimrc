@@ -20,6 +20,9 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGray ctermbg=NONE gui=NONE gui
 " Make tabs as wide as 4 spaces
 set tabstop=4
 
+" Convert tabs to spaces
+set expandtab
+
 " Show “invisible” characters
 set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
