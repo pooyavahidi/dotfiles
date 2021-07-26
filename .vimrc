@@ -23,15 +23,15 @@ set tabstop=4
 " Convert tabs to spaces
 set expandtab
 
-" Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-set list
-
-" Set the indening with '<' and '>' to 4 spaces
+" Set the indenting with '<' and '>' to 4 spaces
 set shiftwidth=4
 
 " Copy indent from the current line when starting a new line
 set autoindent
+
+" Show “invisible” characters
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set list
 
 " Always show the status line
 set laststatus=2
