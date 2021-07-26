@@ -20,6 +20,10 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGray ctermbg=NONE gui=NONE gui
 " Make tabs as wide as 4 spaces
 set tabstop=4
 
+" Show “invisible” characters
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set list
+
 " Set the indening with '<' and '>' to 4 spaces
 set shiftwidth=4
 
