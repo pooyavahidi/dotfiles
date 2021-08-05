@@ -22,6 +22,8 @@
   // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
   "editor.acceptSuggestionOnEnter": "off",
   "editor.formatOnSave": true,
+  //// explorer
+  "explorer.openEditors.visible": 0,
   //// debug settings
   "debug.onTaskErrors": "showErrors",
   //// terminal panel
