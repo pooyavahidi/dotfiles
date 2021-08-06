@@ -90,7 +90,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Add kubectl completion
+# If kubectl exists, add its completion
 if __kubectl_command=$(which kubectl); then
     source <(kubectl completion bash)
 fi

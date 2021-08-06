@@ -6,7 +6,7 @@ autoload -Uz compinit && compinit
 # Allow zsh to read bash completions and run bash builtin function `complete`.
 autoload bashcompinit && bashcompinit
 
-# Add kubectl completion
+# If kubectl exists, add its completion
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 # source the shell profile (shared between bash and zsh)
