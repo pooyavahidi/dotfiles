@@ -127,6 +127,43 @@ function docker-restart {
 # AWS related functions.
 #################################
 
+# Get credentials for MFA enabled authentication
+function aws-sts-session-token {
+    # Validate the input variables
+    mfa_serial_number=$1 #"arn:aws:iam::account_id:mfa/user_name"
+    [[ -z $mfa_serial_number ]] && "mfa_serial_number is missing" && return
+
+    # Reset the environment variables
+    export AWS_ACCESS_KEY_ID=
+    export AWS_SECRET_ACCESS_KEY=
+    export AWS_SESSION_TOKEN=
+
+    # Get the session duration and convert it to seconds
+    printf "Enter the session duration in hours [default is 1]: "; read duration
+    [ -z "$duration" ] && duration=1
+    duration_seconds=$(($duration*3600))
+
+    # Get the code and sts token
+    printf "Enter the MFA code: "; read token_code
+
+    # Get the credential
+    credentials=$(aws sts get-session-token \
+        --duration-seconds ${duration_seconds} \
+        --serial-number ${mfa_serial_number} \
+        --token-code ${token_code} \
+        --query '[Credentials.AccessKeyId,Credentials.SecretAccessKey,Credentials.SessionToken]' \
+        --output text \
+    )
+
+    # Replace tabs (if there is any) to space, and then split the string by spaces.
+    export AWS_ACCESS_KEY_ID=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f1)
+    export AWS_SECRET_ACCESS_KEY=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f2)
+    export AWS_SESSION_TOKEN=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f3)
+
+    unset credentials mfa_serial_number token_code duration duration_seconds
+}
+
+# Assume the given role and return credentials
 function aws-sts-assume-role {
 	# Input variables
 	role_arn=$1 #"arn:aws:iam::trusting_account_id:role/role_name"
@@ -191,6 +228,10 @@ function aws-sts-assume-role {
 	unset token_code
 	unset duration
 	unset duration_seconds
+}
+
+function aws-sts-session-token-current-user {
+    aws-sts-session-token ${AWS_MFA_SERIAL_NUMBER}
 }
 
 function aws-user-elevate-to-poweruser {
