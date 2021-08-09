@@ -1,6 +1,12 @@
 " Use vim settings rather than vi settings.
 set nocompatible
 
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+
+" Use UTF-8 without BOM
+set encoding=utf-8 nobomb
+
 "Enable syntax highlighting
 syntax on
 
@@ -36,6 +42,9 @@ set list
 " Always show the status line
 set laststatus=2
 
+" Show the cursor position
+set ruler
+
 " Highlight searches
 set hlsearch
 
@@ -48,12 +57,20 @@ set incsearch
 " Enable mouse in all modes
 set mouse=a
 
+
 " Mappings for insert mode
 """"""""""""""""""""""""""""""""""""""
 " Map jj to Esc 
 imap jj <Esc>
 
+
 " Mappings for normal mode
 """"""""""""""""""""""""""""""""""""""
 " This will remove the search highlight after hitting return
 nnoremap <CR> :noh<CR><CR>
+
+" Move cursor by display lines
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+nnoremap <silent> 0 g0
+nnoremap <silent> $ g$
