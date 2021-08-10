@@ -289,10 +289,9 @@ function s3-download {
 # Creates patch files from the current git repository and save them into an S3
 # bucket. It can download, upload and delete patches from the bucket.
 function git-patch {
-    # Check and validate input action
+    # Validations
     if [[ -z $1 ]]; then
-        echo "Usage: git-patch <save|load|clean>"
-        return
+        echo "Usage: git-patch <save|load|clean>" && return
     fi
 
     declare -a __actions=(save load clean)
@@ -300,7 +299,9 @@ function git-patch {
         [[ "$__available_action" == "$1" ]] && __action=$1
     done
 
-    [[ -z $__action ]] && echo "action is not provided or valid" && return
+    [[ -z ${__action} ]] && echo "action is not provided or valid" && return
+    [[ -z ${S3_PATCHES_BUCKET} ]] && echo "S3_PATCHES_BUCKET is not set" \
+        && return
 
     # Set the repo_name based on the origin url
     __repo_name=$(git config --get remote.origin.url | sed -e "s/:/_/g" | sed -e "s/\//_/g")
