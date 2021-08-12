@@ -349,8 +349,8 @@ function git-patch {
     case $__action in
         save)
             aws s3 cp . s3://${S3_PATCHES_BUCKET}/${__patch_prefix}/ \
-                --recursive --exclude "*" --include "${__patch_file}*.patch" \
-            && rm ${__patch_file}*.patch
+                --recursive --exclude "*" --include "${__patch_file}*.patch"
+            rm ${__patch_file}*.patch
             ;;
         load)
             aws s3 cp s3://${S3_PATCHES_BUCKET}/${__patch_prefix}/ . \
