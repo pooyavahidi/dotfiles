@@ -1,22 +1,6 @@
 [
   // Keybindings for vscodevim extension
   {
-    "key": "ctrl+; l",
-    "command": "workbench.action.showCommands"
-  },
-  {
-    "key": "ctrl+shift+p",
-    "command": "-workbench.action.showCommands"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "-workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+`",
-    "command": "-workbench.action.terminal.toggleTerminal"
-  },
-  {
     "key": "ctrl+shift+'",
     "command": "workbench.action.terminal.new"
   },
@@ -37,26 +21,13 @@
     "command": "-workbench.action.toggleSidebarVisibility"
   },
   {
-    "key": "ctrl+; e",
-    "command": "workbench.action.focusFirstEditorGroup"
-  },
-  {
-    "key": "ctrl+1",
-    "command": "-workbench.action.focusFirstEditorGroup"
+    "key": "ctrl+\\",
+    "command": "workbench.action.focusFirstEditorGroup",
+    "when": "terminalFocus"
   },
   {
     "key": "ctrl+,",
     "command": "-workbench.action.openSettings"
-  },
-  {
-    "key": "ctrl+'",
-    "command": "workbench.action.terminal.focusNextPane",
-    "when": "terminalFocus && terminalProcessSupported"
-  },
-  {
-    "key": "alt+down",
-    "command": "-workbench.action.terminal.focusNextPane",
-    "when": "terminalFocus && terminalProcessSupported"
   },
   {
     "key": "ctrl+; a",
@@ -99,10 +70,6 @@
     "command": "workbench.action.toggleMaximizedPanel"
   },
   {
-    "key": "ctrl+; '",
-    "command": "workbench.action.terminal.focus"
-  },
-  {
     "key": "ctrl+; z",
     "command": "workbench.action.toggleZenMode"
   },
@@ -113,10 +80,6 @@
   {
     "key": "ctrl+; o",
     "command": "workbench.action.focusNextGroup"
-  },
-  {
-    "key": "ctrl+; shift+'",
-    "command": "workbench.action.terminal.toggleTerminal"
   },
   {
     "key": "ctrl+; x",
@@ -155,7 +118,7 @@
     "command": "-workbench.action.closeAllGroups"
   },
   {
-    "key": "ctrl+; f",
+    "key": "ctrl+; t",
     "command": "workbench.view.search.focus"
   },
   {
@@ -167,46 +130,30 @@
     "command": "-workbench.action.zoomIn"
   },
   {
-    "key": "ctrl+; ctrl+j",
-    "command": "workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+; j",
-    "command": "workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+; ctrl+l",
+    "key": "ctrl+; f",
     "command": "workbench.action.showCommands"
-  },
-  {
-    "key": "ctrl+; ctrl+'",
-    "command": "workbench.action.terminal.focus"
-  },
-  {
-    "key": "ctrl+; ctrl+e",
-    "command": "workbench.action.focusFirstEditorGroup"
   },
   {
     "key": "ctrl+; r",
     "command": "workbench.action.tasks.reRunTask"
   },
   {
-    "key": "ctrl+\\",
+    "key": "ctrl+; d",
     "command": "workbench.action.debug.start",
     "when": "debuggersAvailable && debugState != 'initializing'"
   },
   {
-    "key": "ctrl+\\",
+    "key": "ctrl+; d",
     "command": "workbench.action.debug.continue",
     "when": "inDebugMode"
   },
   {
-    "key": "ctrl+shift+\\",
+    "key": "ctrl+; shift+d",
     "command": "workbench.action.debug.stop",
     "when": "inDebugMode && !focusedSessionIsAttach"
   },
   {
-    "key": "ctrl+shift+\\",
+    "key": "ctrl+; shift+d",
     "command": "workbench.action.debug.disconnect",
     "when": "focusedSessionIsAttach && inDebugMode"
   },
@@ -214,14 +161,6 @@
     "key": "ctrl+shift+\\",
     "command": "-editor.action.jumpToBracket",
     "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+; shift+\\",
-    "command": "workbench.action.splitEditor"
-  },
-  {
-    "key": "ctrl+\\",
-    "command": "-workbench.action.splitEditor"
   },
   {
     "key": "ctrl+; i",
@@ -237,6 +176,32 @@
     "key": "ctrl+/",
     "command": "editor.action.commentLine",
     "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+; \\",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
+  {
+    "key": "ctrl+`",
+    "command": "-workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "workbench.action.terminal.focus",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+; e",
+    "command": "workbench.action.focusFirstEditorGroup"
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "-workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+; ctrl+p",
+    "command": "workbench.action.quickOpen"
   }
 ]
-
