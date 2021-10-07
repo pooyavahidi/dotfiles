@@ -40,7 +40,7 @@ function ping-udp {
 
 # Create a new python project using scaffolding templates
 function scaffold-python-project {
-	python3 ${HOME}/bin/python_scaffolding.py
+	python3 ${HOME}/.bin/python_scaffolding.py
 }
 
 # A simple watch command replacement. It runs in the current shell 
