@@ -1,16 +1,17 @@
 # Set SHELL if it's empty
 [[ -z $SHELL ]] && export SHELL='/bin/zsh'
 
-# load the tab completions 
+# Load the tab completions
 autoload -Uz compinit && compinit
 # Allow zsh to read bash completions and run bash builtin function `complete`.
 autoload bashcompinit && bashcompinit
 
-# If kubectl exists, add its completion
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+# Load the shell profile (shared between bash and zsh)
+source $HOME/.shell_profile
 
-# source the shell profile (shared between bash and zsh)
-source ~/.shell_profile
+# Load zsh scripts from the .lib directory
+for file in $HOME/.lib/zsh/*.zsh; do
+     source "$file"
+done;
+unset file;
 
-# Setting the prompt similar to default macOS terminal prompt
-export PROMPT="%B%F{green}%n@%m%f %1~ %b%# "
