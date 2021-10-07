@@ -25,28 +25,17 @@ export DOCKER_BUILDKIT=1
 
 
 ###################################
-# Load the lib scripts
+# Load the scripts
 ###################################
-# Load the shell dotfiles
-for file in $HOME/.{shell_prompt,aliases,functions}; do
-     source "$file"
-done;
-
 # Load scripts from the .lib directory
 for file in $HOME/.lib/*.sh; do
      source "$file"
 done;
 
-# ~/.extra can be used for additional scripts that you don’t want to commit.
+# Load ~/.extra if exists.
+# .extra is for any custom and  additional scripts which are local and
+# doesn't need to go to the repository
 file="$HOME/.extra"
 [ -r "$file" ] && [ -f "$file" ] && source "$file";
 unset file;
 
-
-# Completions
-##############################
-# Set the completion for awscli
-if __aws_comp=$(which aws_completer); then
-	complete -C ${__aws_comp} aws
-fi;
-unset __aws_comp;
