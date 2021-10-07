@@ -1,10 +1,20 @@
 #!/bin/sh
 
-# Add `~/bin` to the `$PATH`
+###################################
+# Add the directories to the PATH
+###################################
 export PATH="$HOME/.bin:$PATH";
+export PATH="$HOME/.local/bin:$PATH";
 
+# Add Visual Studio Code (code) to the PATH - macOS
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH";
+
+
+###################################
+# Load the lib scripts
+###################################
 # Load the shell dotfiles
-for file in $HOME/.{path,shell_prompt,exports,aliases,functions}; do
+for file in $HOME/.{shell_prompt,exports,aliases,functions}; do
      source "$file"
 done;
 
