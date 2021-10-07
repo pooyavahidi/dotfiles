@@ -3,10 +3,16 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/.bin:$PATH";
 
-# Load the shell dotfiles, and then some:
-# * ~/.extra can be used for other settings you don’t want to commit.
+# Load the shell dotfiles
+# ~/.extra can be used for additional settings that you don’t want to commit.
 for file in ~/.{path,shell_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+
+# Load scripts from the .lib directory
+for file in $HOME/.lib/*.sh; do
+     source $file
 done;
 unset file;
 
