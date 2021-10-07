@@ -4,17 +4,20 @@
 export PATH="$HOME/.bin:$PATH";
 
 # Load the shell dotfiles
-# ~/.extra can be used for additional settings that you don’t want to commit.
-for file in ~/.{path,shell_prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+for file in $HOME/.{path,shell_prompt,exports,aliases,functions}; do
+     source "$file"
 done;
-unset file;
 
 # Load scripts from the .lib directory
 for file in $HOME/.lib/*.sh; do
-     source $file
+     source "$file"
 done;
+
+# ~/.extra can be used for additional scripts that you don’t want to commit.
+file="$HOME/.extra"
+[ -r "$file" ] && [ -f "$file" ] && source "$file";
 unset file;
+
 
 # Completions
 ##############################
