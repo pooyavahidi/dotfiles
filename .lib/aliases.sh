@@ -71,9 +71,3 @@ alias ta='tmux -u attach'
 # tmux attach to session or create a new one
 alias tat='tmux -u attach -t $1 > /dev/null 2>&1 || tmux -u new-session -s $1'
 
-
-# docker aliases
-##############################
-# docker
-alias d='docker'
-

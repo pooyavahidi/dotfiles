@@ -1,8 +1,8 @@
 #!/bin/sh
 
-###################################
+#######################################
 # Add the directories to the PATH
-###################################
+#######################################
 export PATH="$HOME/.bin:$PATH";
 export PATH="$HOME/.local/bin:$PATH";
 
@@ -10,9 +10,9 @@ export PATH="$HOME/.local/bin:$PATH";
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH";
 
 
-###################################
+#######################################
 # export environment variables
-###################################
+#######################################
 export WORKSPACE=$HOME/workspace
 export VISUAL=vim 
 export EDITOR="$VISUAL" 
@@ -24,9 +24,9 @@ export S3_WS_BUCKET="workspace default bucket name"
 export DOCKER_BUILDKIT=1
 
 
-###################################
+#######################################
 # Load the scripts
-###################################
+#######################################
 # Load scripts from the .lib directory
 for file in $HOME/.lib/*.sh; do
      source "$file"
