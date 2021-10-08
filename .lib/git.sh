@@ -21,12 +21,22 @@ function scaffold-python-project {
 # Creates patch files from the current git repository and save them into an S3
 # bucket. It can download, upload and delete patches from the bucket.
 function git-patch {
+    local __repo_name 
+    local __actions 
+    local __action 
+    local __available_action 
+    local __patch_file
+    local __patch_prefix 
+    local __origin_head 
+    local __local_head 
+    local __origin_repo
+
     # Validations
     if [[ -z $1 ]]; then
         echo "Usage: git-patch <save|load|clean>" && return
     fi
 
-    declare -a __actions=(save load clean)
+    local __actions=(save load clean)
     for __available_action in "${__actions[@]}"; do
         [[ "$__available_action" == "$1" ]] && __action=$1
     done
@@ -97,7 +107,5 @@ function git-patch {
             ;;
     esac
 
-    unset __repo_name __actions __action __available_action __patch_file \
-         __patch_prefix __origin_head __local_head __origin_repo
 }
 
