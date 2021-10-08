@@ -15,14 +15,14 @@ alias g="git"
 
 # Create a new python project using scaffolding templates
 function scaffold-python-project {
-	python3 ${HOME}/.bin/python_scaffolding.py
+    python3 ${HOME}/.bin/python_scaffolding.py
 }
 
 # Creates patch files from the current git repository and save them into an S3
 # bucket. It can download, upload and delete patches from the bucket.
 function git-patch {
     local __repo_name 
-    local __actions 
+    local -a __actions 
     local __action 
     local __available_action 
     local __patch_file
@@ -36,7 +36,7 @@ function git-patch {
         echo "Usage: git-patch <save|load|clean>" && return
     fi
 
-    local __actions=(save load clean)
+    __actions=(save load clean)
     for __available_action in "${__actions[@]}"; do
         [[ "$__available_action" == "$1" ]] && __action=$1
     done
@@ -109,3 +109,53 @@ function git-patch {
 
 }
 
+
+# git prompt related functions are based on the ohmyzsh library.
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/git.zsh
+
+# Wrap in a local function instead of exporting the variable directly in
+# order to avoid interfering with manually-run git commands by the user.
+function __git_prompt_git() {
+    GIT_OPTIONAL_LOCKS=0 command git "$@"
+}
+
+function git_prompt_info() {
+  # If we are on a folder not tracked by git, get out.
+  # Otherwise, check for hide-info at global and local repository level
+    if ! __git_prompt_git rev-parse --git-dir &> /dev/null; then
+        return 0
+    fi
+
+    local ref
+    ref=$(__git_prompt_git symbolic-ref --short HEAD 2> /dev/null) \
+    || ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null) \
+    || return 0
+
+    echo "${SHELL_PROMPT_GIT_PREFIX}${ref}$(parse_git_dirty)${SHELL_PROMPT_GIT_SUFFIX}"
+}
+
+# Checks if working tree is dirty
+function parse_git_dirty() {
+  local STATUS
+  local -a FLAGS
+  FLAGS=('--porcelain')
+    if [[ "${DISABLE_UNTRACKED_FILES_DIRTY:-}" == "true" ]]; then
+        FLAGS+='--untracked-files=no'
+    fi
+    case "${GIT_STATUS_IGNORE_SUBMODULES:-}" in
+        git)
+            # let git decide (this respects per-repo config in .gitmodules)
+            ;;
+        *)
+            # if unset: ignore dirty submodules
+            # other values are passed to --ignore-submodules
+            FLAGS+="--ignore-submodules=${GIT_STATUS_IGNORE_SUBMODULES:-dirty}"
+            ;;
+    esac
+    STATUS=$(__git_prompt_git status ${FLAGS} 2> /dev/null | tail -1)
+    if [[ -n $STATUS ]]; then
+        echo "$SHELL_PROMPT_GIT_DIRTY"
+    else
+        echo "$SHELL_PROMPT_GIT_CLEAN"
+    fi
+}
