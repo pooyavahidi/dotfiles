@@ -57,17 +57,3 @@ alias qn='code ${WORKSPACE}/quick_notes/$(date +"%y%m%d_%H%M%S").md'
 alias path='echo -e ${PATH//:/\\n}'
 
 
-# tmux aliases
-##############################
-# tmux
-alias t='tmux -u'
-
-# tmux list of sessions
-alias tl='tmux ls'
-
-# tmux attach to the last session
-alias ta='tmux -u attach'
-
-# tmux attach to session or create a new one
-alias tat='tmux -u attach -t $1 > /dev/null 2>&1 || tmux -u new-session -s $1'
-
