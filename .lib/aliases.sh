@@ -1,14 +1,8 @@
 #!/bin/sh
 
-# This file is based on the solid work of @mathiasbynens, thanks!
+# Some of these aliases are based on the solid work of @mathiasbynens.
 # https://github.com/mathiasbynens/dotfiles/blob/main/.aliases
 
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
-else # macOS `ls`
-	colorflag="-G"
-fi
 
 # Navigations
 alias ..="cd .."
@@ -23,8 +17,14 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias ws="cd $WORKSPACE"
 alias temp="cd $WORKSPACE/temp"
-alias g="git"
 alias python="python3"
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+else # macOS `ls`
+	colorflag="-G"
+fi
 
 # List all files colorized in long format
 alias l="ls -lFh ${colorflag}"
@@ -55,5 +55,4 @@ alias qn='code ${WORKSPACE}/quick_notes/$(date +"%y%m%d_%H%M%S").md'
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
-
 
