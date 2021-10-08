@@ -5,6 +5,8 @@
 autoload -Uz compinit && compinit
 # Allow zsh to read bash completions and run bash builtin function `complete`.
 autoload bashcompinit && bashcompinit
+# Load the colors
+autoload colors && colors
 
 # Load the shell profile (shared between bash and zsh)
 source $HOME/.shell_profile
