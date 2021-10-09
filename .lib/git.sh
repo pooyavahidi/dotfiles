@@ -131,7 +131,12 @@ function git_prompt_info() {
     || ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null) \
     || return 0
 
-    echo "${SHELL_PROMPT_GIT_PREFIX}${ref}$(parse_git_dirty)${SHELL_PROMPT_GIT_SUFFIX}"
+    local prompt_info
+    prompt_info="${SHELL_PROMPT_GIT_BRANCH_PREFIX}${ref}"
+    prompt_info+="${SHELL_PROMPT_GIT_BRANCH_SUFFIX}"
+    prompt_info+="$(git_prompt_status)$(parse_git_dirty)"
+
+    echo $prompt_info
 }
 
 # Checks if working tree is dirty
@@ -156,6 +161,106 @@ function parse_git_dirty() {
     if [[ -n $STATUS ]]; then
         echo "$SHELL_PROMPT_GIT_DIRTY"
     else
-        echo "$SHELL_PROMPT_GIT_CLEAN"
+        return 0
+    fi
+}
+
+function git_prompt_status() {
+    # Maps a git status prefix to an internal constant
+    # This cannot use the prompt constants, as they may be empty
+    local -A prefix_constant_map
+    prefix_constant_map=(
+        '\?\? '     'UNTRACKED'
+        'A  '       'ADDED'
+        'M  '       'ADDED'
+        'MM '       'MODIFIED'
+        ' M '       'MODIFIED'
+        'AM '       'MODIFIED'
+        ' T '       'MODIFIED'
+        'R  '       'RENAMED'
+        ' D '       'DELETED'
+        'D  '       'DELETED'
+        'UU '       'UNMERGED'
+        'ahead'     'AHEAD'
+        'behind'    'BEHIND'
+        'diverged'  'DIVERGED'
+        'stashed'   'STASHED'
+    )
+
+    # Maps the internal constant to the prompt theme
+    local -A constant_prompt_map
+    constant_prompt_map=(
+        'UNTRACKED' ""
+        'ADDED'     ""
+        'MODIFIED'  ""
+        'RENAMED'   ""
+        'DELETED'   ""
+        'UNMERGED'  ""
+        'AHEAD'     "$SHELL_PROMPT_GIT_AHEAD"
+        'BEHIND'    "$SHELL_PROMPT_GIT_BEHIND"
+        'DIVERGED'  ""
+        'STASHED'   ""
+    )
+    # The order that the prompt displays should be added to the prompt
+    local status_constants
+    status_constants=(
+        UNTRACKED ADDED MODIFIED RENAMED DELETED
+        STASHED UNMERGED AHEAD BEHIND DIVERGED
+    )
+
+    local status_text
+    status_text="$(__git_prompt_git status --porcelain -b 2> /dev/null)"
+
+    # Don't continue on a catastrophic failure
+    if [[ $? -eq 128 ]]; then
+        return 1
+    fi
+
+    # A lookup table of each git status encountered
+    local -A statuses_seen
+
+    if __git_prompt_git rev-parse --verify refs/stash &>/dev/null; then
+        statuses_seen[STASHED]=1
+    fi
+
+    local status_lines
+    status_lines=("${(@f)${status_text}}")
+
+    # If the tracking line exists, get and parse it
+    if [[ "$status_lines[1]" =~ "^## [^ ]+ \[(.*)\]" ]]; then
+        local branch_statuses
+        branch_statuses=("${(@s/,/)match}")
+        for branch_status in $branch_statuses; do
+            if [[ ! $branch_status =~ "(behind|diverged|ahead) ([0-9]+)?" ]]; then
+                continue
+            fi
+            local last_parsed_status=$prefix_constant_map[$match[1]]
+            statuses_seen[$last_parsed_status]=$match[2]
+        done
+    fi
+
+    # For each status prefix, do a regex comparison
+    for status_prefix in ${(k)prefix_constant_map}; do
+        local status_constant="${prefix_constant_map[$status_prefix]}"
+        local status_regex=$'(^|\n)'"$status_prefix"
+
+        if [[ "$status_text" =~ $status_regex ]]; then
+            statuses_seen[$status_constant]=1
+        fi
+    done
+
+    # Display the seen statuses in the order specified
+    local status_prompt
+    for status_constant in $status_constants; do
+        if (( ${+statuses_seen[$status_constant]} )); then
+            local next_display=$constant_prompt_map[$status_constant]
+            status_prompt="$next_display$status_prompt"
+        fi
+    done
+
+    if [[ -n $status_prompt ]]; then
+        echo $SHELL_PROMPT_GIT_STATUS_PREFIX${status_prompt}${SHELL_PROMPT_GIT_STATUS_SUFFIX}
+    else
+        return 0
     fi
 }
