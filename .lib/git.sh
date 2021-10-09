@@ -159,10 +159,11 @@ function parse_git_status() {
 
     STATUS=$(__git_prompt_git status ${FLAGS} 2> /dev/null)
 
+    local is_dirty=false
     # Remove the first line (branch info) from the status output and then 
-    # check if the last line is empty. If yes, return as there are no changes.
-    if [[ -z $(echo "$STATUS" | sed "1d" | tail -1 2> /dev/null) ]]; then
-        return 0
+    # check if the last line has some value. If yes, then it is dirty.
+    if [[ -n $(echo "$STATUS" | sed "1d" | tail -1 2> /dev/null) ]]; then
+        is_dirty=true
     fi
 
     # Set the status prompt
@@ -183,6 +184,15 @@ function parse_git_status() {
         status_prompt+=${SHELL_PROMPT_GIT_STATUS_SUFFIX}
     fi 
 
-    echo "${status_prompt}$SHELL_PROMPT_GIT_DIRTY"
+    # Add dirty flag to the status prompt
+    if [[ "$is_dirty" == true ]]; then
+        status_prompt="${status_prompt}$SHELL_PROMPT_GIT_DIRTY"
+    fi
+
+    if [[ -n "$status_prompt" ]]; then
+        echo $status_prompt
+    else
+        return 0
+    fi
 }
 
