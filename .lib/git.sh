@@ -160,7 +160,7 @@ function parse_git_status() {
     STATUS=$(__git_prompt_git status ${FLAGS} 2> /dev/null)
 
     # Remove the first line (branch info) from the status output and then 
-    # check if the last line is empty. If yes, return as there is no changes.
+    # check if the last line is empty. If yes, return as there are no changes.
     if [[ -z $(echo "$STATUS" | sed "1d" | tail -1 2> /dev/null) ]]; then
         return 0
     fi
