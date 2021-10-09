@@ -166,7 +166,6 @@ function parse_git_status() {
         is_dirty=true
     fi
 
-    # Set the status prompt
     local status_prompt
 
     # Check if branch is ahead
@@ -179,6 +178,7 @@ function parse_git_status() {
         status_prompt+=$SHELL_PROMPT_GIT_BEHIND
     fi
 
+    # Set the status prompt with prefix and suffix
     if [[ -n $status_prompt ]]; then
         status_prompt=$SHELL_PROMPT_GIT_STATUS_PREFIX${status_prompt}
         status_prompt+=${SHELL_PROMPT_GIT_STATUS_SUFFIX}
