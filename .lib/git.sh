@@ -104,8 +104,9 @@ function git-patch {
 }
 
 
-# git prompt related functions are based on the ohmyzsh library.
+# git prompt functions are inspired by ohmyzsh and spaceship-prompt libraries.
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/git.zsh
+# https://github.com/spaceship-prompt/spaceship-prompt
 
 # Wrap in a local function instead of exporting the variable directly in
 # order to avoid interfering with manually-run git commands by the user.
@@ -114,8 +115,8 @@ function __git_prompt_git() {
 }
 
 function git_prompt_info() {
-  # If we are on a folder not tracked by git, get out.
-  # Otherwise, check for hide-info at global and local repository level
+    # If we are on a directory not tracked by git, get out.
+    # Otherwise, check for hide-info at global and local repository level
     if ! __git_prompt_git rev-parse --git-dir &> /dev/null; then
         return 0
     fi
@@ -134,15 +135,15 @@ function git_prompt_info() {
 
 # Check the git status and return the status prompt and the dirty flag
 function parse_git_status() {
-  local STATUS
-  local -a FLAGS
-  FLAGS=('--porcelain' '--branch')
+    local STATUS
+    local -a FLAGS
+    FLAGS=('--porcelain' '--branch')
     if [[ "${DISABLE_UNTRACKED_FILES_DIRTY:-}" == "true" ]]; then
         FLAGS+='--untracked-files=no'
     fi
     case "${GIT_STATUS_IGNORE_SUBMODULES:-}" in
         git)
-            # let git decide (this respects per-repo config in .gitmodules)
+            # let git decides (this respects per-repo config in .gitmodules)
             ;;
         *)
             # if unset: ignore dirty submodules
@@ -189,4 +190,3 @@ function parse_git_status() {
         return 0
     fi
 }
-
