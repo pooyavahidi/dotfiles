@@ -1,5 +1,12 @@
 #!/bin/sh
 
+#######################################
+# environment variables
+#######################################
+
+# Enable docker BuildKit
+export DOCKER_BUILDKIT=1
+
 
 #######################################
 # aliases

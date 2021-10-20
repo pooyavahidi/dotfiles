@@ -2,6 +2,14 @@
 
 
 #######################################
+# environment variables
+#######################################
+
+# Set defaults for aws specific functions
+export S3_WS_BUCKET="workspace default bucket name"
+
+
+#######################################
 # functions
 #######################################
 
