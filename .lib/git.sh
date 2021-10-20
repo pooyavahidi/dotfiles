@@ -8,15 +8,9 @@
 alias g="git"
 
 
-
 #######################################
 # functions
 #######################################
-
-# Create a new python project using scaffolding templates
-function scaffold-python-project {
-    python3 ${HOME}/.bin/python_scaffolding.py
-}
 
 # Creates patch files from the current git repository and save them into an S3
 # bucket. It can download, upload and delete patches from the bucket.
