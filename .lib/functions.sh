@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Open a new terminal
-function term () {
+function term() {
 	# If macos then use open command
 	if [[ $(uname -s) =~ "Darwin" ]]; then
 		open -a Terminal .
@@ -12,7 +12,7 @@ function term () {
 }
 
 # Open the graphical files explorer 
-function open-files {
+function open-files() {
     dir=$1
     [[ -z $dir ]] && dir='.'
 
@@ -27,20 +27,20 @@ function open-files {
 }
 
 # Ping tcp ports 
-function ping-tcp {
+function ping-tcp() {
     # $1 = host, $2 = port
     echo > /dev/tcp/$1/$2 && echo "$1:$2 is open."
 }
 
 # Ping udp ports
-function ping-udp {
+function ping-udp() {
     # $1 = host, $2 = port
     echo > /dev/udp/$1/$2 && echo "$1:$2 is open."
 }
 
 # A simple watch command replacement. It runs in the current shell 
 # so all the aliases and sourced scripts are available.
-function sw {
+function sw() {
     local __usage="sw -n <interval-in-sec> command"
 
     # If there is no argument provided, show usage and return
@@ -78,5 +78,4 @@ function sw {
         sleep ${__watch_interval}
     done
 }
-
 
