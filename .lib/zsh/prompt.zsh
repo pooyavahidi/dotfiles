@@ -19,7 +19,7 @@ PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) "
 
 # Show the user@hostname if:
 # connected via SSH or it's inside a container
-if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" || _is_in_container; then
+if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" ]] || _is_in_container; then
     PROMPT+="%{$fg[green]%}%n@%m "
 fi;
 
