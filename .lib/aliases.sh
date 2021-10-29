@@ -55,3 +55,5 @@ alias qn='code ${WORKSPACE}/quick_notes/$(date +"%y%m%d_%H%M%S").md'
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
+# Always show tree in color
+alias tree="tree -C"
