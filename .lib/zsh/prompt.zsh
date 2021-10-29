@@ -17,8 +17,9 @@ SHELL_PROMPT_GIT_BEHIND="%{$fg[yellow]%}⇣"
 # Shows the arrow. if the last command was successful, shows green, if error, red
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) "
 
-# If connected via SSH, show the user@hostname
-if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" ]]; then
+# Show the user@hostname if:
+# connected via SSH or it's inside a container
+if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" || _is_in_container; then
     PROMPT+="%{$fg[green]%}%n@%m "
 fi;
 
