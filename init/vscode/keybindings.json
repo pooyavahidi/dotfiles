@@ -130,7 +130,7 @@
     "command": "-workbench.action.zoomIn"
   },
   {
-    "key": "ctrl+; f",
+    "key": "ctrl+; j",
     "command": "workbench.action.showCommands"
   },
   {
@@ -201,7 +201,7 @@
     "command": "-workbench.action.splitEditor"
   },
   {
-    "key": "ctrl+; ctrl+p",
+    "key": "ctrl+; f",
     "command": "workbench.action.quickOpen"
   },
   {
