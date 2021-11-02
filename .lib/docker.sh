@@ -13,6 +13,8 @@ export DOCKER_BUILDKIT=1
 #######################################
 alias d="docker"
 alias dcl="docker container ls -a"
+alias dcri="docker run -it"
+alias dcrim="docker run -it --rm"
 alias dil="docker image ls -a"
 alias dcrm="docker container rm"
 alias dirm="docker image rm"
@@ -63,3 +65,38 @@ function _is_in_container() {
     fi
 }
 
+# Attach to an existing container.
+# If it's not running, make it to run first, then attach to it.
+function dcattach() {
+    local container
+    container=$1
+    local c_status
+    c_status=$(docker container inspect $container | grep Status)
+
+    # If error in getting the status, exit
+    (( $? != 0 )) && return 1
+
+    # Get the Status value
+    c_status=$(echo $c_status | cut -d'"' -f 4)
+
+    case $c_status in
+        running)
+            docker container attach $container
+            return 0
+            ;;
+        exited)
+            docker container start $container
+            docker container attach $container
+            return 0
+            ;;
+        paused)
+            docker container unpause $container
+            docker container attach $container
+            return 0
+            ;;
+        *)
+            echo "Status is $c_status. Cannot attach!"
+            return 1
+            ;;
+    esac
+}
