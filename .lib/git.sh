@@ -6,6 +6,9 @@
 #######################################
 
 alias g="git"
+alias gpload="__git_patch load"
+alias gpsave="__git_patch save"
+alias gpclean="__git_patch clean"
 
 
 #######################################
@@ -14,7 +17,7 @@ alias g="git"
 
 # Creates patch files from the current git repository and save them into an S3
 # bucket. It can download, upload and delete patches from the bucket.
-function git-patch {
+function __git_patch {
     local __repo_name 
     local -a __actions 
     local __action 
