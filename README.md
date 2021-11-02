@@ -14,3 +14,11 @@ git clone https://github.com/pooyavahidi/dotfiles.git
 cd dotfiles
 ./bootstrap.sh
 ```
+
+### macOS defaults
+
+To set some sensible macOS defaults, run this after the bootstrapping.
+
+```sh
+./.macos
+```
