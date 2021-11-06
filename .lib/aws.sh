@@ -5,26 +5,22 @@
 # environment variables
 #######################################
 
-# Set defaults for aws specific functions
-export S3_WS_BUCKET="workspace default bucket name"
-
 
 #######################################
 # functions
 #######################################
 
 # Get credentials for MFA enabled authentication
-function aws-sts-session-token {
+function aws-sts-session-token() {
     local credentials
     local mfa_serial_number
     local token_code
     local duration
     local duration_seconds
 
-    # Validate the input variables
-    mfa_serial_number=$1 #"arn:aws:iam::account_id:mfa/user_name"
-    [[ -z "$mfa_serial_number" ]] && echo "mfa_serial_number is missing" \
-        && return
+    # Get the mfa serial number
+    mfa_serial_number=$(__get_aws_mfa_serial_number $1) \
+    || return 1
 
     # Reset the environment variables
     export AWS_ACCESS_KEY_ID=
@@ -55,7 +51,7 @@ function aws-sts-session-token {
 }
 
 # Assume the given role and return credentials
-function aws-sts-assume-role {
+function aws-sts-assume-role() {
     local credentials
     local mfa_serial_number
     local role_arn
@@ -68,7 +64,7 @@ function aws-sts-assume-role {
     role_arn=$1 #"arn:aws:iam::trusting_account_id:role/role_name"
     mfa_serial_number=$2 #"arn:aws:iam::trusted_account_id:mfa/myuser"
 
-    [[ -z $role_arn ]] && echo "role arn is missing" && return
+    [[ -z $role_arn ]] && echo "role arn is missing" && return 1
     [[ -n $mfa_serial_number ]] && __mfa_enabled=true
 
     # Reset the environment variables
@@ -122,6 +118,20 @@ function aws-sts-assume-role {
 
 }
 
+# Assume role using MFA
+function aws-sts-assume-role-mfa() {
+    local role_arn
+    local mfa_serial_number
+
+    role_arn=$1
+
+    # Get the mfa serial number
+    mfa_serial_number=$(__get_aws_mfa_serial_number $2) \
+    || return 1
+
+    aws-sts-assume-role $role_arn $mfa_serial_number
+}
+
 function aws-sts-session-token-current-user {
     aws-sts-session-token ${AWS_MFA_SERIAL_NUMBER}
 }
@@ -171,4 +181,34 @@ function s3-download {
         && return
 
     aws s3 sync s3://${S3_WS_BUCKET}/$1 $2
+}
+
+# Get aws mfa serial number. If it's not set as an env variable, it gets it
+# from the aws sts get-caller-identity
+function __get_aws_mfa_serial_number() {
+    local mfa_serial_number
+
+    [[ -n "${mfa_serial_number:=$1}" ]] \
+    || [[ -n "${mfa_serial_number:=$AWS_MFA_SERIAL_NUMBER}" ]] \
+    || mfa_serial_number=$(aws sts get-caller-identity \
+                        | grep Arn \
+                        | cut -d'"' -f 4 \
+                        | sed 's/:user/:mfa/g')
+
+    # If mfa serial number is empty, return with error
+    [[ -z "$mfa_serial_number" ]] && echo "mfa serial number is missing" \
+        && return 1
+
+    echo $mfa_serial_number
+}
+
+# Get current aws username
+function __get_aws_current_user() {
+    local iam_user
+    iam_user=$(aws sts get-caller-identity \
+                | grep Arn \
+                | sed 's/.*\/\(.*\)"/\1/') \
+    || return 1
+
+    echo $iam_user
 }
