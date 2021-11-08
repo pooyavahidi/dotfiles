@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-# Copy dotfiles and bin/ directory
+# Copy dotfiles and .lib directory
 rsync --exclude ".git/" \
     --exclude ".vscode/" \
     --exclude "init/" \
@@ -13,12 +13,15 @@ rsync --exclude ".git/" \
     --exclude "bootstrap*" \
     -avh . ~
 
-# Copy settings for vscode in Linux
-if [ -d "$HOME/.config/Code/User" ]; then
-    rsync -avh init/vscode/ $HOME/.config/Code/User
-fi
+# Run OS specific bootstrap scripts
+if [[ $(uname -s) =~ "Darwin" ]]; then
+    # Run macOS specific scripts
+    ./.macos
+else
+    # Run linux specific scripts
 
-# Copy settings for vscode in macOS
-if [ -d "$HOME/Library/Application Support/Code/User" ]; then
-    rsync -avh init/vscode/ "$HOME/Library/Application Support/Code/User"
+    # Copy settings for vscode in Linux
+    if [ -d "$HOME/.config/Code/User" ]; then
+        rsync -avh init/vscode/ $HOME/.config/Code/User
+    fi
 fi

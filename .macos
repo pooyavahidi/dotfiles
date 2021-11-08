@@ -4,27 +4,45 @@
 function __set_vscode_settings() {
     set -e
 
+    # Copy settings files
+    if [ -d "$HOME/Library/Application Support/Code/User" ]; then
+        rsync -avh init/vscode/ "$HOME/Library/Application Support/Code/User"
+    fi
+
     local settings_file
     settings_file="$HOME/Library/Application Support/Code/User/settings.json"
 
+    # Set the font size in both terminal and editor
     local font_size=13
 
-    # Set the font size in both terminal and editor
     if [[ -f "$settings_file" ]]; then
         sed -i "" "s/\"terminal.integrated.fontSize\": [0-9][0-9]/\"terminal.integrated.fontSize\": $font_size/g" \
             "$settings_file"
 
         sed -i "" "s/\"editor.fontSize\": [0-9][0-9]/\"editor.fontSize\": $font_size/g" \
             "$settings_file"
-      
-        echo "VSCode font size is set to $font_size"
     fi
+
+
+    # Disable Press and Hold
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 }
 
+# Set additional git configs for macOS
+function __set_gitconfig() {
+    # Setup the credential helper
+    git config --global credential.helper osxkeychain
+}
 
 # Run the functions in order
 function main() {
+    __set_gitconfig
     __set_vscode_settings
+
+    # If .macos.extra exists run that too.
+    [[ -f "$HOME/.macos.extra" ]] && source $HOME/.macos.extra
+
+    return 0
 }
 
 main "${@}"
