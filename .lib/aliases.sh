@@ -24,7 +24,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
     alias md5sum="md5"
     alias term="open -a Terminal ."
 
-elif [[ ${XDG_CURRENT_DESKTOP} == "GNOME" ]]; then
+elif [[ ${XDG_CURRENT_DESKTOP} =~ "GNOME" ]]; then
     # It's linux and running GNOME
     alias term="gnome-terminal"
     alias open="xdg-open"
