@@ -4,7 +4,7 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "One Monokai",
   //// window
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0,
   "window.menuBarVisibility": "toggle",
   //// editor
   "editor.renderWhitespace": "none",
