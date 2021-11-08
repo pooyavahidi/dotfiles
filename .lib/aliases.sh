@@ -18,6 +18,18 @@ alias dt="cd ~/Desktop"
 alias ws="cd $WORKSPACE"
 alias temp="cd $WORKSPACE/temp"
 
+# Normalize some commands across Linux and macOS
+if [[ $(uname -s) == "Darwin" ]]; then
+    # It's macOS
+    alias md5sum="md5"
+    alias term="open -a Terminal ."
+
+elif [[ ${XDG_CURRENT_DESKTOP} == "GNOME" ]]; then
+    # It's linux and running GNOME
+    alias term="gnome-terminal"
+    alias open="xdg-open"
+fi
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"

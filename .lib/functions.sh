@@ -1,30 +1,5 @@
 #!/bin/sh
 
-# Open a new terminal
-function term() {
-	# If macos then use open command
-	if [[ $(uname -s) =~ "Darwin" ]]; then
-		open -a Terminal .
-	# If gnome then use gnome command
-	elif [[ ${XDG_CURRENT_DESKTOP} =~ "GNOME" ]]; then
-		gnome-terminal
-	fi
-}
-
-# Open the graphical files explorer 
-function open-files() {
-    dir=$1
-    [[ -z $dir ]] && dir='.'
-
-    # If it's macOS
-	if [[ $(uname -s) =~ "Darwin" ]]; then
-		open $dir
-    # If it's gnome
-	elif [[ ${XDG_CURRENT_DESKTOP} =~ "GNOME" ]]; then
-		xdg-open $dir
-	fi
-	unset dir;
-}
 
 # Ping tcp ports 
 function ping-tcp() {
