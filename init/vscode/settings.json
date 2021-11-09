@@ -16,6 +16,7 @@
   "editor.cursorBlinking": "solid",
   "editor.fontSize": 15,
   "editor.tabSize": 4,
+  "editor.mouseWheelZoom": true,
   // Use spaces per tab
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,

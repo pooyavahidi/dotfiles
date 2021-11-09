@@ -223,5 +223,13 @@
   {
     "key": "ctrl+; ctrl+j",
     "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "meta+=",
+    "command": "workbench.action.zoomIn"
+  },
+  {
+    "key": "meta+-",
+    "command": "workbench.action.zoomOut"
   }
 ]
