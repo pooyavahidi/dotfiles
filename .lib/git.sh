@@ -39,7 +39,7 @@ function __git_patch {
     done
 
     [[ -z ${__action} ]] && echo "action is not provided or valid" && return
-    [[ -z ${S3_PATCHES_BUCKET} ]] && echo "S3_PATCHES_BUCKET is not set" \
+    [[ -z ${AWS_S3_BUCKET_PATCHES} ]] && echo "AWS_S3_BUCKET_PATCHES is not set" \
         && return
 
     # Set the repo_name based on the origin url
@@ -86,16 +86,16 @@ function __git_patch {
     # Based on the action, upload, download or delete files from the S3 bucket
     case $__action in
         save)
-            aws s3 cp . s3://${S3_PATCHES_BUCKET}/${__patch_prefix}/ \
+            aws s3 cp . s3://${AWS_S3_BUCKET_PATCHES}/${__patch_prefix}/ \
                 --recursive --exclude "*" --include "${__patch_file}*.patch"
             rm ${__patch_file}*.patch
             ;;
         load)
-            aws s3 cp s3://${S3_PATCHES_BUCKET}/${__patch_prefix}/ . \
+            aws s3 cp s3://${AWS_S3_BUCKET_PATCHES}/${__patch_prefix}/ . \
                 --recursive
             ;;
         clean)
-            aws s3 rm s3://${S3_PATCHES_BUCKET}/${__patch_prefix}/ \
+            aws s3 rm s3://${AWS_S3_BUCKET_PATCHES}/${__patch_prefix}/ \
                 --recursive
             ;;
         *)
