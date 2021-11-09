@@ -34,8 +34,25 @@ function __set_gitconfig() {
     git config --global credential.helper osxkeychain
 }
 
+# Set the defaults for macOS finder
+function __set_macos_defaults() {
+    # Finder: show path bar
+    defaults write com.apple.finder ShowPathbar -bool true
+
+    # Finder: show all filename extensions
+    defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+    # Finder: show hidden files by default
+    defaults write com.apple.finder AppleShowAllFiles -bool true
+
+    # Set the size of dock items
+    defaults write com.apple.dock tilesize -int 50
+
+}
+
 # Run the functions in order
 function main() {
+    __set_macos_defaults
     __set_gitconfig
     __set_vscode_settings
 
