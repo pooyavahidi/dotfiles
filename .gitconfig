@@ -1,20 +1,20 @@
 [alias]
-	# View the current status in the short format
-	s = status --short --branch
-	
-	# branch
-	b = branch
+    # View the current status in the short format
+    s = status --short --branch
 
-	# List all branches
-	ba = branch --all
-	
-	# commit
-	ci = commit
+    # branch
+    b = branch
 
-	# checkout
-	co = checkout
+    # List all branches
+    ba = branch --all
 
-	# Commit all changes using verbose commit
-	ca = !git add -A && git commit -av
+    # commit
+    ci = commit
+
+    # checkout
+    co = checkout
+
+    # Commit all changes using verbose commit
+    ca = !git add -A && git commit -av
 [pull]
-	ff = only
+    rebase = false
