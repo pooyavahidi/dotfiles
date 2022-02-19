@@ -16,5 +16,10 @@
 
     # Commit all changes using verbose commit
     ca = !git add -A && git commit -av
+
+[apply]
+    # Detect whitespace errors when applying a patch.
+    whitespace = fix
+
 [pull]
     rebase = false
