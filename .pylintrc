@@ -63,8 +63,11 @@ disable=
     invalid-name,
     protected-access,
     too-few-public-methods,
-	no-absolute-import,
-	no-self-use
+    no-absolute-import,
+    no-self-use,
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring
 
 
 [REPORTS]
