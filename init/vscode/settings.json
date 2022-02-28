@@ -14,7 +14,7 @@
     80
   ],
   "editor.cursorBlinking": "solid",
-  "editor.fontSize": 15,
+  "editor.fontSize": 13,
   "editor.tabSize": 4,
   "editor.mouseWheelZoom": true,
   // Use spaces per tab
@@ -30,7 +30,8 @@
   //// debug settings
   "debug.onTaskErrors": "showErrors",
   //// terminal panel
-  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.tabs.enabled": false,
   //// others
   "files.eol": "\n",
   "breadcrumbs.enabled": true,
