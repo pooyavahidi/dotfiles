@@ -73,7 +73,7 @@ function aws-sts-assume-role() {
     export AWS_SESSION_TOKEN=
     export AWS_ACCOUNT_ID=
 
-    # Get the caller identity before assume role
+    # Print the caller identity before assume role
     aws sts get-caller-identity
 
     # Get the session duration and convert it to seconds
@@ -113,7 +113,7 @@ function aws-sts-assume-role() {
     export AWS_SESSION_TOKEN=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f3)
     export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 
-    # get caller identity after the assume role
+    # Print caller identity after the assume role
     aws sts get-caller-identity
 
 }
