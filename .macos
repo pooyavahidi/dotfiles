@@ -48,6 +48,14 @@ function __set_macos_defaults() {
     # Set the size of dock items
     defaults write com.apple.dock tilesize -int 50
 
+    # Keep folders on top when sorting by name
+    defaults write com.apple.finder _FXSortFoldersFirst -bool true
+    defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool true
+
+    # Use list view in all Finder windows by default
+    # Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
+    defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
 }
 
 # Run the functions in order
