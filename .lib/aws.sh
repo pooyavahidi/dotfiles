@@ -130,10 +130,6 @@ function aws-sts-assume-role-mfa() {
     aws-sts-assume-role $role_arn $mfa_serial_number
 }
 
-function aws-sts-session-token-current-user {
-    aws-sts-session-token ${AWS_MFA_SERIAL_NUMBER}
-}
-
 function aws-user-elevate-to-poweruser {
     aws iam add-user-to-group --user-name $1 --group-name PowerUsers
 }
