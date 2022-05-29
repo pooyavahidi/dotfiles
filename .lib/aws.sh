@@ -81,13 +81,11 @@ function aws-sts-assume-role() {
     [ -z "$duration" ] && duration=1
     duration_seconds=$(($duration*3600))
 
-    # Get the code and sts token
-    if [[ ${__mfa_enabled} ]]; then
-        printf "Enter the MFA code: "; read token_code
-    fi
-
     # Get the credential
     if [[ ${__mfa_enabled} ]]; then
+        # Get the token code
+        printf "Enter the MFA code: "; read token_code
+
         credentials=$(aws sts assume-role \
         --role-arn ${role_arn} \
         --role-session-name $(date '+%Y%m%d%H%M%S%3N') \
