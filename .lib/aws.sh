@@ -22,11 +22,6 @@ function aws-sts-session-token() {
     mfa_serial_number=$(__get_aws_mfa_serial_number $1) \
     || return 1
 
-    # Reset the environment variables
-    export AWS_ACCESS_KEY_ID=
-    export AWS_SECRET_ACCESS_KEY=
-    export AWS_SESSION_TOKEN=
-
     # Get the session duration and convert it to seconds
     printf "Enter the session duration in hours [default is 1]: "; read duration
     [ -z "$duration" ] && duration=1
@@ -66,12 +61,6 @@ function aws-sts-assume-role() {
 
     [[ -z $role_arn ]] && echo "role arn is missing" && return 1
     [[ -n $mfa_serial_number ]] && __mfa_enabled=true
-
-    # Reset the environment variables
-    export AWS_ACCESS_KEY_ID=
-    export AWS_SECRET_ACCESS_KEY=
-    export AWS_SESSION_TOKEN=
-    export AWS_ACCOUNT_ID=
 
     # Print the caller identity before assume role
     aws sts get-caller-identity
