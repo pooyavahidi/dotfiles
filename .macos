@@ -64,9 +64,6 @@ function main() {
     __set_gitconfig
     __set_vscode_settings
 
-    # If .macos.extra exists run that too.
-    [[ -f "$HOME/.macos.extra" ]] && source $HOME/.macos.extra
-
     return 0
 }
 
