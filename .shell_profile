@@ -5,9 +5,6 @@
 #######################################
 export PATH="$HOME/.local/bin:$PATH";
 
-# Add Visual Studio Code (code) to the PATH - macOS
-export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH";
-
 
 #######################################
 # export environment variables
@@ -24,6 +21,14 @@ export EDITOR="$VISUAL"
 for file in $HOME/.lib/*.sh; do
      source "$file"
 done;
+
+# Load scripts from the .lib/macos directory if this is MacOS
+if [[ $(uname -s) =~ "Darwin" ]]; then
+    # Run macOS specific scripts
+    for file in $HOME/.lib/macos/*.sh; do
+         source "$file"
+    done;
+fi
 
 # Load ~/.extra if exists.
 # .extra contains any custom and additional scripts which are locally defined
