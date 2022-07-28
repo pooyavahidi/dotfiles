@@ -131,13 +131,13 @@ function git_prompt_info() {
 
     local prompt_info
     prompt_info="${SHELL_PROMPT_GIT_BRANCH_PREFIX}${ref}"
-    prompt_info+="${SHELL_PROMPT_GIT_BRANCH_SUFFIX}$(parse_git_status)"
+    prompt_info+="${SHELL_PROMPT_GIT_BRANCH_SUFFIX}$(__parse_git_status)"
 
     echo $prompt_info
 }
 
 # Check the git status and return the status prompt and the dirty flag
-function parse_git_status() {
+function __parse_git_status() {
     local STATUS
     local -a FLAGS
     FLAGS=('--porcelain' '--branch')
