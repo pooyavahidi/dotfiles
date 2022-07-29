@@ -207,3 +207,29 @@ function __is_git_working_dir() {
         return 1
     fi
 }
+
+# Check for git status of all the subdirectories of the given path.
+# This function goes through the first-level subdirectories.
+function __git_working_dirs_status {
+    local __root_dir
+    local __dir
+
+    __root_dir=$1
+    if [[ -z $__root_dir ]] && echo "Path is missing" && return 1
+
+    # Go through all the first-level subdirectories of the given path
+    for __dir in ${__root_dir}/*/ ; do
+        # If the directory is not tracked by git, then continue
+        if ! __is_git_working_dir $__dir ; then
+            continue
+        fi
+        echo ----------------------------------------
+        echo ${__dir}
+
+        __git_prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
+            fetch
+
+        __git_prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
+            status --short --branch
+    done
+}
