@@ -6,9 +6,8 @@
 #######################################
 
 alias g="git"
-alias gpload="__git_patch load"
+alias gpload="__git_patch load && __git_patch clean"
 alias gpsave="__git_patch save"
-alias gpclean="__git_patch clean"
 
 
 #######################################
@@ -29,6 +28,9 @@ function __git_patch {
     local __origin_repo
 
     # Validations
+    if ! __is_git_working_dir; then
+        echo "Not a git working directory" && return 1
+    fi
     if [[ -z $1 ]]; then
         echo "Usage: git-patch <save|load|clean>" && return
     fi
@@ -105,7 +107,6 @@ function __git_patch {
     esac
 
 }
-
 
 # git prompt functions are inspired by ohmyzsh and spaceship-prompt libraries.
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/git.zsh
@@ -191,5 +192,18 @@ function __parse_git_status() {
         echo $status_prompt
     else
         return 0
+    fi
+}
+# If the given directory is a git working directory return 0, if not return 1
+function __is_git_working_dir() {
+    local __dir
+    __dir=$1
+
+    # If no directory has been passed, use the current directory
+    if [[ -z $__dir ]] && __dir=$(pwd)
+
+    if ! __git_prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
+        rev-parse --git-dir &> /dev/null; then
+        return 1
     fi
 }
