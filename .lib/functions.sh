@@ -53,4 +53,15 @@ function sw() {
         sleep ${__watch_interval}
     done
 }
+# A shorthand for the grep command to search for a given string inside the files
+# of the current directory recursively
+function search-string() {
+    local __pattern
+    __pattern=$1
+
+    # Validations
+    [[ -z ${__pattern} ]] && echo "pattern is missing" && return 1
+
+    grep --exclude-dir=.git -nr ${__pattern} .
+}
 
