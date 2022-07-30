@@ -8,7 +8,7 @@
 alias g="git"
 alias gpload="__git_patch load && __git_patch clean"
 alias gpsave="__git_patch save"
-
+alias gpclean="__git_patch clean"
 
 #######################################
 # functions
@@ -88,20 +88,20 @@ function __git_patch {
     # Based on the action, upload, download or delete files from the S3 bucket
     case $__action in
         save)
-            aws s3 cp . s3://${AWS_S3_BUCKET_PATCHES}/${__patch_prefix}/ \
-                --recursive --exclude "*" --include "${__patch_file}*.patch"
+            [[ ! -d ${PATCHES_REPO}/${__patch_prefix} ]] \
+                && mkdir ${PATCHES_REPO}/${__patch_prefix}
+
+            cp ${__patch_file}*.patch ${PATCHES_REPO}/${__patch_prefix}/
             rm ${__patch_file}*.patch
             ;;
         load)
-            aws s3 cp s3://${AWS_S3_BUCKET_PATCHES}/${__patch_prefix}/ . \
-                --recursive
+            cp -v ${PATCHES_REPO}/${__patch_prefix}/*.* .
             ;;
         clean)
-            aws s3 rm s3://${AWS_S3_BUCKET_PATCHES}/${__patch_prefix}/ \
-                --recursive
+            rm ${PATCHES_REPO}/${__patch_prefix}/*.*
             ;;
         *)
-            echo "ERROR: unkown action"
+            echo "ERROR: unknown action"
             return
             ;;
     esac
