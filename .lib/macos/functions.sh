@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Keychain functions
-function _get_password_from_keychain {
+function _keychain_get_password {
     local value
     local item_name
 
