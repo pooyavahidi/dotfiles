@@ -210,7 +210,7 @@ function __is_git_working_dir() {
 
 # Check for git status of all the subdirectories of the given path.
 # This function goes through the first-level subdirectories.
-function __git_working_dirs_status {
+function git_working_dirs_status {
     local __root_dir
     local __dir
 
