@@ -62,6 +62,6 @@ function search-string() {
     # Validations
     [[ -z ${__pattern} ]] && echo "pattern is missing" && return 1
 
-    grep --exclude-dir=.git -nr ${__pattern} .
+    grep --exclude-dir=.git -inr ${__pattern} .
 }
 
