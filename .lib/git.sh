@@ -41,7 +41,7 @@ function __git_patch {
     done
 
     [[ -z ${__action} ]] && echo "action is not provided or valid" && return
-    [[ -z ${AWS_S3_BUCKET_PATCHES} ]] && echo "AWS_S3_BUCKET_PATCHES is not set" \
+    [[ -z ${PATCHES_REPO} ]] && echo "PATCHES_REPO is not set" \
         && return
 
     # Set the repo_name based on the origin url
@@ -88,11 +88,15 @@ function __git_patch {
     # Based on the action, upload, download or delete files from the S3 bucket
     case $__action in
         save)
+            # Create a directory in the patch repo if doesn't exist already
             [[ ! -d ${PATCHES_REPO}/${__patch_prefix} ]] \
                 && mkdir ${PATCHES_REPO}/${__patch_prefix}
 
-            cp ${__patch_file}*.patch ${PATCHES_REPO}/${__patch_prefix}/
-            rm ${__patch_file}*.patch
+            # Check if patch files are created, then copy and clean up
+            if [[ -n $(find . -type f -name "${__patch_file}*.patch") ]]; then
+                cp ${__patch_file}*.patch ${PATCHES_REPO}/${__patch_prefix}/
+                rm ${__patch_file}*.patch
+            fi
             ;;
         load)
             cp -v ${PATCHES_REPO}/${__patch_prefix}/*.* .
