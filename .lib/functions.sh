@@ -54,8 +54,9 @@ function sw() {
     done
 }
 # A shorthand for the grep command to search for a given string inside the files
-# of the current directory recursively
-function search-string() {
+# of the current directory recursively.
+# exclude .git
+function search-text() {
     local __pattern
     __pattern=$1
 
@@ -65,3 +66,15 @@ function search-string() {
     grep --exclude-dir=.git -inr ${__pattern} .
 }
 
+# A shorthand for the find and grep command to search for a given string in
+# files and directories names.
+# excludes .git
+function search-files() {
+    local __pattern
+    __pattern=$1
+
+    # Validations
+    [[ -z ${__pattern} ]] && echo "pattern is missing" && return 1
+
+    find . ! -path "*/.git/*" | grep -i ${__pattern}
+}
