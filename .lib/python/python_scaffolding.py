@@ -23,6 +23,8 @@ def add_requirements():
 
 
 def install_requirements():
+    # Upgrade pip first
+    subprocess.run([".env/bin/pip", "install", "--upgrade", "pip"], check=True)
     subprocess.run(
         [".env/bin/pip", "install", "-r", "requirements.txt"], check=True
     )
