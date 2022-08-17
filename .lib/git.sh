@@ -204,7 +204,7 @@ function __is_git_working_dir() {
     __dir=$1
 
     # If no directory has been passed, use the current directory
-    if [[ -z $__dir ]] && __dir=$(pwd)
+    [[ -z $__dir ]] && __dir=$(pwd)
 
     if ! __git_prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
         rev-parse --git-dir &> /dev/null; then
@@ -219,7 +219,7 @@ function git_working_dirs_status {
     local __dir
 
     __root_dir=$1
-    if [[ -z $__root_dir ]] && echo "Path is missing" && return 1
+    [[ -z $__root_dir ]] && echo "Path is missing" && return 1
 
     # Go through all the first-level subdirectories of the given path
     for __dir in ${__root_dir}/*/ ; do
