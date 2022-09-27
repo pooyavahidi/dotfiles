@@ -204,9 +204,17 @@ function __is_git_working_dir() {
     __dir=$1
 
     # If no directory has been passed, use the current directory
-    [[ -z $__dir ]] && __dir=$(pwd)
+    if [[ -z $__dir ]]; then
+        # If no directory is given, then assume it's the current directory.
+        if __git_prompt_git rev-parse --git-dir &> /dev/null; then
+            return 0
+        else
+            return 1
+        fi
+    fi
 
-    if ! __git_prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
+    # If a directory is given, then use its .git directory path.
+    if ! __git_prompt_git --git-dir=$__dir/.git \
         rev-parse --git-dir &> /dev/null; then
         return 1
     fi
