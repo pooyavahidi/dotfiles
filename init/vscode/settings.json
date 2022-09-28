@@ -35,7 +35,7 @@
   //// others
   "files.eol": "\n",
   "breadcrumbs.enabled": true,
-  "remote.SSH.configFile": "${env:HOME}/.ssh/config",
+  "remote.SSH.configFile": "/.ssh/config",
   //// vscodevim extension settings
   "vim.insertModeKeyBindings": [
     {
