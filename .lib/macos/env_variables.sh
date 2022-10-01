@@ -1,5 +1,9 @@
 #!/bin/sh
 
+
+export VSCODE_USER_HOME="$HOME/Library/Application Support/Code/User"
+
+
 # Add python bin directory
 export PATH="/Users/$USER/Library/Python/3.8/bin:$PATH"
 

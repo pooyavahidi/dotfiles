@@ -1,9 +1,6 @@
 #!/bin/sh
 
-# Source the paths
-source $HOME/.paths
-
-# export environment variables
+# Load environment variables
 source $HOME/.env_variables
 
 # Load scripts from the .lib directory.
