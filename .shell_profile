@@ -1,28 +1,19 @@
 #!/bin/sh
 
-#######################################
-# Add the directories to the PATH
-#######################################
-export PATH="$HOME/.local/bin:$PATH";
+# Source the paths
+source $HOME/.paths
 
-
-#######################################
 # export environment variables
-#######################################
-export WORKSPACE=$HOME/workspace
-export VISUAL=vim 
-export EDITOR="$VISUAL" 
+source $HOME/.env_variables
 
-
-#######################################
-# Load the scripts
-#######################################
-# Load scripts from the .lib directory
+# Load scripts from the .lib directory.
 for file in $HOME/.lib/*.sh; do
      source "$file"
 done;
 
-# Load scripts from the .lib/macos directory if this is MacOS
+# Load scripts from the .lib/macos directory if this is MacOS.
+# Note: OS-specific scripts should be sourced after all the .lib scripts as
+# they override values and functions as required.
 if [[ $(uname -s) =~ "Darwin" ]]; then
     # Run macOS specific scripts
     for file in $HOME/.lib/macos/*.sh; do
