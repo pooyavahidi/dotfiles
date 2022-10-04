@@ -17,6 +17,18 @@
     # Commit all changes using verbose commit
     ca = !git add -A && git commit -av
 
+    # Show the diff including the stat at the beginning
+    d = diff -p --stat
+
+    # Show the last changes of the given path/file or the current dir
+    dl = log -p --stat -n 1
+
+    # Show logs in a graph and in oneline format
+    l = log --pretty=oneline --graph --abbrev-commit
+
+    # Show logs with summary of changed files
+    ls = log --pretty=oneline --graph --abbrev-commit --stat
+
 [apply]
     # Detect whitespace errors when applying a patch.
     whitespace = fix
