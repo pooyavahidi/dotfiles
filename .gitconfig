@@ -8,9 +8,6 @@
     # List all branches
     ba = branch --all
 
-    # commit
-    ci = commit
-
     # checkout
     co = checkout
 
@@ -28,6 +25,15 @@
 
     # Show logs with summary of changed files
     ls = log --pretty=oneline --graph --abbrev-commit --stat
+
+    # Show verbose about remotes
+    remotes = remote --verbose
+
+    # List aliases
+    aliases = config --get-regexp alias
+
+    # Clone a repository including all submodules
+    clo = clone --recursive
 
 [apply]
     # Detect whitespace errors when applying a patch.
