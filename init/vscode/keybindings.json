@@ -130,17 +130,17 @@
     "command": "workbench.action.tasks.reRunTask"
   },
   {
-    "key": "cmd+8",
+    "key": "ctrl+8",
     "command": "workbench.action.debug.start",
     "when": "debuggersAvailable && debugState != 'initializing'"
   },
   {
-    "key": "cmd+8",
+    "key": "ctrl+8",
     "command": "workbench.action.debug.continue",
     "when": "inDebugMode"
   },
   {
-    "key": "shift+cmd+8",
+    "key": "ctrl+9",
     "command": "workbench.action.debug.stop",
     "when": "inDebugMode && !focusedSessionIsAttach"
   },
