@@ -53,6 +53,7 @@ function sw() {
         sleep ${__watch_interval}
     done
 }
+
 # A shorthand for the grep command to search for a given string inside the files
 # of the current directory recursively.
 # exclude .git
@@ -77,4 +78,14 @@ function search-files() {
     [[ -z ${__pattern} ]] && echo "pattern is missing" && return 1
 
     find . ! -path "*/.git/*" | grep -i ${__pattern}
+}
+
+# Checksum for directories
+function sha256sum-dir {
+    local __dir
+
+    __dir=$1
+    [[ -z $__dir ]] && __dir="."
+
+   find -s $__dir -type f -exec sha256sum {} \; | sha256sum
 }
