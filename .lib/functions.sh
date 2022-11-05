@@ -103,13 +103,17 @@ function checksumdir {
     [ -z $__dir ] && __dir="."
 
     if [ $__include_all ]; then
-        __hash=$(find -s $__dir -type f \
-        -exec shasum -a 256 {} \; | shasum -a 256)
+        __hash=$(find $__dir -type f \
+        | LC_ALL=C sort \
+        | xargs shasum -a 256 \
+        | shasum -a 256)
     else
-        __hash=$(find -s $__dir -type f \
+        __hash=$(find $__dir -type f \
         ! -path "*/.git/*" \
         ! -path "*/.env/*" \
-        -exec shasum -a 256 {} \; | shasum -a 256)
+        | LC_ALL=C sort \
+        | xargs shasum -a 256 \
+        | shasum -a 256)
     fi
     echo $__hash | cut -d' ' -f1 | xargs printf "%s  $__dir\n"
 }
