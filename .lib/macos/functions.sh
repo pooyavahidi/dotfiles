@@ -12,13 +12,3 @@ function _keychain_get_password {
            | xmllint --xpath '//dict/string/text()' -)
     echo $value
 }
-
-# Checksum for directories
-function sha256sum-dir {
-    local __dir
-
-    __dir=$1
-    [[ -z $__dir ]] && __dir="."
-
-    find -s $__dir -type f -exec shasum -a 256 {} \; | shasum -a 256
-}

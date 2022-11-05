@@ -81,11 +81,35 @@ function search-files() {
 }
 
 # Checksum for directories
-function sha256sum-dir {
+function checksumdir {
     local __dir
+    local __include_all
+    local __hash
 
-    __dir=$1
-    [[ -z $__dir ]] && __dir="."
+    while [ -n "$1" ]; do
+        case $1 in
+            -a | --all)
+                __include_all=true
+                shift
+                ;;
+            *)
+                __dir=$1
+                shift
+                ;;
+        esac
+    done
 
-   find -s $__dir -type f -exec sha256sum {} \; | sha256sum
+    # If directory is not provided set it to current dir.
+    [ -z $__dir ] && __dir="."
+
+    if [ $__include_all ]; then
+        __hash=$(find -s $__dir -type f \
+        -exec shasum -a 256 {} \; | shasum -a 256)
+    else
+        __hash=$(find -s $__dir -type f \
+        ! -path "*/.git/*" \
+        ! -path "*/.env/*" \
+        -exec shasum -a 256 {} \; | shasum -a 256)
+    fi
+    echo $__hash | cut -d' ' -f1 | xargs printf "%s  $__dir\n"
 }
