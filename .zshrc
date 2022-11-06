@@ -11,6 +11,9 @@ autoload colors && colors
 # Load the shell profile (shared between bash and zsh)
 source $HOME/.shell_profile
 
+# Deduplicate path variable
+typeset -U path
+
 # Load zsh scripts from the .lib directory
 for file in $HOME/.lib/zsh/*.zsh; do
      source "$file"
