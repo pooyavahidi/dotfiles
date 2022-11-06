@@ -1,15 +1,5 @@
 #!/bin/sh
 
-
-#######################################
-# environment variables
-#######################################
-
-
-#######################################
-# functions
-#######################################
-
 # Get credentials for MFA enabled authentication
 function aws-sts-session-token() {
     local credentials
@@ -19,7 +9,7 @@ function aws-sts-session-token() {
     local duration_seconds
 
     # Get the mfa serial number
-    mfa_serial_number=$(__get_aws_mfa_serial_number $1) \
+    mfa_serial_number=$(__aws_current_mfa_serial_number $1) \
     || return 1
 
     # Get the session duration and convert it to seconds
@@ -50,29 +40,38 @@ function aws-sts-assume-role() {
     local credentials
     local mfa_serial_number
     local role_arn
-    local __mfa_enabled
     local token_code
-    local duration
     local duration_seconds
 
-    # Input variables
-    role_arn=$1 #"arn:aws:iam::trusting_account_id:role/role_name"
-    mfa_serial_number=$2 #"arn:aws:iam::trusted_account_id:mfa/myuser"
-
+    # Parse parameters
+    while [[ -n "$1" ]]; do
+        case $1 in
+            -r | --role-arn)
+                shift
+                role_arn=$1
+                shift
+                ;;
+            -d | --duration)
+                shift
+                duration_seconds=$1
+                shift
+                ;;
+            -s | --serial)
+                shift
+                mfa_serial_number=$1
+                shift
+        esac
+    done
     [[ -z $role_arn ]] && echo "role arn is missing" && return 1
-    [[ -n $mfa_serial_number ]] && __mfa_enabled=true
+    [[ -z $duration_seconds ]] && duration_seconds=900
 
     # Print the caller identity before assume role
     aws sts get-caller-identity
-
-    # Get the session duration and convert it to seconds
-    printf "Enter the session duration in hours [default is 1]: "; read duration
-    [ -z "$duration" ] && duration=1
-    duration_seconds=$(($duration*3600))
+    echo Assuming $role_arn for $duration_seconds seconds.
 
     # Get the credential
-    if [[ ${__mfa_enabled} ]]; then
-        # Get the token code
+    if [[ -n $mfa_serial_number ]]; then
+        # If mfa_serial_number is provided, then get the token code
         printf "Enter the MFA code: "; read token_code
 
         credentials=$(aws sts assume-role \
@@ -103,32 +102,6 @@ function aws-sts-assume-role() {
     # Print caller identity after the assume role
     aws sts get-caller-identity
 
-}
-
-# Assume role using MFA
-function aws-sts-assume-role-mfa() {
-    local role_arn
-    local mfa_serial_number
-
-    role_arn=$1
-
-    # Get the mfa serial number
-    mfa_serial_number=$(__get_aws_mfa_serial_number $2) \
-    || return 1
-
-    aws-sts-assume-role $role_arn $mfa_serial_number
-}
-
-function aws-user-elevate-to-poweruser {
-    aws iam add-user-to-group --user-name $1 --group-name PowerUsers
-}
-
-function aws-user-elevate-to-readonly {
-    aws iam add-user-to-group --user-name $1 --group-name ReadOnlyUsers
-}
-
-function aws-user-elevate-to-admin {
-    aws iam add-user-to-group --user-name $1 --group-name Admins
 }
 
 function aws-list-env-variables {
@@ -168,7 +141,7 @@ function s3-download {
 
 # Get aws mfa serial number. If it's not set as an env variable, it gets it
 # from the aws sts get-caller-identity
-function __get_aws_mfa_serial_number() {
+function __aws_current_mfa_serial_number() {
     local mfa_serial_number
 
     [[ -n "${mfa_serial_number:=$1}" ]] \
@@ -186,7 +159,7 @@ function __get_aws_mfa_serial_number() {
 }
 
 # Get current aws username
-function __get_aws_current_user() {
+function __aws_current_user() {
     local iam_user
     iam_user=$(aws sts get-caller-identity \
                 | grep Arn \
