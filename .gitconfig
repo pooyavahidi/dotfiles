@@ -42,5 +42,11 @@
     # Detect whitespace errors when applying a patch.
     whitespace = fix
 
+[commit]
+    gpgsign = true
+
+[gpg]
+    format = ssh
+
 [pull]
     rebase = false
