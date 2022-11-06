@@ -9,8 +9,9 @@ rsync --exclude ".git/" \
     --exclude "README.md" \
     --exclude ".gitignore" \
     --exclude ".osx" \
+    --exclude ".macos" \
     --exclude "LICENSE" \
-    --exclude "bootstrap*" \
+    --exclude "bootstrap.sh" \
     -avh . ~
 
 # Run OS specific bootstrap scripts
@@ -19,9 +20,10 @@ if [[ $(uname -s) =~ "Darwin" ]]; then
     ./.macos
 else
     # Run linux specific scripts
-
     # Copy settings for vscode in Linux
     if [ -d "$HOME/.config/Code/User" ]; then
         rsync -avh init/vscode/ $HOME/.config/Code/User
     fi
 fi
+
+source ~/.zshrc

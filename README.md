@@ -12,13 +12,10 @@ Simply run the `bootstrap.sh` from the dotfiles directory.
 ```sh
 git clone https://github.com/pooyavahidi/dotfiles.git
 cd dotfiles
-./bootstrap.sh
+source bootstrap.sh
 ```
 
 ### macOS defaults
 
-To set some sensible macOS defaults, run this after the bootstrapping.
+There are some sensible macOS defaults in `.macos` file. `bootstrap.sh` executes this script if it's running on macOS.
 
-```sh
-./.macos
-```
