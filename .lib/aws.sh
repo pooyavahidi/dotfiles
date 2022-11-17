@@ -93,6 +93,12 @@ function aws-sts-assume-role() {
         )
     fi
 
+    # Return if the previous command executed with error
+    if (( $? != 0 )); then
+        echo "Unable to get session token"
+        return 1
+    fi
+
     # Replace tabs (if there is any) to space, and then split the string by spaces.
     export AWS_ACCESS_KEY_ID=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f1)
     export AWS_SECRET_ACCESS_KEY=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f2)
