@@ -8,16 +8,28 @@ function aws-sts-session-token() {
     local duration
     local duration_seconds
 
-    # Get the mfa serial number
-    mfa_serial_number=$(__aws_current_mfa_serial_number $1) \
-    || return 1
+    # Parse parameters
+    while [[ -n "$1" ]]; do
+        case $1 in
+            -d | --duration)
+                shift
+                duration_seconds=$1
+                shift
+                ;;
+            -s | --serial)
+                shift
+                mfa_serial_number=$1
+                shift
+        esac
+    done
 
-    # Get the session duration and convert it to seconds
-    printf "Enter the session duration in hours [default is 1]: "; read duration
-    [ -z "$duration" ] && duration=1
-    duration_seconds=$(($duration*3600))
+    [[ -z $duration_seconds ]] && duration_seconds=900
+    if [[ -z $mfa_serial_number ]]; then
+        # Get the current user's mfa serial number
+        mfa_serial_number=$(__aws_current_mfa_serial_number $1) || return 1
+    fi
 
-    # Get the code and sts token
+    # Get the mfa token code
     printf "Enter the MFA code: "; read token_code
 
     # Get the credential
@@ -28,6 +40,12 @@ function aws-sts-session-token() {
         --query '[Credentials.AccessKeyId,Credentials.SecretAccessKey,Credentials.SessionToken]' \
         --output text \
     )
+
+    # Return if the previous command executed with error
+    if (( $? != 0 )); then
+        echo "Unable to get session token"
+        return 1
+    fi
 
     # Replace tabs (if there is any) to space, and then split the string by spaces.
     export AWS_ACCESS_KEY_ID=$(echo $credentials | tr -s '\t' ' ' | cut -d' ' -f1)
