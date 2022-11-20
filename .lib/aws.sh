@@ -5,7 +5,6 @@ function aws-sts-session-token() {
     local credentials
     local mfa_serial_number
     local token_code
-    local duration
     local duration_seconds
 
     # Parse parameters
@@ -14,13 +13,12 @@ function aws-sts-session-token() {
             -d | --duration)
                 shift
                 duration_seconds=$1
-                shift
                 ;;
             -s | --serial)
                 shift
                 mfa_serial_number=$1
-                shift
         esac
+        [[ $# > 0 ]] && shift
     done
 
     [[ -z $duration_seconds ]] && duration_seconds=900
@@ -29,6 +27,7 @@ function aws-sts-session-token() {
         mfa_serial_number=$(__aws_current_mfa_serial_number $1) || return 1
     fi
 
+    echo Getting session token using mfa: $mfa_serial_number for duration: $duration_seconds seconds.
     # Get the mfa token code
     printf "Enter the MFA code: "; read token_code
 
@@ -67,25 +66,25 @@ function aws-sts-assume-role() {
             -r | --role-arn)
                 shift
                 role_arn=$1
-                shift
                 ;;
             -d | --duration)
                 shift
                 duration_seconds=$1
-                shift
                 ;;
             -s | --serial)
                 shift
                 mfa_serial_number=$1
-                shift
         esac
+        [[ $# > 0 ]] && shift
     done
+
     [[ -z $role_arn ]] && echo "role arn is missing" && return 1
     [[ -z $duration_seconds ]] && duration_seconds=900
 
     # Print the caller identity before assume role
     aws sts get-caller-identity
-    echo Assuming $role_arn for $duration_seconds seconds.
+
+    echo Assuming role: $role_arn using mfa: $mfa_serial_number for duration: $duration_seconds seconds.
 
     # Get the credential
     if [[ -n $mfa_serial_number ]]; then
