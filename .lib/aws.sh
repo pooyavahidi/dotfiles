@@ -1,5 +1,15 @@
 #!/bin/sh
 
+#######################################
+# aliases
+#######################################
+alias aws-whoami="aws sts get-caller-identity"
+
+
+#######################################
+# functions
+#######################################
+
 # Get credentials for MFA enabled authentication
 function aws-sts-session-token() {
     local credentials
