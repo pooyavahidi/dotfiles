@@ -17,7 +17,6 @@ alias gpclean="__git_patch clean"
 # Creates patch files from the current git repository and save them into an S3
 # bucket. It can download, upload and delete patches from the bucket.
 function __git_patch {
-    local __repo_name 
     local -a __actions 
     local __action 
     local __available_action 
@@ -44,9 +43,9 @@ function __git_patch {
     [[ -z ${PATCHES_REPO} ]] && echo "PATCHES_REPO is not set" \
         && return
 
-    # Set the repo_name based on the origin url
-    __repo_name=$(git config --get remote.origin.url | sed -e "s/:/_/g" | sed -e "s/\//_/g")
-    __patch_prefix=${__repo_name}
+    # Get the minified version of the remote url
+    __patch_prefix=$(__git_remote_url_minified)
+    [[ -z __patch_prefix ]] && echo "Unable to read remote url" && return 1
 
     if [[ $__action == "save" ]]; then
         __patch_file=$(date +"%y%m%d_%H%M")
@@ -218,6 +217,22 @@ function __is_git_working_dir() {
         rev-parse --git-dir &> /dev/null; then
         return 1
     fi
+}
+
+function __git_remote_url_minified() {
+    local __remote_url
+    __remote_url=$(git config --get remote.origin.url)
+
+    # If previous command exited with error, then do the same
+    [[ $? != 0 ]] && return 1
+
+    # Remove the special characters, username and protocol from the origin url.
+    # It works for both https and ssh
+    echo $__remote_url \
+        | sed -e "s/https:\/\///g" \
+        | sed -e "s/.*@//g" \
+        | sed -e "s/\//_/g" \
+        | sed -e "s/:/_/g"
 }
 
 # Check for git status of all the subdirectories of the given path.
