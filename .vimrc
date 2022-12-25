@@ -74,3 +74,9 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> 0 g0
 nnoremap <silent> $ g$
+
+" Replace currently selected text with default register without yanking it.
+vnoremap p "_dP
+
+" Avoid putting the deleted characters to the default register.
+noremap x "_x

@@ -73,6 +73,44 @@
       ]
     }
   ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "j"
+      ],
+      "after": [
+        "g",
+        "j"
+      ]
+    },
+    {
+      "before": [
+        "k"
+      ],
+      "after": [
+        "g",
+        "k"
+      ]
+    },
+    {
+      "before": [
+        "0"
+      ],
+      "after": [
+        "g",
+        "0"
+      ]
+    },
+    {
+      "before": [
+        "$"
+      ],
+      "after": [
+        "g",
+        "$"
+      ]
+    }
+  ],
   //// markdown settings
   "[markdown]": {
     "editor.wordWrap": "on",
@@ -88,6 +126,7 @@
     "--line-length",
     "79"
   ],
+  "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.pycodestyleEnabled": true,
   "python.linting.lintOnSave": true,
