@@ -137,16 +137,6 @@ function aws-sts-assume-role() {
 
 }
 
-function aws-list-env-variables {
-    echo AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
-    echo AWS_REGION=$AWS_REGION
-    echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-    echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-    echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-    echo AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
-}
-
-
 # sync workspace directory to the workspace bucket in s3
 function s3-upload-ws {
     aws s3 sync ${WORKSPACE} s3://${S3_WS_BUCKET}/ \
@@ -200,4 +190,23 @@ function __aws_current_user() {
     || return 1
 
     echo $iam_user
+}
+
+# Load original aws env variables
+function __aws_load_original_env_variables {
+    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_ORIGINAL
+    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_ORIGINAL
+    export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN_ORIGINAL
+}
+
+# Set the current aws env variables to orginal variables
+function __aws_set_original_env_variables {
+    [[ -n $AWS_ACCESS_KEY_ID ]] \
+        && export AWS_ACCESS_KEY_ID_ORIGINAL=$AWS_ACCESS_KEY_ID
+    [[ -n $AWS_SECRET_ACCESS_KEY ]] \
+        && export AWS_SECRET_ACCESS_KEY_ORIGINAL=$AWS_SECRET_ACCESS_KEY
+    [[ -n $AWS_SESSION_TOKEN ]] \
+        && export AWS_SESSION_TOKEN_ORIGINAL=$AWS_SESSION_TOKEN
+
+    return 0
 }
