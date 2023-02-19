@@ -180,19 +180,18 @@ function __parse_git_status() {
         status_prompt+=$SHELL_PROMPT_GIT_BEHIND
     fi
 
-    # Set the status prompt with prefix and suffix
-    if [[ -n $status_prompt ]]; then
-        status_prompt=$SHELL_PROMPT_GIT_STATUS_PREFIX${status_prompt}
-        status_prompt+=${SHELL_PROMPT_GIT_STATUS_SUFFIX}
-    fi 
-
     # Add dirty flag to the status prompt
     if [[ "$is_dirty" == true ]]; then
-        status_prompt="${status_prompt}$SHELL_PROMPT_GIT_DIRTY"
+        # If status prompt is not empty, add a space in front.
+        if [[ -n $status_prompt ]]; then
+            status_prompt+=" "
+        fi
+        status_prompt+=$SHELL_PROMPT_GIT_DIRTY
     fi
 
     if [[ -n "$status_prompt" ]]; then
-        echo $status_prompt
+        # If status_prompt is not empty, set it with prefix and suffix
+        echo ${SHELL_PROMPT_GIT_STATUS_PREFIX}${status_prompt}${SHELL_PROMPT_GIT_STATUS_SUFFIX}
     else
         return 0
     fi
