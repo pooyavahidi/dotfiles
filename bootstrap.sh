@@ -1,5 +1,18 @@
 #!/bin/sh
 
+# Check if the working directory is clean
+__git_untracked_objects=$(git ls-files --others --directory)
+
+# If previous command exited with error, return false
+[[ $? != 0 ]] && return 1
+
+if [[ -n $__git_untracked_objects ]]; then
+    echo "Clean up the working directory before bootstrapping. Remove these:"
+    echo $__git_untracked_objects
+    return 1
+fi
+unset __git_untracked_objects
+
 # Copy dotfiles and .lib directory
 rsync --exclude ".git/" \
     --exclude ".vscode/" \

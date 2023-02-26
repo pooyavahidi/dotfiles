@@ -24,14 +24,14 @@ function sw() {
         return
     fi
 
-    # Load the command line parameters into variables                               
+    # Load the command line parameters into variables.
     while [ $# -gt 1 ]; do
         case $1 in
             -n)
                 shift
                 local __watch_interval=$1
                 shift
-           	    ;;
+                ;;
             *)
                 break
                 ;;
@@ -41,7 +41,7 @@ function sw() {
     # If the command is empty show usage and return
     if [[ -z $1 ]]; then
         echo $__usage
-        return 
+        return
     fi
 
     # Run the given command in indefinite loop until user stops the process
@@ -83,16 +83,16 @@ function search-files() {
 # Checksum for directories
 function checksumdir {
     local __dir
-    local __include_all
+    local __option
     local __hash
 
-    while [ -n "$1" ]; do
+    while [[ -n "$1" ]]; do
         case $1 in
-            -a | --all)
-                __include_all=true
+            -g | --git)
+                __option="git"
                 shift
                 ;;
-            *)
+             *)
                 __dir=$1
                 shift
                 ;;
@@ -100,17 +100,17 @@ function checksumdir {
     done
 
     # If directory is not provided set it to current dir.
-    [ -z $__dir ] && __dir="."
+    [[ -z $__dir ]] && __dir="."
 
-    if [ $__include_all ]; then
-        __hash=$(find $__dir -type f \
+
+    if [[ "$__option" == "git" ]]; then
+        __hash=$(git ls-files \
         | LC_ALL=C sort \
         | xargs shasum -a 256 \
         | shasum -a 256)
     else
+        # By default, include all files.
         __hash=$(find $__dir -type f \
-        ! -path "*/.git/*" \
-        ! -path "*/.env/*" \
         | LC_ALL=C sort \
         | xargs shasum -a 256 \
         | shasum -a 256)
