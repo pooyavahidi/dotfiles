@@ -6,9 +6,6 @@
 #######################################
 
 alias g="git"
-alias gpload="__git_patch load && __git_patch clean"
-alias gpsave="__git_patch save"
-alias gpclean="__git_patch clean"
 
 #######################################
 # functions
