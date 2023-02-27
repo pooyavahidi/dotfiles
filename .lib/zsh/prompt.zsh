@@ -30,7 +30,7 @@ PROMPT=$SHELL_PROMPT_INITIAL_ARROW
 
 # Show user@hostname if connected via SSH or it's inside a container.
 if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" ]] || _is_in_container; then
-    PROMPT+="$SHELL_PROMPT_USER_HOST "
+    PROMPT+=" $SHELL_PROMPT_USER_HOST"
 fi;
 
 PROMPT+=" $SHELL_PROMPT_DIR_INFO"
