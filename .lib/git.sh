@@ -6,25 +6,28 @@
 #######################################
 
 alias g="git"
+alias g-patch-push="git::__patch save && git::__patch_repo_sync"
+alias g-patch-pull="git::__patch_repo_sync && git::__patch load && git::__patch clean"
+alias g-push-all-changes="git::push_all_changes"
+
 
 #######################################
 # functions
 #######################################
 
-# Creates patch files from the current git repository and save them into an S3
-# bucket. It can download, upload and delete patches from the bucket.
-function __git_patch {
-    local -a __actions 
-    local __action 
-    local __available_action 
+# Creates/saves/loads patch files from the current git repository.
+function git::__patch() {
+    local -a __actions
+    local __action
+    local __available_action
     local __patch_file
-    local __patch_prefix 
-    local __origin_head 
-    local __local_head 
+    local __patch_prefix
+    local __origin_head
+    local __local_head
     local __origin_repo
 
     # Validations
-    if ! __is_git_working_dir; then
+    if ! git::is_git_working_dir; then
         echo "Not a git working directory" && return 1
     fi
     if [[ -z $1 ]]; then
@@ -41,7 +44,7 @@ function __git_patch {
         && return
 
     # Get the minified version of the remote url
-    __patch_prefix=$(__git_remote_url_minified)
+    __patch_prefix=$(git::remote_url_minified)
     [[ -z __patch_prefix ]] && echo "Unable to read remote url" && return 1
 
     if [[ $__action == "save" ]]; then
@@ -105,7 +108,45 @@ function __git_patch {
             return
             ;;
     esac
+}
 
+# It goes to the patches working dir and then push all the changes.
+# This function should run from the git working directory which the patch has
+# been created for.
+function git::__patch_repo_sync() {
+    local __orig_dir
+
+    __orig_dir=$(pwd)
+
+    cd ${PATCHES_REPO} \
+    && git pull
+
+    if (( $? != 0 )); then
+        cd $__orig_dir
+        return 1
+    fi
+
+    git::push_all_changes "patches" \
+    && cd $__orig_dir
+}
+
+# Pull and then push all the changes.
+function git::push_all_changes() {
+    local commit_msg
+
+    commit_msg=$1
+    [[ -z $commit_mdg ]] && commit_msg="update"
+
+    git pull \
+    && git add .
+
+    # Check to see if there is any changes in the working directory or index.
+    if ! ( git diff --quiet --cached && git diff --quiet ); then
+        git commit -m "$commit_msg" \
+        && git push
+    else
+        echo "There are no changes to push!"
+    fi
 }
 
 # git prompt functions are inspired by ohmyzsh and spaceship-prompt libraries.
@@ -114,31 +155,31 @@ function __git_patch {
 
 # Wrap in a local function instead of exporting the variable directly in
 # order to avoid interfering with manually-run git commands by the user.
-function __git_prompt_git() {
+function git::__prompt_git() {
     GIT_OPTIONAL_LOCKS=0 command git "$@"
 }
 
-function git_prompt_info() {
+function git::prompt_info() {
     # If we are on a directory not tracked by git, get out.
     # Otherwise, check for hide-info at global and local repository level
-    if ! __git_prompt_git rev-parse --git-dir &> /dev/null; then
+    if ! git::__prompt_git rev-parse --git-dir &> /dev/null; then
         return 0
     fi
 
     local ref
-    ref=$(__git_prompt_git symbolic-ref --short HEAD 2> /dev/null) \
-    || ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null) \
+    ref=$(git::__prompt_git symbolic-ref --short HEAD 2> /dev/null) \
+    || ref=$(git::__prompt_git rev-parse --short HEAD 2> /dev/null) \
     || return 0
 
     local prompt_info
     prompt_info="${SHELL_PROMPT_GIT_BRANCH_PREFIX}${ref}"
-    prompt_info+="${SHELL_PROMPT_GIT_BRANCH_SUFFIX}$(__parse_git_status)"
+    prompt_info+="${SHELL_PROMPT_GIT_BRANCH_SUFFIX}$(git::__parse_git_status)"
 
     echo $prompt_info
 }
 
 # Check the git status and return the status prompt and the dirty flag
-function __parse_git_status() {
+function git::__parse_git_status() {
     local STATUS
     local -a FLAGS
     FLAGS=('--porcelain' '--branch')
@@ -156,7 +197,7 @@ function __parse_git_status() {
             ;;
     esac
 
-    STATUS=$(__git_prompt_git status ${FLAGS} 2> /dev/null)
+    STATUS=$(git::__prompt_git status ${FLAGS} 2> /dev/null)
 
     local is_dirty=false
     # Remove the first line (branch info) from the status output and then 
@@ -193,15 +234,16 @@ function __parse_git_status() {
         return 0
     fi
 }
+
 # If the given directory is a git working directory return 0, if not return 1
-function __is_git_working_dir() {
+function git::is_git_working_dir() {
     local __dir
     __dir=$1
 
     # If no directory has been passed, use the current directory
     if [[ -z $__dir ]]; then
         # If no directory is given, then assume it's the current directory.
-        if __git_prompt_git rev-parse --git-dir &> /dev/null; then
+        if git::__prompt_git rev-parse --git-dir &> /dev/null; then
             return 0
         else
             return 1
@@ -209,13 +251,15 @@ function __is_git_working_dir() {
     fi
 
     # If a directory is given, then use its .git directory path.
-    if ! __git_prompt_git --git-dir=$__dir/.git \
+    if ! git::__prompt_git --git-dir=$__dir/.git \
         rev-parse --git-dir &> /dev/null; then
         return 1
     fi
 }
 
-function __git_remote_url_minified() {
+# Returns a minified version of the remote url and replace all
+# special characters with `_`.
+function git::remote_url_minified() {
     local __remote_url
     __remote_url=$(git config --get remote.origin.url)
 
@@ -233,26 +277,20 @@ function __git_remote_url_minified() {
 
 # Check for git status of all the subdirectories of the given path.
 # This function goes through the first-level subdirectories.
-function git_working_dirs_status {
-    local __root_dir
+function git::working_dir_status {
     local __dir
 
-    __root_dir=$1
-    [[ -z $__root_dir ]] && echo "Path is missing" && return 1
+    __dir=$1
+    [[ -z $__dir ]] && __dir=$(pwd)
 
-    # Go through all the first-level subdirectories of the given path
-    for __dir in ${__root_dir}/*/ ; do
-        # If the directory is not tracked by git, then continue
-        if ! __is_git_working_dir $__dir ; then
-            continue
-        fi
-        echo ----------------------------------------
-        echo ${__dir}
+    # If the directory is not tracked by git, then return
+    if ! git::is_git_working_dir $__dir ; then
+        return 1
+    fi
 
-        __git_prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
-            fetch
+    git::__prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
+        fetch
 
-        __git_prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
-            status --short --branch
-    done
+    git::__prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
+        status --short --branch
 }

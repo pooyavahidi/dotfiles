@@ -40,6 +40,6 @@ fi;
 
 PROMPT+=" $SHELL_PROMPT_DIR_INFO"
 
-PROMPT+='$(git_prompt_info)'
+PROMPT+='$(git::prompt_info)'
 
 PROMPT+=$SHELL_PROMPT_FINAL_SUFFIX
