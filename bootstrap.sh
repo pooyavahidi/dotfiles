@@ -39,4 +39,9 @@ else
     fi
 fi
 
-source ~/.zshrc
+# Source the rc file based on the current shell.
+if [[ "$SHELL" =~ "zsh" ]]; then
+   source ~/.zshrc
+else
+    source ~/.bashrc
+fi
