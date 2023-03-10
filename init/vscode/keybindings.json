@@ -222,5 +222,15 @@
   {
     "key": "ctrl+j ctrl+;",
     "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+j l",
+    "command": "workbench.action.focusRightGroup",
+    "when": "multipleEditorGroups"
+  },
+  {
+    "key": "ctrl+j h",
+    "command": "workbench.action.focusLeftGroup",
+    "when": "multipleEditorGroups"
   }
 ]
