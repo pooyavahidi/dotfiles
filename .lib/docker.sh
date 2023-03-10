@@ -15,10 +15,13 @@ alias d="docker"
 alias dcl="docker container ls -a"
 alias dcri="docker run -it"
 alias dcrim="docker run -it --rm"
+alias dcat="docker::container_attach"
+alias dcs="docker container stop"
 alias dil="docker image ls -a"
 alias dcrm="docker container rm"
 alias dirm="docker image rm"
 alias dvl="docker volume ls"
+
 
 # Get container IP
 alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
@@ -37,17 +40,7 @@ alias dsysprune="docker system prune -a --volumes"
 # functions
 #######################################
 
-# Stop all containers
-function dcstop () {
-    docker container stop $(docker container ls -a -q)
-}
-
-# Restart docker service
-function drestart () {
-    sudo systemctl restart docker
-}
-
-function dcstats() {
+function docker::stats() {
     if [[ $# -eq 0 ]]; then
         docker container stats --no-stream;
     else
@@ -56,7 +49,7 @@ function dcstats() {
 }
 
 # If path '/' is mounted to `overlay`, it's most likely inside a container
-function _is_in_container() {
+function docker::is_in_container() {
     if findmnt > /dev/null 2>&1 && \
         [[ $(findmnt / -o SOURCE | awk 'NR>1 {print $1}') == "overlay" ]]; then
             return 0
@@ -67,10 +60,11 @@ function _is_in_container() {
 
 # Attach to an existing container.
 # If it's not running, make it to run first, then attach to it.
-function dcattach() {
+function docker::container_attach() {
     local container
-    container=$1
     local c_status
+
+    container=$1
     c_status=$(docker container inspect $container | grep Status)
 
     # If error in getting the status, exit

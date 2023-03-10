@@ -10,9 +10,9 @@ SHELL_PROMPT_FINAL_SUFFIX=" "
 
 # Git Prompt Info
 SHELL_PROMPT_GIT_BRANCH_PREFIX=" %B%F{blue}(%f%F{red}"
-SHELL_PROMPT_GIT_BRANCH_SUFFIX="%f%F{blue})%f%b "
+SHELL_PROMPT_GIT_BRANCH_SUFFIX="%f%F{blue})%f%b"
 SHELL_PROMPT_GIT_DIRTY="%F{yellow}✗%f"
-SHELL_PROMPT_GIT_STATUS_PREFIX=""
+SHELL_PROMPT_GIT_STATUS_PREFIX=" "
 SHELL_PROMPT_GIT_STATUS_SUFFIX=""
 SHELL_PROMPT_GIT_AHEAD="%F{yellow}⇡%f"
 SHELL_PROMPT_GIT_BEHIND="%F{yellow}⇣%f"
@@ -32,7 +32,9 @@ SHELL_PROMPT_DIR_INFO="%B%F{cyan}%c%f%b"
 PROMPT=$SHELL_PROMPT_INITIAL_PREFIX
 
 # Show user@hostname if connected via SSH or it's inside a container.
-if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" ]] || _is_in_container; then
+if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" ]] \
+    || docker::is_in_container; then
+
     PROMPT+=" $SHELL_PROMPT_USER_HOST"
 fi;
 
