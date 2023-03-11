@@ -264,7 +264,7 @@ function git::remote_url_minified() {
     __remote_url=$(git config --get remote.origin.url)
 
     # If previous command exited with error, then do the same
-    [[ $? != 0 ]] && return 1
+    (( $? != 0 )) && return 1
 
     # Remove the special characters, username and protocol from the origin url.
     # It works for both https and ssh

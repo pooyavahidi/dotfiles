@@ -4,7 +4,7 @@
 __git_untracked_objects=$(git ls-files --others --directory)
 
 # If previous command exited with error, return false
-[[ $? != 0 ]] && return 1
+(( $? != 0 )) && return 1
 
 if [[ -n $__git_untracked_objects ]]; then
     echo "Clean up the working directory before bootstrapping. Remove these:"
