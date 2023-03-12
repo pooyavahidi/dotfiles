@@ -17,7 +17,7 @@
     # Show the diff including the stat if there is any diff between the last commit and current index
     d = !"git diff-index --quiet HEAD -- || clear; git diff -p --stat"
 
-    # `git di $number $options` shows the diff between revision `$number` and the current state.
+    # `git di $n $options` shows the diff between the state of $n revisions ago and the current state.
     di = !"__di() { git diff-index --quiet HEAD~$1 ${@:2} || clear; git diff -p --stat HEAD~$1 ${@:2}; };  __di"
 
     # Show logs in a graph and in oneline format
