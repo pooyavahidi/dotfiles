@@ -17,6 +17,9 @@
     # Show the diff including the stat if there is any diff between the last commit and current index
     d = !"git diff-index --quiet HEAD -- || clear; git diff -p --stat"
 
+    # `git di $number $options` shows the diff between revision `$number` and the current state.
+    di = !"__di() { git diff-index --quiet HEAD~$1 ${@:2} || clear; git diff -p --stat HEAD~$1 ${@:2}; };  __di"
+
     # Show logs in a graph and in oneline format
     l = log --pretty=oneline --graph --abbrev-commit
 
@@ -35,8 +38,14 @@
     # List aliases
     aliases = config --get-regexp alias
 
-    # Clone a repository including all submodules
-    clo = clone --recursive
+    # Clone a repository including all submodules.
+    c = clone --recursive
+
+    # Pull remote changes for the repo and submodules.
+    p = pull --recurse-submodules
+
+    # Show the user email.
+    whoami = config user.email
 
 [apply]
     # Detect whitespace errors when applying a patch.
@@ -49,4 +58,4 @@
     format = ssh
 
 [pull]
-    rebase = false
+    rebase = true
