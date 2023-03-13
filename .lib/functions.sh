@@ -117,3 +117,20 @@ function checksumdir {
     fi
     echo $__hash | cut -d' ' -f1 | xargs printf "%s  $__dir\n"
 }
+
+# Returns true if the given value is an integer.
+function is-int() {
+    local int_regex
+    int_regex="^[0-9]+$"
+
+    if [[ $1 =~ $int_regex ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Print error to STDERR.
+function __err() {
+    echo "ERROR [$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+}
