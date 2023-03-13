@@ -9,7 +9,6 @@ alias aws-whoami="aws sts get-caller-identity"
 #######################################
 # functions
 #######################################
-
 # Get credentials for MFA enabled authentication
 function aws-sts-session-token() {
     local credentials
@@ -28,9 +27,10 @@ function aws-sts-session-token() {
                 shift
                 mfa_serial_number=$1
         esac
-        [[ $# > 0 ]] && shift
+        (( $# > 0 )) && shift
     done
 
+    # If duration is not provided, default it to 900 seconds.
     [[ -z $duration_seconds ]] && duration_seconds=900
     if [[ -z $mfa_serial_number ]]; then
         # Get the current user's mfa serial number
@@ -85,10 +85,12 @@ function aws-sts-assume-role() {
                 shift
                 mfa_serial_number=$1
         esac
-        [[ $# > 0 ]] && shift
+        (( $# > 0 )) && shift
     done
 
     [[ -z $role_arn ]] && echo "role arn is missing" && return 1
+
+    # If duration is not provided, default it to 900 seconds.
     [[ -z $duration_seconds ]] && duration_seconds=900
 
     # Print the caller identity before assume role
@@ -137,31 +139,6 @@ function aws-sts-assume-role() {
 
 }
 
-# sync workspace directory to the workspace bucket in s3
-function s3-upload-ws {
-    aws s3 sync ${WORKSPACE} s3://${S3_WS_BUCKET}/ \
-        --exclude '*.git/*' \
-        --exclude '*.env/*' \
-        --exclude '.DS_Store' \
-        --delete
-}
-
-function s3-upload {
-    aws s3 cp $1 s3://${S3_WS_BUCKET}
-}
-
-function s3-ls {
-    aws s3 ls s3://${S3_WS_BUCKET}
-}
-
-function s3-download {
-    [[ -z $1 || -z $2 ]] \
-        && echo "Usage: s3-download <source> <destination>" \
-        && return
-
-    aws s3 sync s3://${S3_WS_BUCKET}/$1 $2
-}
-
 # Get aws mfa serial number. If it's not set as an env variable, it gets it
 # from the aws sts get-caller-identity
 function __aws_current_mfa_serial_number() {
@@ -175,8 +152,10 @@ function __aws_current_mfa_serial_number() {
                         | sed 's/:user/:mfa/g')
 
     # If mfa serial number is empty, return with error
-    [[ -z "$mfa_serial_number" ]] && echo "mfa serial number is missing" \
-        && return 1
+    if [[ -z "$mfa_serial_number" ]]; then
+        __err "Cannot retrieve the mfa serial number"
+        return 1
+    fi
 
     echo $mfa_serial_number
 }
@@ -209,4 +188,73 @@ function __aws_set_original_env_variables {
         && export AWS_SESSION_TOKEN_ORIGINAL=$AWS_SESSION_TOKEN
 
     return 0
+}
+
+
+# AWS SSM functions
+# Put (upsert) a secure string into the Parameter Store.
+function aws-ssm-put-param {
+    local __param_name
+    local __param_val
+    local __param_label
+
+    # Parse parameters
+    while [[ -n "$1" ]]; do
+        case $1 in
+            -n | --name)
+                shift
+                __param_name=$1
+                ;;
+            -l | --label)
+                shift
+                __param_label=$1
+                ;;
+            -v | --value)
+                shift
+                __param_val=$1
+         esac
+         (( $# > 0 )) && shift
+    done
+
+    aws ssm put-parameter --name $__param_name \
+        --value $__param_val \
+        --type SecureString \
+        --overwrite
+
+    # If previous command exited without error and label is provided,
+    # then set the label to the current version.
+    if [[ $? == 0 && -n $__param_label ]]; then
+        aws ssm label-parameter-version --name $__param_name \
+            --labels $__param_label
+    fi
+}
+
+# Get a secure string value from the Parameter Store.
+function aws-ssm-get-param {
+    local __param_name
+    local __param_label
+
+    # Parse parameters
+    while [[ -n "$1" ]]; do
+        case $1 in
+            -n | --name)
+                shift
+                __param_name=$1
+                ;;
+            -l | --label)
+                shift
+                __param_label=$1
+        esac
+        (( $# > 0 )) && shift
+    done
+
+    # If label is provided, add it to the name.
+    if [[ -n $__param_label ]]; then
+        __param_name=$__param_name:$__param_label
+    fi
+
+    aws ssm get-parameter --name $__param_name \
+        --with-decryption \
+        --query 'Parameter.Value' \
+        --output text
 }
