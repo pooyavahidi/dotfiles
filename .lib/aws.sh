@@ -1,5 +1,15 @@
 #!/bin/sh
 
+
+#######################################
+# Add awscli completion
+#######################################
+# If both complete and aws_completer commands exist, then add them.
+if type complete &> /dev/null && type aws_completer &> /dev/null; then
+    complete -C $(which aws_completer) aws
+fi;
+
+
 #######################################
 # aliases
 #######################################
