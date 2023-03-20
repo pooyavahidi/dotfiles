@@ -62,7 +62,7 @@ function search-text() {
     __pattern=$1
 
     # Validations
-    [[ -z ${__pattern} ]] && echo "pattern is missing" && return 1
+    [[ -z ${__pattern} ]] && __err "pattern is missing" && return 1
 
     grep --exclude-dir=.git -inr ${__pattern} .
 }
@@ -75,13 +75,13 @@ function search-files() {
     __pattern=$1
 
     # Validations
-    [[ -z ${__pattern} ]] && echo "pattern is missing" && return 1
+    [[ -z ${__pattern} ]] && __err "pattern is missing" && return 1
 
     find . ! -path "*/.git/*" | grep -i ${__pattern}
 }
 
 # Checksum for directories
-function checksumdir {
+function checksumdir() {
     local __dir
     local __option
     local __hash
@@ -132,5 +132,5 @@ function is-int() {
 
 # Print error to STDERR.
 function __err() {
-    echo "ERROR [$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+    echo -e "\e[1;31mERROR [$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*\e[0m" >&2
 }
