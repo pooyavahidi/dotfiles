@@ -9,11 +9,11 @@
     "command": "-workbench.action.terminal.new"
   },
   {
-    "key": "ctrl+j s",
+    "key": "ctrl+j r",
     "command": "workbench.files.action.focusFilesExplorer"
   },
   {
-    "key": "ctrl+j shift+s",
+    "key": "ctrl+j shift+r",
     "command": "workbench.action.toggleSidebarVisibility"
   },
   {
@@ -232,5 +232,14 @@
     "key": "ctrl+j h",
     "command": "workbench.action.focusLeftGroup",
     "when": "multipleEditorGroups"
+  },
+  {
+    "key": "ctrl+j s",
+    "command": "workbench.action.findInFiles"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "search.action.focusSearchList",
+    "when": "hasSearchResult && searchViewletVisible"
   }
 ]
