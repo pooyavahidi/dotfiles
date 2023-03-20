@@ -5,6 +5,7 @@
 # aliases
 #######################################
 alias t='tmux -u'
+alias ta='tmux::attach'
 # tmux list of sessions
 alias tl='tmux ls'
 alias tkill='tmux kill-session -t'
@@ -13,9 +14,8 @@ alias tkill='tmux kill-session -t'
 #######################################
 # functions
 #######################################
-
-function ta() {
-    if [[ $# -eq 0 ]]; then
+function tmux::attach() {
+    if (( $# == 0 )); then
         # Attach to the last session
         tmux -u attach
     else

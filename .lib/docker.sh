@@ -15,22 +15,22 @@ alias d="docker"
 alias dcl="docker container ls -a"
 alias dcri="docker run -it"
 alias dcrim="docker run -it --rm"
-alias dcat="docker::container_attach"
-alias dcs="docker container stop"
-alias dil="docker image ls -a"
 alias dcrm="docker container rm"
+alias dcatt="docker::container_attach"
+alias dcs="docker container stop"
+alias dcstats="docker container stats --no-stream"
+alias dil="docker image ls -a"
 alias dirm="docker image rm"
 alias dvl="docker volume ls"
-
 
 # Get container IP
 alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
-# Prune images
-alias diprune="docker image prune -a -f"
-
 # Prune containers
 alias dcprune="docker container prune -f"
+
+# Prune images
+alias diprune="docker image prune -a -f"
 
 # Remove unused data
 alias dsysprune="docker system prune -a --volumes"
@@ -39,14 +39,6 @@ alias dsysprune="docker system prune -a --volumes"
 #######################################
 # functions
 #######################################
-
-function docker::stats() {
-    if [[ $# -eq 0 ]]; then
-        docker container stats --no-stream;
-    else
-        docker container stats --no-stream | grep $1;
-    fi
-}
 
 # If path '/' is mounted to `overlay`, it's most likely inside a container
 function docker::is_in_container() {
@@ -89,7 +81,7 @@ function docker::container_attach() {
             return 0
             ;;
         *)
-            echo "Status is $c_status. Cannot attach!"
+            __err "Status is $c_status. Cannot attach!"
             return 1
             ;;
     esac

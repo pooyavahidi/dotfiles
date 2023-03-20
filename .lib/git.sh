@@ -28,10 +28,10 @@ function git::__patch() {
 
     # Validations
     if ! git::is_git_working_dir; then
-        echo "Not a git working directory" && return 1
+        __err "Not a git working directory" && return 1
     fi
     if [[ -z $1 ]]; then
-        echo "Usage: git-patch <save|load|clean>" && return
+        __err "Usage: git-patch <save|load|clean>" && return 1
     fi
 
     __actions=(save load clean)
@@ -39,13 +39,12 @@ function git::__patch() {
         [[ "$__available_action" == "$1" ]] && __action=$1
     done
 
-    [[ -z ${__action} ]] && echo "action is not provided or valid" && return
-    [[ -z ${PATCHES_REPO} ]] && echo "PATCHES_REPO is not set" \
-        && return
+    [[ -z ${__action} ]] && __err "action is not provided or valid" && return 1
+    [[ -z ${PATCHES_REPO} ]] && __err "PATCHES_REPO is not set" && return 1
 
     # Get the minified version of the remote url
     __patch_prefix=$(git::remote_url_minified)
-    [[ -z __patch_prefix ]] && echo "Unable to read remote url" && return 1
+    [[ -z __patch_prefix ]] && __err "Unable to read remote url" && return 1
 
     if [[ $__action == "save" ]]; then
         __patch_file=$(date +"%y%m%d_%H%M")
@@ -119,7 +118,7 @@ function git::__patch_repo_sync() {
     __orig_dir=$(pwd)
 
     cd ${PATCHES_REPO} \
-    && git pull
+    && git pull --rebase=false
 
     if (( $? != 0 )); then
         cd $__orig_dir
@@ -132,17 +131,16 @@ function git::__patch_repo_sync() {
 
 # Pull and then push all the changes.
 function git::push_all_changes() {
-    local commit_msg
+    local __commit_msg
 
-    commit_msg=$1
-    [[ -z $commit_mdg ]] && commit_msg="update"
+    [[ -z "${__commit_msg:=$1}" ]] && __commit_msg="update"
 
-    git pull \
+    git pull --rebase=false \
     && git add .
 
     # Check to see if there is any changes in the working directory or index.
     if ! ( git diff --quiet --cached && git diff --quiet ); then
-        git commit -m "$commit_msg" \
+        git commit -m "$__commit_msg" \
         && git push
     else
         echo "There are no changes to push!"
@@ -238,10 +236,9 @@ function git::__parse_git_status() {
 # If the given directory is a git working directory return 0, if not return 1
 function git::is_git_working_dir() {
     local __dir
-    __dir=$1
 
     # If no directory has been passed, use the current directory
-    if [[ -z $__dir ]]; then
+    if [[ -z "${__dir:=$1}" ]]; then
         # If no directory is given, then assume it's the current directory.
         if git::__prompt_git rev-parse --git-dir &> /dev/null; then
             return 0
@@ -280,8 +277,7 @@ function git::remote_url_minified() {
 function git::working_dir_status {
     local __dir
 
-    __dir=$1
-    [[ -z $__dir ]] && __dir=$(pwd)
+    [[ -z "${__dir:=$1}" ]] && __dir=$(pwd)
 
     # If the directory is not tracked by git, then return
     if ! git::is_git_working_dir $__dir ; then

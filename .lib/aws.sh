@@ -20,7 +20,7 @@ alias aws-whoami="aws sts get-caller-identity"
 # functions
 #######################################
 # Get credentials for MFA enabled authentication
-function aws-sts-session-token() {
+function aws::sts_session_token() {
     local credentials
     local mfa_serial_number
     local token_code
@@ -44,7 +44,7 @@ function aws-sts-session-token() {
     [[ -z $duration_seconds ]] && duration_seconds=900
     if [[ -z $mfa_serial_number ]]; then
         # Get the current user's mfa serial number
-        mfa_serial_number=$(__aws_current_mfa_serial_number $1) || return 1
+        mfa_serial_number=$(aws::current_mfa_serial_number $1) || return 1
     fi
 
     echo Getting session token using mfa: $mfa_serial_number for duration: $duration_seconds seconds.
@@ -62,7 +62,7 @@ function aws-sts-session-token() {
 
     # Return if the previous command executed with error
     if (( $? != 0 )); then
-        echo "Unable to get session token"
+        __err "Unable to get session token"
         return 1
     fi
 
@@ -73,7 +73,7 @@ function aws-sts-session-token() {
 }
 
 # Assume the given role and return credentials
-function aws-sts-assume-role() {
+function aws::sts_assume_role() {
     local credentials
     local mfa_serial_number
     local role_arn
@@ -98,7 +98,7 @@ function aws-sts-assume-role() {
         (( $# > 0 )) && shift
     done
 
-    [[ -z $role_arn ]] && echo "role arn is missing" && return 1
+    [[ -z $role_arn ]] && __err "role arn is missing" && return 1
 
     # If duration is not provided, default it to 900 seconds.
     [[ -z $duration_seconds ]] && duration_seconds=900
@@ -134,7 +134,7 @@ function aws-sts-assume-role() {
 
     # Return if the previous command executed with error
     if (( $? != 0 )); then
-        echo "Unable to get session token"
+        __err "Unable to get session token"
         return 1
     fi
 
@@ -151,7 +151,7 @@ function aws-sts-assume-role() {
 
 # Get aws mfa serial number. If it's not set as an env variable, it gets it
 # from the aws sts get-caller-identity
-function __aws_current_mfa_serial_number() {
+function aws::current_mfa_serial_number() {
     local mfa_serial_number
 
     [[ -n "${mfa_serial_number:=$1}" ]] \
@@ -171,7 +171,7 @@ function __aws_current_mfa_serial_number() {
 }
 
 # Get current aws username
-function __aws_current_user() {
+function aws::current_user() {
     local iam_user
     iam_user=$(aws sts get-caller-identity \
                 | grep Arn \
@@ -182,14 +182,14 @@ function __aws_current_user() {
 }
 
 # Load original aws env variables
-function __aws_load_original_env_variables {
+function aws::load_original_env_variables() {
     export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_ORIGINAL
     export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_ORIGINAL
     export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN_ORIGINAL
 }
 
 # Set the current aws env variables to orginal variables
-function __aws_set_original_env_variables {
+function aws::set_original_env_variables() {
     [[ -n $AWS_ACCESS_KEY_ID ]] \
         && export AWS_ACCESS_KEY_ID_ORIGINAL=$AWS_ACCESS_KEY_ID
     [[ -n $AWS_SECRET_ACCESS_KEY ]] \
@@ -203,7 +203,7 @@ function __aws_set_original_env_variables {
 
 # AWS SSM functions
 # Put (upsert) a secure string into the Parameter Store.
-function aws-ssm-put-param {
+function aws::ssm_put_param() {
     local __param_name
     local __param_val
     local __param_label
@@ -240,7 +240,7 @@ function aws-ssm-put-param {
 }
 
 # Get a secure string value from the Parameter Store.
-function aws-ssm-get-param {
+function aws::ssm_get_param() {
     local __param_name
     local __param_label
 

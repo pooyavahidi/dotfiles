@@ -32,7 +32,7 @@ SHELL_PROMPT_DIR_INFO="%B%F{cyan}%c%f%b"
 PROMPT=$SHELL_PROMPT_INITIAL_PREFIX
 
 # Show user@hostname if connected via SSH or it's inside a container.
-if [[ "${SSH_TTY}" ]] || [[ "${SSH_CONNECTION}" ]] \
+if [[ -n "${SSH_TTY}" ]] || [[ -n "${SSH_CONNECTION}" ]] \
     || docker::is_in_container; then
 
     PROMPT+=" $SHELL_PROMPT_USER_HOST"
