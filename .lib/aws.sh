@@ -1,6 +1,3 @@
-#!/bin/sh
-
-
 #######################################
 # Add awscli completion
 #######################################
@@ -13,7 +10,7 @@ fi;
 #######################################
 # aliases
 #######################################
-alias aws-whoami="aws sts get-caller-identity"
+alias aws-whoami="aws::current_user_arn"
 
 
 #######################################
@@ -154,8 +151,7 @@ function aws::sts_assume_role() {
 function aws::current_mfa_serial_number() {
     local mfa_serial_number
 
-    [[ -n "${mfa_serial_number:=$1}" ]] \
-    || [[ -n "${mfa_serial_number:=$AWS_MFA_SERIAL_NUMBER}" ]] \
+    [[ -n "${mfa_serial_number:=$AWS_MFA_SERIAL_NUMBER}" ]] \
     || mfa_serial_number=$(aws sts get-caller-identity \
                         | grep Arn \
                         | cut -d'"' -f 4 \
@@ -170,15 +166,26 @@ function aws::current_mfa_serial_number() {
     echo $mfa_serial_number
 }
 
-# Get current aws username
-function aws::current_user() {
-    local iam_user
-    iam_user=$(aws sts get-caller-identity \
-                | grep Arn \
-                | sed 's/.*\/\(.*\)"/\1/') \
-    || return 1
+# Get current aws user arn
+function aws::current_user_arn() {
+    aws sts get-caller-identity | grep Arn | cut -d'"' -f4
 
-    echo $iam_user
+    (( PIPESTATUS[0] != 0 )) && return 1
+}
+
+# Get current aws user in format of AccountNo/Username
+function aws::current_user() {
+    local __user_arn
+
+    [[ -n "${__user_arn:=$1}" ]] \
+        || __user_arn=$(aws::current_user_arn)
+
+    if [[ -z "$__user_arn" ]]; then
+        __err "User arn is empty"
+        return 1
+    fi
+
+    echo $(echo $__user_arn | cut -d: -f5)/$(echo $__user_arn | cut -d/ -f2)
 }
 
 # Load original aws env variables
