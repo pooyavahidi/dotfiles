@@ -6,6 +6,7 @@
 
 # Enable docker BuildKit
 export DOCKER_BUILDKIT=1
+export DOCKER_LOCAL_REGISTRY="local"
 
 
 #######################################

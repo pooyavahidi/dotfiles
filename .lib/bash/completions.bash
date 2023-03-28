@@ -12,7 +12,6 @@ if ! shopt -oq posix; then
 fi
 
 # If kubectl exists, add its completion
-if __kubectl_command=$(which kubectl); then
+if type kubectl &> /dev/null; then
     source <(kubectl completion bash)
 fi
-unset __kubectl_command;
