@@ -130,6 +130,9 @@
   "python.linting.pylintEnabled": true,
   "python.linting.pycodestyleEnabled": true,
   "python.linting.lintOnSave": true,
+  "[python]": {
+    "editor.formatOnSave": true
+  },
   //// docker settings
   "[dockerfile]": {
     "editor.formatOnSave": false
@@ -143,5 +146,7 @@
     "editor.tabSize": 2
   },
   //// c/c++ settings
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}"
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
+  "git.openRepositoryInParentFolders": "never",
+  "notebook.formatOnSave.enabled": true
 }
