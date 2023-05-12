@@ -14,8 +14,8 @@
     # Commit all changes using verbose commit
     ca = !git add -A && git commit -av
 
-    # Show the diff including the stat if there is any diff between the last commit and current index
-    d = !"git diff-index --quiet HEAD -- || clear; git diff -p --stat"
+    # Show the diff between the last commit and current index.
+    d = !"git diff --quiet HEAD -- || clear; git diff -p --stat HEAD"
 
     # `git di $n $options` shows the diff between the state of $n revisions ago and the current state.
     di = !"__di() { git diff-index --quiet HEAD~$1 ${@:2} || clear; git diff -p --stat HEAD~$1 ${@:2}; };  __di"
