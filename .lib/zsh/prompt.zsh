@@ -1,7 +1,25 @@
-#!/bin/sh
+#!/bin/zsh
 
-# Enable parameter expansion, command substitution in prompts
+# Enable parameter expansion, command substitution in prompts.
 setopt PROMPT_SUBST
+
+# Add text to the Right Prompt.
+function __rprompt_add_text() {
+    local __msg
+
+    [[ -z "${__msg:=$1}" ]] && __err "message is not provided" && return 1
+
+    # Decorate the message.
+    __msg="[$__msg]"
+
+    # Add delimiter between messages.
+    if [[ -n $RPROMPT ]]; then
+        __msg="-$__msg"
+    fi
+
+    # Add the final message to the RPROMPT with formatting.
+    RPROMPT=$RPROMPT"%K{blue}$__msg%k"
+}
 
 # Initial prefix and final suffix. Initial prefix shows green if previous
 # command exited without error, otherwise shows red.
