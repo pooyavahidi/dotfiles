@@ -14,8 +14,8 @@ export DOCKER_LOCAL_REGISTRY="pv"
 #######################################
 alias d="docker"
 alias dcl="docker container ls -a"
-alias dcri="docker run -it"
-alias dcrim="docker run -it --rm"
+alias dci="docker run -it"
+alias dcirm="docker run -it --rm"
 alias dcrm="docker container rm"
 alias dcatt="docker::container_attach"
 alias dcs="docker container stop"
@@ -41,6 +41,22 @@ alias dsysprune="docker system prune -a --volumes"
 # functions
 #######################################
 
+function docker::get_container_status() {
+    local container
+    local c_status
+
+    container=$1
+    c_status=$(docker container inspect $container | grep Status)
+
+    # If error in getting the status, exit
+    (( $? != 0 )) && return 1
+
+    # Get the Status value
+    c_status=$(echo $c_status | cut -d'"' -f 4)
+    echo $c_status
+}
+
+
 # If path '/' is mounted to `overlay`, it's most likely inside a container
 function docker::is_in_container() {
     if findmnt > /dev/null 2>&1 && \
@@ -58,13 +74,9 @@ function docker::container_attach() {
     local c_status
 
     container=$1
-    c_status=$(docker container inspect $container | grep Status)
-
-    # If error in getting the status, exit
+    # Try to get container status. If error, exit
+    c_status=$(docker::get_container_status $container)
     (( $? != 0 )) && return 1
-
-    # Get the Status value
-    c_status=$(echo $c_status | cut -d'"' -f 4)
 
     case $c_status in
         running)
