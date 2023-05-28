@@ -20,6 +20,9 @@
     # `git di $n $options` shows the diff between the state of $n revisions ago and the current state.
     di = !"__di() { git diff-index --quiet HEAD~$1 ${@:2} || clear; git diff -p --stat HEAD~$1 ${@:2}; };  __di"
 
+    # Fetch upstream and diff the current branch with its equivalent in the upstream.
+    du = !git fetch upstream && git diff upstream/$(git branch --show-current)
+
     # Show logs in a graph and in oneline format
     l = log --pretty=oneline --graph --abbrev-commit
 
