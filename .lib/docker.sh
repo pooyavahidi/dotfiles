@@ -31,7 +31,7 @@ alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 alias dcprune="docker container prune -f"
 
 # Prune images
-alias diprune="docker image prune -a -f"
+alias diprune="docker image prune -f"
 
 # Remove unused data
 alias dsysprune="docker system prune -a --volumes"
