@@ -188,7 +188,7 @@
     "command": "-workbench.action.splitEditor"
   },
   {
-    "key": "ctrl+j f",
+    "key": "ctrl+j ctrl+p",
     "command": "workbench.action.quickOpen"
   },
   {
