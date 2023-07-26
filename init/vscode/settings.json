@@ -16,7 +16,7 @@
   "editor.cursorBlinking": "solid",
   "editor.fontSize": 13,
   "editor.tabSize": 4,
-  "editor.mouseWheelZoom": true,
+  "editor.mouseWheelZoom": false,
   // Use spaces per tab
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
@@ -148,7 +148,7 @@
   },
   //// c/c++ settings
   "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
-  "git.openRepositoryInParentFolders": "never",
+  "git.openRepositoryInParentFolders": "always",
   "notebook.formatOnSave.enabled": true,
   "notebook.output.scrolling": true
 }
