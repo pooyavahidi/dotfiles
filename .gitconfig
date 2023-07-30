@@ -59,3 +59,9 @@
 
 [gpg]
     format = ssh
+
+[pull]
+    rebase = true
+
+[rebase]
+    autoStash = true
