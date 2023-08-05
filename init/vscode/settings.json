@@ -3,10 +3,12 @@
   "workbench.activityBar.visible": true,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "One Monokai",
+  "workbench.layoutControl.enabled": false,
   //// window
   "window.zoomLevel": 0,
   "window.menuBarVisibility": "toggle",
   "window.titleBarStyle": "custom",
+  "window.commandCenter": false,
   //// editor
   "editor.renderWhitespace": "none",
   "editor.minimap.enabled": false,
