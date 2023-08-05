@@ -13,28 +13,30 @@ export DOCKER_LOCAL_REGISTRY="pv"
 # aliases
 #######################################
 alias d="docker"
+
+# Containers
 alias dcl="docker container ls -a"
-alias dci="docker run -it"
-alias dcirm="docker run -it --rm"
-alias dcrm="docker container rm"
+alias dcit="docker run -it"
+alias dcitrm="docker run -it --rm"
+alias dcrm="docker container rm -f"
 alias dcatt="docker::container_attach"
 alias dcs="docker container stop"
 alias dcstats="docker container stats --no-stream"
-alias dil="docker image ls -a"
-alias dirm="docker image rm"
-alias dvl="docker volume ls"
-
 # Get container IP
 alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
-
-# Prune containers
 alias dcprune="docker container prune -f"
 
-# Prune images
+# Images
+alias dil="docker image ls -a"
+alias dirm="docker image rm"
 alias diprune="docker image prune -f"
 
-# Remove unused data
-alias dsysprune="docker system prune -a --volumes"
+# Volumes
+alias dvl="docker volume ls"
+
+# System
+alias dsprune="docker system prune -a --volumes"
+alias dsdf="docker system df"
 
 
 #######################################
