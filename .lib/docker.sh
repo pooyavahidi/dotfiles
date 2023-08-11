@@ -96,7 +96,7 @@ function docker::exec_shell() {
 }
 
 # Get containers by their name pattern
-docker::get_containers() {
+function docker::get_containers() {
     local __pattern
     local __containers
 
@@ -107,7 +107,7 @@ docker::get_containers() {
 }
 
 # Remove containers by an identifier (name pattern or image id).
-docker::remove_containers() {
+function docker::remove_containers() {
     local __identifier
 
     __identifier="$1"
