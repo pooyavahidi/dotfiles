@@ -15,16 +15,17 @@ export DOCKER_LOCAL_REGISTRY="pv"
 alias d="docker"
 
 # Containers
-alias dcl="docker container ls -a"
+alias dcatt="docker::container_attach"
+alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 alias dcit="docker run -it"
 alias dcitrm="docker run -it --rm"
-alias dcrm="docker container rm -f"
-alias dcatt="docker::container_attach"
-alias dcs="docker container stop"
-alias dcstats="docker container stats --no-stream"
-# Get container IP
-alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+alias dcl="docker container ls -a"
+alias dcls="docker::get_containers"
+alias dcrm="docker::remove_containers"
 alias dcprune="docker container prune -f"
+alias dcs="docker container stop"
+alias dcsh="docker::exec_shell"
+alias dcstats="docker container stats --no-stream"
 
 # Images
 alias dil="docker image ls -a"
@@ -69,8 +70,68 @@ function docker::is_in_container() {
     fi
 }
 
-# Attach to an existing container.
-# If it's not running, make it to run first, then attach to it.
+# Run shell in the container interactively.
+function docker::exec_shell() {
+    local __container
+    local __shell_in_container
+
+    __container=$1
+
+    # Check if container running
+    if ! docker::get_container_status $__container | grep -wq running; then
+        echo "Container $__container is not running."
+        return 1
+    fi
+
+    # Check what is the default shell in the container
+    __shell_in_container=$(docker exec $__container sh -c 'echo $SHELL')
+    (( $? != 0 )) && return 1
+
+    # If there is no default shell, fall back to `sh`
+    if [ -z "$__shell_in_container" ]; then
+        __shell_in_container="sh"
+    fi
+
+    docker exec -it $__container $__shell_in_container
+}
+
+# Get containers by their name pattern
+docker::get_containers() {
+    local __pattern
+    local __containers
+
+    __pattern="$1"
+    __containers=$(docker container ls -a --filter "name=${__pattern}" --format "{{.Names}}")
+
+    echo $__containers
+}
+
+# Remove containers by an identifier (name pattern or image id).
+docker::remove_containers() {
+    local __identifier
+
+    __identifier="$1"
+
+    # Check for provided identifier. We don't want to delete all containers!
+    if [[ -z $__identifier ]]; then
+        echo "Please provide an identifier."
+        return 1
+    fi
+
+    # First check the containers name for this identifier.
+    __containers=$(docker::get_containers $__identifier)
+
+    if [[ -n "$__containers" ]]; then
+        # If there are matching containers, then remove them all.
+        echo $__containers | xargs docker container rm -f
+    else
+        # If no container found with the given identifier as name pattern,
+        # assume it's an IMAGE ID, and try to remove it directly.
+        docker container rm -f ${__identifier}
+    fi
+}
+
+# Attach to a container. If it's not running, start it first.
 function docker::container_attach() {
     local container
     local c_status
