@@ -1,5 +1,5 @@
-# Set the SHELL if it's empty.
-[[ -z $SHELL ]] && export SHELL='/bin/bash'
+# Set the SHELL
+export SHELL='/bin/bash'
 
 source ~/.shell_profile
 
