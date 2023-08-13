@@ -15,17 +15,17 @@ export DOCKER_LOCAL_REGISTRY="pv"
 alias d="docker"
 
 # Containers
-alias dcatt="docker::container_attach"
+alias dcattach="docker::container_attach"
 alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 alias dcit="docker run -it"
 alias dcitrm="docker run -it --rm"
 alias dcl="docker container ls -a"
-alias dcls="docker::get_containers"
-alias dcrm="docker::remove_containers"
+alias dcls="docker::container_list"
+alias dcrm="docker::container_remove"
 alias dcprune="docker container prune -f"
-alias dcs="docker container stop"
 alias dcsh="docker::exec_shell"
 alias dcstats="docker container stats --no-stream"
+alias dcstop="docker container stop"
 
 # Images
 alias dil="docker image ls -a"
@@ -45,18 +45,18 @@ alias dsdf="docker system df"
 #######################################
 
 function docker::get_container_status() {
-    local container
-    local c_status
+    local __container
+    local __c_status
 
-    container=$1
-    c_status=$(docker container inspect $container | grep Status)
+    __container=$1
+    __c_status=$(docker container inspect $__container | grep Status)
 
     # If error in getting the status, exit
     (( $? != 0 )) && return 1
 
     # Get the Status value
-    c_status=$(echo $c_status | cut -d'"' -f 4)
-    echo $c_status
+    __c_status=$(echo $__c_status | cut -d'"' -f 4)
+    echo $__c_status
 }
 
 
@@ -77,13 +77,11 @@ function docker::exec_shell() {
 
     __container=$1
 
-    # Check if container running
-    if ! docker::get_container_status $__container | grep -wq running; then
-        echo "Container $__container is not running."
-        return 1
-    fi
+    # Start the container if it's not.
+    docker::container_start $__container
+    (( $? != 0 )) && return 1
 
-    # Check what is the default shell in the container
+    # Check what is the default shell in the container.
     __shell_in_container=$(docker exec $__container sh -c 'echo $SHELL')
     (( $? != 0 )) && return 1
 
@@ -95,8 +93,8 @@ function docker::exec_shell() {
     docker exec -it $__container $__shell_in_container
 }
 
-# Get containers by their name pattern
-function docker::get_containers() {
+# Get list of container names by their name pattern.
+function docker::container_list() {
     local __pattern
     local __containers
 
@@ -107,7 +105,7 @@ function docker::get_containers() {
 }
 
 # Remove containers by an identifier (name pattern or image id).
-function docker::remove_containers() {
+function docker::container_remove() {
     local __identifier
 
     __identifier="$1"
@@ -119,7 +117,7 @@ function docker::remove_containers() {
     fi
 
     # First check the containers name for this identifier.
-    __containers=$(docker::get_containers $__identifier)
+    __containers=$(docker::container_list $__identifier)
 
     if [[ -n "$__containers" ]]; then
         # If there are matching containers, then remove them all.
@@ -131,34 +129,45 @@ function docker::remove_containers() {
     fi
 }
 
-# Attach to a container. If it's not running, start it first.
-function docker::container_attach() {
-    local container
-    local c_status
+# Try to start the container based on its status.
+function docker::container_start() {
+    local __container
+    local __c_status
 
-    container=$1
-    # Try to get container status. If error, exit
-    c_status=$(docker::get_container_status $container)
+    __container=$1
+    # Get container status. If error, exit.
+    __c_status=$(docker::get_container_status $__container)
     (( $? != 0 )) && return 1
 
-    case $c_status in
+    case $__c_status in
         running)
-            docker container attach $container
             return 0
             ;;
         exited)
-            docker container start $container
-            docker container attach $container
+            echo "Starting $__container ..."
+            docker container start $__container
             return 0
             ;;
         paused)
-            docker container unpause $container
-            docker container attach $container
+            echo "Unpausing $__container ..."
+            docker container unpause $__container
             return 0
             ;;
         *)
-            __err "Status is $c_status. Cannot attach!"
+            __err "Cannot start container $__container with status $__c_status"
             return 1
             ;;
     esac
+}
+
+function docker::container_attach() {
+    local __container
+
+    __container=$1
+
+    # Start the container if it's not.
+    docker::container_start $__container
+    (( $? != 0 )) && return 1
+
+    docker container attach $__container
 }
