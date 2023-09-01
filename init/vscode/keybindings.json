@@ -38,14 +38,6 @@
     "command": "-editor.action.selectAll"
   },
   {
-    "key": "ctrl+j c",
-    "command": "editor.action.clipboardCopyAction"
-  },
-  {
-    "key": "ctrl+c",
-    "command": "-editor.action.clipboardCopyAction"
-  },
-  {
     "key": "ctrl+j v",
     "command": "editor.action.clipboardPasteAction"
   },
@@ -130,19 +122,14 @@
     "command": "workbench.action.tasks.reRunTask"
   },
   {
-    "key": "ctrl+8",
+    "key": "ctrl+enter",
     "command": "workbench.action.debug.start",
     "when": "debuggersAvailable && debugState != 'initializing'"
   },
   {
-    "key": "ctrl+8",
+    "key": "ctrl+enter",
     "command": "workbench.action.debug.continue",
     "when": "inDebugMode"
-  },
-  {
-    "key": "ctrl+shift+8",
-    "command": "workbench.action.debug.stop",
-    "when": "inDebugMode && !focusedSessionIsAttach"
   },
   {
     "key": "ctrl+shift+\\",
@@ -243,27 +230,17 @@
     "when": "hasSearchResult && searchViewletVisible"
   },
   {
-    "key": "ctrl+7",
-    "command": "extension.node-debug.startWithStopOnEntry",
-    "when": "!inDebugMode && debugConfigurationType == 'node' || !inDebugMode && debugConfigurationType == 'pwa-extensionHost' || !inDebugMode && debugConfigurationType == 'pwa-node'"
-  },
-  {
-    "key": "ctrl+7",
-    "command": "extension.node-debug.startWithStopOnEntry",
-    "when": "!inDebugMode && debugConfigurationType == 'node' || !inDebugMode && debugConfigurationType == 'pwa-extensionHost' || !inDebugMode && debugConfigurationType == 'pwa-node'"
-  },
-  {
-    "key": "ctrl+7",
+    "key": "ctrl+8",
     "command": "workbench.action.debug.stepOver",
     "when": "debugState == 'stopped'"
   },
   {
-    "key": "ctrl+7",
+    "key": "ctrl+8",
     "command": "jupyter.runByLine",
     "when": "isWorkspaceTrusted && jupyter.ispythonnotebook && !notebookKernel && notebookCellType == 'code' || isWorkspaceTrusted && jupyter.ispythonnotebook && notebookCellType == 'code' && notebookKernel =~ /^ms-toolsai.jupyter\\// && resource not in 'jupyter.notebookeditor.debugDocuments'"
   },
   {
-    "key": "ctrl+7",
+    "key": "ctrl+8",
     "command": "jupyter.runByLineNext",
     "when": "notebookCellResource in 'jupyter.notebookeditor.runByLineCells'"
   },
@@ -298,5 +275,24 @@
     "key": "ctrl+j 2",
     "command": "editor.action.rename",
     "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+j c",
+    "command": "github.copilot.generate",
+    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-github.copilot.generate",
+    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
+  },
+  {
+    "key": "ctrl+shift+8",
+    "command": "workbench.action.debug.stop",
+    "when": "inDebugMode && !focusedSessionIsAttach"
+  },
+  {
+    "key": "ctrl+8",
+    "command": "-workbench.action.openEditorAtIndex8"
   }
 ]

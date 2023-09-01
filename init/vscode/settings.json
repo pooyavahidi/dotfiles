@@ -29,15 +29,11 @@
   "editor.formatOnSave": true,
   //// explorer
   "explorer.openEditors.visible": 0,
-  //// debug settings
+  //// debug
   "debug.onTaskErrors": "showErrors",
-  //// terminal panel
+  //// terminal
   "terminal.integrated.fontSize": 13,
   "terminal.integrated.tabs.enabled": false,
-  //// others
-  "files.eol": "\n",
-  "breadcrumbs.enabled": true,
-  "remote.SSH.configFile": "/.ssh/config",
   //// vscodevim extension settings
   "vim.insertModeKeyBindings": [
     {
@@ -150,7 +146,20 @@
   },
   //// c/c++ settings
   "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
-  "git.openRepositoryInParentFolders": "always",
+  //// notebook settings
   "notebook.formatOnSave.enabled": true,
-  "notebook.output.scrolling": true
+  "notebook.output.scrolling": true,
+  "notebook.lineNumbers": "on",
+  //// copilot settings
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  //// other settings
+  "files.eol": "\n",
+  "breadcrumbs.enabled": true,
+  "remote.SSH.configFile": "/.ssh/config",
+  "git.openRepositoryInParentFolders": "always"
 }
