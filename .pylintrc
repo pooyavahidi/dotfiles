@@ -58,14 +58,12 @@ enable=F,E,W,R,C
 # --disable=W"
 
 disable=
-    attribute-defined-outside-init,
-    duplicate-code,
-    invalid-name,
-    protected-access,
     too-few-public-methods,
     missing-module-docstring,
     missing-class-docstring,
-    missing-function-docstring
+    missing-function-docstring,
+    unsubscriptable-object,
+    broad-except
 
 
 [REPORTS]
