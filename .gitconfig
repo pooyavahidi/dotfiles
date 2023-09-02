@@ -2,6 +2,15 @@
     # View the current status in the short format
     s = status --short --branch
 
+    # View the short status and file info
+    sl = "!f() { \
+        git -c color.status=always status --short | while IFS= read -r line; do \
+            file=$(echo $line | awk '{print $2}'); \
+            size=$(ls -lh \"$file\" | awk '{print $5}'); \
+            printf \"%s %s\\n\" \"$size\" \"$line\"; \
+        done; \
+    }; f"
+
     # branch
     b = branch
 
@@ -15,10 +24,10 @@
     ca = !git add -A && git commit -av
 
     # Show the diff between the last commit and current index.
-    d = !"git diff --quiet HEAD -- || clear; git diff -p --stat HEAD"
+    d = "!git diff --quiet HEAD -- || clear; git diff -p --stat HEAD"
 
     # `git di $n $options` shows the diff between the state of $n revisions ago and the current state.
-    di = !"__di() { git diff-index --quiet HEAD~$1 ${@:2} || clear; git diff -p --stat HEAD~$1 ${@:2}; };  __di"
+    di = "!f() { git diff-index --quiet HEAD~$1 ${@:2} || clear; git diff -p --stat HEAD~$1 ${@:2}; }; f"
 
     # Fetch upstream and diff the current branch with its equivalent in the upstream.
     du = !git fetch upstream && git diff upstream/$(git branch --show-current)
