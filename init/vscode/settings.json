@@ -161,5 +161,6 @@
   "files.eol": "\n",
   "breadcrumbs.enabled": true,
   "remote.SSH.configFile": "/.ssh/config",
-  "git.openRepositoryInParentFolders": "always"
+  "git.openRepositoryInParentFolders": "always",
+  "extensions.ignoreRecommendations": true
 }
