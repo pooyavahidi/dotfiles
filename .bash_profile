@@ -5,20 +5,19 @@ source ~/.shell_profile
 
 # Add bash specific here
 
-# If not running interactively, don't do anything
+# If not running interactively, don't do anything and return early.
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
+# Ignore duplicates and commands starting with a space in history.
 HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
+# Append to the history file, don't overwrite it
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
 

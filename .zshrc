@@ -14,6 +14,14 @@ source $HOME/.shell_profile
 # Deduplicate path variable
 typeset -U path
 
+# Avoid duplicates and commands starting with a space in history.
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+
+# Set the history size.
+HISTSIZE=1000
+
 # Load zsh scripts from the .lib directory
 for file in $HOME/.lib/zsh/*.zsh; do
      source "$file"
