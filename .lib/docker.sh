@@ -39,6 +39,14 @@ alias dvl="docker volume ls"
 alias dsprune="docker system prune -a --volumes"
 alias dsdf="docker system df"
 
+# Compose
+alias dcom="docker compose"
+alias dcomf="docker::compose_config_files"
+
+# Network
+alias dnl="docker network ls"
+alias dnrm="docker network rm"
+
 
 #######################################
 # functions
@@ -170,4 +178,46 @@ function docker::container_attach() {
     (( $? != 0 )) && return 1
 
     docker container attach $__container
+}
+
+# Get the docker-compose config file for containers matching the given name.
+# If no name is given, it lists all containers with at least one config file.
+function docker::compose_config_files() {
+    declare -a __containers
+    local __config_files
+    local __num_config_files
+
+    # Get all the container names matching the given name pattern.
+    IFS=$'\n' __containers=($(docker::container_list $1))
+
+    # If no containers matched, print a message and exit.
+    if [ ${#__containers[@]} -eq 0 ]; then
+        __err "No matching container found." && return 1
+    fi
+
+    # Header
+    printf "%-40s %-7s %-60s\n" "CONTAINER NAME" \
+           "FILES" "FIRST DOCKER-COMPOSE CONFIG FILE"
+
+    # Use docker inspect to fetch the config_files label from each container.
+    for __container in "${__containers[@]}"; do
+        __config_files=$(
+            docker inspect --format \
+            '{{ index .Config.Labels "com.docker.compose.project.config_files" }}' \
+            "$__container" 2>/dev/null
+        )
+
+        # Count number of config files.
+        __num_config_files=$(echo "$__config_files" | tr ',' '\n' | wc -l)
+
+        # Take the first config file if there are multiple.
+        IFS=',' read -r __config_file _ <<< "$__config_files"
+
+        # If docker inspect returns a non-empty result, print it.
+        if [ -n "${__config_file}" ]; then
+            echo "$__container $__num_config_files $__config_file" \
+            | awk '{printf "%-40s %-7s %-60s\n", $1, $2, $3}'
+
+        fi
+    done
 }
