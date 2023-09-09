@@ -162,5 +162,6 @@
   "breadcrumbs.enabled": true,
   "remote.SSH.configFile": "/.ssh/config",
   "git.openRepositoryInParentFolders": "always",
-  "extensions.ignoreRecommendations": true
+  "extensions.ignoreRecommendations": true,
+  "diffEditor.ignoreTrimWhitespace": false
 }

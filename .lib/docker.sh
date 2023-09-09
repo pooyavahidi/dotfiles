@@ -40,8 +40,8 @@ alias dsprune="docker system prune -a --volumes"
 alias dsdf="docker system df"
 
 # Compose
-alias dcom="docker compose"
-alias dcomf="docker::compose_config_files"
+alias dcomp="docker compose"
+alias dcompf="docker::compose_config_files"
 
 # Network
 alias dnl="docker network ls"
