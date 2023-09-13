@@ -20,7 +20,7 @@ alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 alias dcit="docker run -it"
 alias dcitrm="docker run -it --rm"
 alias dcl="docker container ls -a"
-alias dcls="docker::container_list"
+alias dcln="docker::container_list"
 alias dcrm="docker::container_remove"
 alias dcprune="docker container prune -f"
 alias dcsh="docker::exec_shell"
@@ -46,6 +46,9 @@ alias dcompf="docker::compose_config_files"
 # Network
 alias dnl="docker network ls"
 alias dnrm="docker network rm"
+
+# Logs
+alias dclogs="docker container logs"
 
 
 #######################################
