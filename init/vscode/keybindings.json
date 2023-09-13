@@ -294,5 +294,9 @@
   {
     "key": "ctrl+8",
     "command": "-workbench.action.openEditorAtIndex8"
+  },
+  {
+    "key": "ctrl+j w",
+    "command": "editor.action.toggleWordWrap"
   }
 ]
