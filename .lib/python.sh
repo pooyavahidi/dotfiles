@@ -13,6 +13,6 @@ alias py="python3"
 #######################################
 # Create a new python project using scaffolding templates
 function python::scaffold_project() {
-    python3 ${HOME}/.lib/python/python_scaffolding.py
+    python3 ${HOME}/.lib/utils/python_scaffolding.py
 }
 

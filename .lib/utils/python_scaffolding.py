@@ -8,7 +8,7 @@ import subprocess
 def add_gitignore():
     file_name = ".gitignore"
     urllib.request.urlretrieve(
-        url="https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore",
+        url="https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore",
         filename=file_name,
     )
     print(f"{file_name} is created.")
