@@ -230,17 +230,17 @@
     "when": "hasSearchResult && searchViewletVisible"
   },
   {
-    "key": "ctrl+8",
+    "key": "ctrl+i",
     "command": "workbench.action.debug.stepOver",
     "when": "debugState == 'stopped'"
   },
   {
-    "key": "ctrl+8",
+    "key": "ctrl+i",
     "command": "jupyter.runByLine",
     "when": "isWorkspaceTrusted && jupyter.ispythonnotebook && !notebookKernel && notebookCellType == 'code' || isWorkspaceTrusted && jupyter.ispythonnotebook && notebookCellType == 'code' && notebookKernel =~ /^ms-toolsai.jupyter\\// && resource not in 'jupyter.notebookeditor.debugDocuments'"
   },
   {
-    "key": "ctrl+8",
+    "key": "ctrl+i",
     "command": "jupyter.runByLineNext",
     "when": "notebookCellResource in 'jupyter.notebookeditor.runByLineCells'"
   },
@@ -257,17 +257,17 @@
     "command": "-workbench.action.moveEditorToLastGroup"
   },
   {
-    "key": "ctrl+9",
+    "key": "ctrl+o",
     "command": "extension.node-debug.startWithStopOnEntry",
     "when": "!inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'node' || !inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'pwa-extensionHost' || !inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'pwa-node'"
   },
   {
-    "key": "ctrl+9",
+    "key": "ctrl+o",
     "command": "workbench.action.debug.stepInto",
     "when": "debugState != 'inactive'"
   },
   {
-    "key": "ctrl+shift+9",
+    "key": "ctrl+shift+o",
     "command": "workbench.action.debug.stepOut",
     "when": "debugState == 'stopped'"
   },
@@ -287,7 +287,7 @@
     "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
   },
   {
-    "key": "ctrl+shift+8",
+    "key": "ctrl+shift+i",
     "command": "workbench.action.debug.stop",
     "when": "inDebugMode && !focusedSessionIsAttach"
   },
@@ -298,5 +298,9 @@
   {
     "key": "ctrl+j w",
     "command": "editor.action.toggleWordWrap"
+  },
+  {
+    "key": "ctrl+j u",
+    "command": "testing.runAll"
   }
 ]
