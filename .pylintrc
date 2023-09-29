@@ -60,9 +60,7 @@ enable=F,E,W,R,C
 disable=
     too-few-public-methods,
     missing-module-docstring,
-    missing-class-docstring,
     missing-function-docstring,
-    unsubscriptable-object,
     broad-except
 
 
