@@ -9,6 +9,7 @@
   "window.menuBarVisibility": "toggle",
   "window.titleBarStyle": "custom",
   "window.commandCenter": false,
+  "window.density.editorTabHeight": "default",
   //// editor
   "editor.renderWhitespace": "none",
   "editor.minimap.enabled": false,
@@ -157,8 +158,12 @@
     "markdown": true,
     "scminput": false
   },
-  //// other settings
+  //// files
   "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  //// other settings
   "breadcrumbs.enabled": true,
   "remote.SSH.configFile": "/.ssh/config",
   "git.openRepositoryInParentFolders": "always",
