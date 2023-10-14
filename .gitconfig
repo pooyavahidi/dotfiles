@@ -24,6 +24,9 @@
     # checkout
     co = checkout
 
+    # Intent to add changes
+    an = add . -N
+
     # Commit all changes using verbose commit
     ca = !git add -A && git commit -av
 
