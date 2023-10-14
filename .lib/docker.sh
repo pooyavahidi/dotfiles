@@ -17,8 +17,6 @@ alias d="docker"
 # Containers
 alias dcattach="docker::container_attach"
 alias dcip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
-alias dcit="docker run -it"
-alias dcitrm="docker run -it --rm"
 alias dcl="docker container ls -a"
 alias dcln="docker::container_list"
 alias dcrm="docker::container_remove"
@@ -26,6 +24,12 @@ alias dcprune="docker container prune -f"
 alias dcsh="docker::exec_shell"
 alias dcstats="docker container stats --no-stream"
 alias dcstop="docker container stop"
+
+# Container run
+alias drit="docker run -it"
+alias dritpwd='docker run -it -v "$(pwd):/workspace"'
+alias dritrm="docker run -it --rm"
+alias dritrmpwd='docker run -it --rm -v "$(pwd):/workspace"'
 
 # Images
 alias dil="docker image ls -a"
@@ -55,7 +59,7 @@ alias dclogs="docker container logs"
 # functions
 #######################################
 
-function docker::get_container_status() {
+function docker::container_status() {
     local __container
     local __c_status
 
@@ -147,7 +151,7 @@ function docker::container_start() {
 
     __container=$1
     # Get container status. If error, exit.
-    __c_status=$(docker::get_container_status $__container)
+    __c_status=$(docker::container_status $__container)
     (( $? != 0 )) && return 1
 
     case $__c_status in

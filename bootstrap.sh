@@ -105,7 +105,7 @@ bootstrap
 post_bootstrap
 (( $? != 0 )) && return 1
 
-echo "Bootstrapping completed successfully"
+echo "\nBootstrapping completed successfully"
 
 # After successful bootstrapping, source the RC file based on the current shell.
 if [[ "$SHELL" =~ "zsh" ]]; then
@@ -113,5 +113,5 @@ if [[ "$SHELL" =~ "zsh" ]]; then
 elif [[ "$SHELL" =~ "bash" ]]; then
     source "$HOME/.bashrc"
 else
-    echo "Unable to source RC file for unsupported shell `$SHELL`"
+    echo "\nUnable to source RC file for unsupported shell `$SHELL`"
 fi
