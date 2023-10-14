@@ -124,12 +124,12 @@
   {
     "key": "ctrl+enter",
     "command": "workbench.action.debug.start",
-    "when": "debuggersAvailable && debugState != 'initializing'"
+    "when": "debuggersAvailable && debugState != 'initializing' && !notebookEditorFocused"
   },
   {
     "key": "ctrl+enter",
     "command": "workbench.action.debug.continue",
-    "when": "inDebugMode"
+    "when": "inDebugMode && !notebookEditorFocused"
   },
   {
     "key": "ctrl+shift+\\",
