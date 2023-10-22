@@ -24,4 +24,3 @@ fi
 file="$HOME/.extra"
 [ -r "$file" ] && [ -f "$file" ] && source "$file";
 unset file;
-

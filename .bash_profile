@@ -1,5 +1,11 @@
+#!/bin/bash
+
+
 # Set the SHELL
 export SHELL='/bin/bash'
+
+# QUICK_PATHS stores alias/path pairs for quick access.
+declare -A QUICK_PATHS
 
 source ~/.shell_profile
 
@@ -13,10 +19,8 @@ esac
 
 # Ignore duplicates and commands starting with a space in history.
 HISTCONTROL=ignoreboth
-
 # Append to the history file, don't overwrite it
 shopt -s histappend
-
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
@@ -37,4 +41,3 @@ for file in $HOME/.lib/bash/*.bash; do
      source "$file"
 done;
 unset file;
-

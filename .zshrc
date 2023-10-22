@@ -8,6 +8,9 @@ autoload bashcompinit && bashcompinit
 # Load the colors
 autoload colors && colors
 
+# QUICK_PATHS stores alias/path pairs for quick access.
+typeset -A QUICK_PATHS
+
 # Load the shell profile (shared between bash and zsh)
 source $HOME/.shell_profile
 
@@ -27,4 +30,3 @@ for file in $HOME/.lib/zsh/*.zsh; do
      source "$file"
 done;
 unset file;
-
