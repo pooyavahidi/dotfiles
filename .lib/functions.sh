@@ -1,7 +1,84 @@
 #!/bin/sh
 
 
-# Ping tcp ports 
+# Print error to STDERR.
+function __err() {
+    echo -e "\e[1;31mERROR [$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*\e[0m" >&2
+}
+
+# Return the path from QUICK_PATHS for the given alias.
+function __get_quick_path() {
+    local __alias="$1"
+    local __path=""
+
+    if [[ -z "${QUICK_PATHS}" ]]; then
+        __err "QUICK_PATHS is empty or not defined"
+        return 1
+    fi
+
+    if [[ -z "$__alias" ]]; then
+        # If no argument is provided, print all aliases and their paths.
+        for __key in ${(k)QUICK_PATHS}; do
+            printf "%s=%s\n" "$__key" "${QUICK_PATHS[$__key]}"
+        done
+        return 0
+    fi
+
+    __path="${QUICK_PATHS[$__alias]}"
+
+    # If the alias is not found, return an error.
+    if [[ -z "${__path}" ]]; then
+        __err "alias $__alias not found"
+        return 1
+    fi
+
+    # If path is not a valid file or directory, return an error.
+    if [[ ! -f "$__path" && ! -d "$__path" ]]; then
+        __err "path $__path not found or valid for alias $__alias"
+        return 1
+    fi
+
+    echo "$__path"
+}
+
+# j is short for "jump", to quickly jump to a directory using quick path alias.
+function j() {
+    local __alias="$1"
+    local __path=""
+
+    __path=$(__get_quick_path "$__alias")
+    (( $? != 0 )) && return 1
+
+    if [[ -d "$__path" ]]; then
+        # If the path is a directory, cd to that.
+        cd "$__path" && pwd
+    elif [[ -f "$__path" ]]; then
+        # If the path is a file, cd to the parent directory.
+        cd "$(dirname "$__path")" && pwd
+    else
+        __err "cannot cd to $__path"
+        return 1
+    fi
+}
+
+# c is short for code, and overrding the code command to use quick path alias.
+function c() {
+    local __alias="$1"
+    local __path=""
+
+    __path=$(__get_quick_path "$__alias" 2> /dev/null)
+    if (( $? == 0 )); then
+        # If the first argument is an alias, use the path for that alias.
+        # Remove the first argument and pass the rest to code.
+        shift 1
+        code "$__path" "$@"
+    else
+        # If the first argument is not an alias, then just run code as is.
+        code "$@"
+    fi
+}
+
+# Ping tcp ports
 function ping-tcp() {
     # $1 = host, $2 = port
     echo > /dev/tcp/$1/$2 && echo "$1:$2 is open."
@@ -13,7 +90,7 @@ function ping-udp() {
     echo > /dev/udp/$1/$2 && echo "$1:$2 is open."
 }
 
-# A simple watch command replacement. It runs in the current shell 
+# A simple watch command replacement. It runs in the current shell
 # so all the aliases and sourced scripts are available.
 function sw() {
     local __usage="sw -n <interval-in-sec> command"
@@ -128,9 +205,4 @@ function is-int() {
     else
         return 1
     fi
-}
-
-# Print error to STDERR.
-function __err() {
-    echo -e "\e[1;31mERROR [$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*\e[0m" >&2
 }

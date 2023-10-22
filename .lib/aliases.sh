@@ -12,11 +12,14 @@ alias .....="cd ../../../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
-# Shortcuts
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
+# Quick Paths
 alias ws="cd $WORKSPACE"
-alias temp="cd $WORKSPACE/temp"
+QUICK_PATHS[ws]="$WORKSPACE"
+QUICK_PATHS[temp]="$WORKSPACE/temp"
+QUICK_PATHS[dl]="$HOME/Downloads"
+QUICK_PATHS[dt]="$HOME/Desktop"
+QUICK_PATHS[docs]="$HOME/Documents"
+
 
 if [[ ${XDG_CURRENT_DESKTOP} =~ "GNOME" ]]; then
     # It's linux and running GNOME
@@ -37,12 +40,12 @@ alias l="ls -lFh ${colorflag}"
 # List all files colorized in long format, excluding . and ..
 alias ll="ls -lAFh ${colorflag}"
 
-# List all files 
+# List all files
 alias la="ls -laF ${colorflag}"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
- 
+
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
 
@@ -60,3 +63,7 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Always show tree in color
 alias tree="tree -C"
+
+# Quick Paths
+alias qp="__get_quick_path"
+alias qpl="__get_quick_path | sort"
