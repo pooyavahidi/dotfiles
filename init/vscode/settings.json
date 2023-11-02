@@ -5,7 +5,7 @@
   "workbench.colorTheme": "One Monokai",
   "workbench.layoutControl.enabled": false,
   //// window
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "window.menuBarVisibility": "toggle",
   "window.titleBarStyle": "custom",
   "window.commandCenter": false,
@@ -125,10 +125,6 @@
     "--line-length",
     "79"
   ],
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.pycodestyleEnabled": true,
-  "python.linting.lintOnSave": true,
   "[python]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-python.black-formatter"
@@ -165,7 +161,6 @@
   "files.trimFinalNewlines": true,
   //// other settings
   "breadcrumbs.enabled": true,
-  "remote.SSH.configFile": "/.ssh/config",
   "git.openRepositoryInParentFolders": "always",
   "extensions.ignoreRecommendations": true,
   "diffEditor.ignoreTrimWhitespace": false
