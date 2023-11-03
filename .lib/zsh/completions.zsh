@@ -14,6 +14,7 @@ __quick_path_completion() {
 compdef __quick_path_completion qp
 compdef __quick_path_completion j
 compdef __quick_path_completion c
+compdef __quick_path_completion jc
 
 
 # If kubectl exists, add its completion

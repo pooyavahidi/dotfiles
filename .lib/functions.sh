@@ -17,11 +17,8 @@ function __get_quick_path() {
     fi
 
     if [[ -z "$__alias" ]]; then
-        # If no argument is provided, print all aliases and their paths.
-        for __key in ${(k)QUICK_PATHS}; do
-            printf "%s=%s\n" "$__key" "${QUICK_PATHS[$__key]}"
-        done
-        return 0
+        __err "alias is missing"
+        return 1
     fi
 
     __path="${QUICK_PATHS[$__alias]}"
@@ -39,6 +36,17 @@ function __get_quick_path() {
     fi
 
     echo "$__path"
+}
+# Return the list of QUICK_PATHS aliases.
+function __list_quick_paths() {
+    if [[ -z "${QUICK_PATHS}" ]]; then
+        __err "QUICK_PATHS is empty or not defined"
+        return 1
+    fi
+
+    for __key in ${(k)QUICK_PATHS}; do
+        printf "%s=%s\n" "$__key" "${QUICK_PATHS[$__key]}"
+    done
 }
 
 # j is short for "jump", to quickly jump to a directory using quick path alias.
@@ -76,6 +84,11 @@ function c() {
         # If the first argument is not an alias, then just run code as is.
         code "$@"
     fi
+}
+
+# Combine jump and code to jc() function.
+function jc() {
+    j $1 && c $1
 }
 
 # Ping tcp ports

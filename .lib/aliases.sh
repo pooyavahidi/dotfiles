@@ -66,4 +66,4 @@ alias tree="tree -C"
 
 # Quick Paths
 alias qp="__get_quick_path"
-alias qpl="__get_quick_path | sort"
+alias qpl="__list_quick_paths | sort"
