@@ -1,6 +1,6 @@
 {
   //// workbench
-  "workbench.activityBar.visible": true,
+  "workbench.activityBar.location": "side",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "One Monokai",
   "workbench.layoutControl.enabled": false,

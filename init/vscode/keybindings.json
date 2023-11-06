@@ -58,10 +58,6 @@
     "command": "-workbench.action.togglePanel"
   },
   {
-    "key": "ctrl+j m",
-    "command": "workbench.action.toggleMaximizedPanel"
-  },
-  {
     "key": "ctrl+j z",
     "command": "workbench.action.toggleZenMode"
   },
@@ -302,5 +298,10 @@
   {
     "key": "ctrl+j u",
     "command": "testing.runAll"
+  },
+  {
+    "key": "ctrl+j m",
+    "command": "workbench.action.toggleMaximizeEditorGroup",
+    "when": "maximizedEditorGroup || multipleEditorGroups"
   }
 ]

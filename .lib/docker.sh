@@ -54,6 +54,8 @@ alias dnrm="docker network rm"
 # Logs
 alias dclogs="docker container logs"
 
+# Builder
+alias dbprune="docker builder prune -a"
 
 #######################################
 # functions
