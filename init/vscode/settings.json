@@ -121,14 +121,14 @@
   },
   //// python settings
   "python.formatting.provider": "none",
-  "python.formatting.blackArgs": [
-    "--line-length",
-    "79"
-  ],
   "[python]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
+  "black-formatter.args": [
+    "--line-length",
+    "79"
+  ],
   //// docker settings
   "[dockerfile]": {
     "editor.formatOnSave": false
