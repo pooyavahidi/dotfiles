@@ -163,10 +163,6 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+j e",
-    "command": "workbench.action.focusFirstEditorGroup"
-  },
-  {
     "key": "ctrl+\\",
     "command": "-workbench.action.splitEditor"
   },
@@ -273,11 +269,6 @@
     "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+j c",
-    "command": "github.copilot.generate",
-    "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
-  },
-  {
     "key": "ctrl+enter",
     "command": "-github.copilot.generate",
     "when": "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused"
@@ -303,5 +294,13 @@
     "key": "ctrl+j m",
     "command": "workbench.action.toggleMaximizeEditorGroup",
     "when": "maximizedEditorGroup || multipleEditorGroups"
+  },
+  {
+    "key": "ctrl+j c",
+    "command": "workbench.panel.chat.view.copilot.focus"
+  },
+  {
+    "key": "ctrl+j e",
+    "command": "workbench.action.focusActiveEditorGroup"
   }
 ]

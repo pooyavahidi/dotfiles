@@ -30,8 +30,6 @@ function __set_macos_defaults() {
     # Finder: show hidden files by default
     defaults write com.apple.finder AppleShowAllFiles -bool true
 
-    # Set the size of dock items
-    defaults write com.apple.dock tilesize -int 50
 
     # Keep folders on top when sorting by name
     defaults write com.apple.finder _FXSortFoldersFirst -bool true

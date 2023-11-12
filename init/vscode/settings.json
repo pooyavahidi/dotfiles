@@ -1,15 +1,15 @@
 {
   //// workbench
-  "workbench.activityBar.location": "side",
+  "workbench.activityBar.location": "top",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "One Monokai",
   "workbench.layoutControl.enabled": false,
   //// window
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 3.25,
   "window.menuBarVisibility": "toggle",
   "window.titleBarStyle": "custom",
   "window.commandCenter": false,
-  "window.density.editorTabHeight": "default",
+  "window.density.editorTabHeight": "compact",
   //// editor
   "editor.renderWhitespace": "none",
   "editor.minimap.enabled": false,
@@ -17,7 +17,7 @@
     80
   ],
   "editor.cursorBlinking": "solid",
-  "editor.fontSize": 13,
+  "editor.fontSize": 12,
   "editor.tabSize": 4,
   "editor.mouseWheelZoom": false,
   // Use spaces per tab
@@ -28,15 +28,16 @@
   // Controls Sf suggestions should be accepted on 'Enter'. Use 'tab' instead.
   "editor.acceptSuggestionOnEnter": "off",
   "editor.formatOnSave": true,
+  "editor.multiDocumentOccurrencesHighlight": true,
   //// explorer
   "explorer.openEditors.visible": 0,
   //// debug
   "debug.onTaskErrors": "showErrors",
   //// terminal
-  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontSize": 12,
   "terminal.integrated.tabs.enabled": false,
   //// vscodevim extension settings
-  "vim.insertModeKeyBindings": [
+  "vim.insertModeKeyBindingsNonRecursive": [
     {
       "before": [
         "j",
@@ -44,18 +45,6 @@
       ],
       "after": [
         "<Esc>"
-      ]
-    },
-    {
-      "before": [
-        "J",
-        "J"
-      ],
-      "after": [
-        "<Esc>"
-      ],
-      "commands": [
-        ":w"
       ]
     }
   ],
@@ -65,10 +54,19 @@
         "p"
       ],
       "after": [
-        "p",
-        "g",
-        "v",
-        "y"
+        "\"",
+        "0",
+        "p"
+      ]
+    },
+    {
+      "before": [
+        "P"
+      ],
+      "after": [
+        "\"",
+        "0",
+        "P"
       ]
     }
   ],
@@ -120,7 +118,6 @@
     }
   },
   //// python settings
-  "python.formatting.provider": "none",
   "[python]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-python.black-formatter"
@@ -163,5 +160,5 @@
   "breadcrumbs.enabled": true,
   "git.openRepositoryInParentFolders": "always",
   "extensions.ignoreRecommendations": true,
-  "diffEditor.ignoreTrimWhitespace": false
+  "diffEditor.ignoreTrimWhitespace": false,
 }
