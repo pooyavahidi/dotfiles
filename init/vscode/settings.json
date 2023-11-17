@@ -4,12 +4,19 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "One Monokai",
   "workbench.layoutControl.enabled": false,
+  "workbench.panel.defaultLocation": "right",
+  "workbench.editor.centeredLayoutAutoResize": false,
+  "workbench.editor.centeredLayoutFixedWidth": true,
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.sideBar.location": "left",
+  "workbench.statusBar.visible": true,
   //// window
   "window.zoomLevel": 3.25,
   "window.menuBarVisibility": "toggle",
   "window.titleBarStyle": "custom",
   "window.commandCenter": false,
   "window.density.editorTabHeight": "compact",
+  "window.newWindowDimensions": "inherit",
   //// editor
   "editor.renderWhitespace": "none",
   "editor.minimap.enabled": false,
@@ -17,7 +24,7 @@
     80
   ],
   "editor.cursorBlinking": "solid",
-  "editor.fontSize": 12,
+  "editor.fontSize": 13,
   "editor.tabSize": 4,
   "editor.mouseWheelZoom": false,
   // Use spaces per tab
@@ -139,6 +146,7 @@
   //// notebook settings
   "notebook.formatOnSave.enabled": true,
   "notebook.output.scrolling": true,
+  "notebook.output.wordWrap": true,
   "notebook.lineNumbers": "on",
   //// copilot settings
   "github.copilot.enable": {

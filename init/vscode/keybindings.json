@@ -21,21 +21,8 @@
     "command": "-workbench.action.toggleSidebarVisibility"
   },
   {
-    "key": "ctrl+\\",
-    "command": "workbench.action.focusFirstEditorGroup",
-    "when": "terminalFocus"
-  },
-  {
     "key": "ctrl+,",
     "command": "-workbench.action.openSettings"
-  },
-  {
-    "key": "ctrl+j a",
-    "command": "editor.action.selectAll"
-  },
-  {
-    "key": "ctrl+a",
-    "command": "-editor.action.selectAll"
   },
   {
     "key": "ctrl+j v",
@@ -72,18 +59,6 @@
   {
     "key": "ctrl+j x",
     "command": "workbench.action.closeEditorsAndGroup"
-  },
-  {
-    "key": "ctrl+j shift+p",
-    "command": "workbench.action.openPreviousEditorFromHistory"
-  },
-  {
-    "key": "ctrl+j p",
-    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
-  },
-  {
-    "key": "ctrl+j n",
-    "command": "workbench.action.nextEditorInGroup"
   },
   {
     "key": "ctrl+k ctrl+pagedown",
@@ -148,16 +123,6 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+j \\",
-    "command": "workbench.action.terminal.toggleTerminal",
-    "when": "terminal.active"
-  },
-  {
-    "key": "ctrl+`",
-    "command": "-workbench.action.terminal.toggleTerminal",
-    "when": "terminal.active"
-  },
-  {
     "key": "ctrl+\\",
     "command": "workbench.action.terminal.focus",
     "when": "editorTextFocus"
@@ -167,20 +132,8 @@
     "command": "-workbench.action.splitEditor"
   },
   {
-    "key": "ctrl+j ctrl+p",
+    "key": "ctrl+j f",
     "command": "workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+j l",
-    "command": "workbench.action.nextEditor"
-  },
-  {
-    "key": "ctrl+pagedown",
-    "command": "-workbench.action.nextEditor"
-  },
-  {
-    "key": "ctrl+j h",
-    "command": "workbench.action.previousEditor"
   },
   {
     "key": "ctrl+pageup",
@@ -215,11 +168,6 @@
   {
     "key": "ctrl+j s",
     "command": "workbench.action.findInFiles"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "search.action.focusSearchList",
-    "when": "hasSearchResult && searchViewletVisible"
   },
   {
     "key": "ctrl+i",
@@ -302,5 +250,63 @@
   {
     "key": "ctrl+j e",
     "command": "workbench.action.focusActiveEditorGroup"
+  },
+  {
+    "key": "ctrl+j ctrl+f",
+    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
+  },
+  {
+    "key": "ctrl+j h",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+j l",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+j shift+s",
+    "command": "workbench.action.files.saveFiles"
+  },
+  {
+    "key": "ctrl+j 0",
+    "command": "workbench.action.joinAllGroups"
+  },
+  {
+    "key": "ctrl+j n",
+    "command": "workbench.action.moveEditorToNextGroup"
+  },
+  {
+    "key": "ctrl+j b",
+    "command": "workbench.action.moveEditorToPreviousGroup"
+  },
+  {
+    "key": "ctrl+j \\",
+    "command": "workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+j ctrl+\\",
+    "command": "workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+0",
+    "command": "-workbench.action.lastEditorInGroup"
+  },
+  {
+    "key": "ctrl+9",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+8",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+j p",
+    "command": "markdown.showPreviewToSide",
+    "when": "!notebookEditorFocused && editorLangId == 'markdown'"
   }
 ]
