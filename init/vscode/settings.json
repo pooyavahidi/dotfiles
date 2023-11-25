@@ -10,6 +10,7 @@
   "workbench.editor.closeOnFileDelete": true,
   "workbench.sideBar.location": "left",
   "workbench.statusBar.visible": true,
+  "workbench.startupEditor": "none",
   //// window
   "window.zoomLevel": 3.25,
   "window.menuBarVisibility": "toggle",
@@ -44,6 +45,7 @@
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.tabs.enabled": false,
   //// vscodevim extension settings
+  "vim.useSystemClipboard": true,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
       "before": [
@@ -108,6 +110,33 @@
       ],
       "after": [
         "P"
+      ]
+    },
+    {
+      "before": [
+        "u"
+      ],
+      "after": [],
+      "commands": [
+        "undo"
+      ]
+    },
+    {
+      "before": [
+        "C-r"
+      ],
+      "after": [],
+      "commands": [
+        "redo"
+      ]
+    },
+    {
+      "before": [
+        "U"
+      ],
+      "after": [],
+      "commands": [
+        "redo"
       ]
     }
   ],

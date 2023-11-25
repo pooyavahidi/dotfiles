@@ -33,14 +33,6 @@
     "command": "-editor.action.clipboardPasteAction"
   },
   {
-    "key": "ctrl+j x",
-    "command": "editor.action.clipboardCutAction"
-  },
-  {
-    "key": "ctrl+x",
-    "command": "-editor.action.clipboardCutAction"
-  },
-  {
     "key": "ctrl+j",
     "command": "-workbench.action.togglePanel"
   },
@@ -53,14 +45,6 @@
     "command": "-workbench.action.toggleZenMode"
   },
   {
-    "key": "ctrl+j o",
-    "command": "workbench.action.focusNextGroup"
-  },
-  {
-    "key": "ctrl+j x",
-    "command": "workbench.action.closeEditorsAndGroup"
-  },
-  {
     "key": "ctrl+k ctrl+pagedown",
     "command": "-workbench.action.nextEditorInGroup"
   },
@@ -69,7 +53,7 @@
     "command": "-workbench.action.closeActiveEditor"
   },
   {
-    "key": "ctrl+j shift+x",
+    "key": "ctrl+j shift+q",
     "command": "workbench.action.closeAllEditors"
   },
   {
@@ -124,20 +108,15 @@
   },
   {
     "key": "ctrl+\\",
-    "command": "workbench.action.terminal.focus",
-    "when": "editorTextFocus"
+    "command": "workbench.action.terminal.focus"
   },
   {
     "key": "ctrl+\\",
     "command": "-workbench.action.splitEditor"
   },
   {
-    "key": "ctrl+j f",
+    "key": "ctrl+k",
     "command": "workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+pageup",
-    "command": "-workbench.action.previousEditor"
   },
   {
     "key": "ctrl+j ;",
@@ -252,18 +231,6 @@
     "command": "workbench.action.focusActiveEditorGroup"
   },
   {
-    "key": "ctrl+j ctrl+f",
-    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
-  },
-  {
-    "key": "ctrl+j h",
-    "command": "workbench.action.previousEditor"
-  },
-  {
-    "key": "ctrl+j l",
-    "command": "workbench.action.nextEditor"
-  },
-  {
     "key": "ctrl+j shift+s",
     "command": "workbench.action.files.saveFiles"
   },
@@ -298,11 +265,13 @@
   },
   {
     "key": "ctrl+9",
-    "command": "workbench.action.nextEditor"
+    "command": "workbench.action.nextEditor",
+    "when": "!terminalFocus"
   },
   {
     "key": "ctrl+8",
-    "command": "workbench.action.previousEditor"
+    "command": "workbench.action.previousEditor",
+    "when": "!terminalFocus"
   },
   {
     "key": "ctrl+j p",
@@ -326,5 +295,94 @@
     "key": "shift+cmd+r",
     "command": "workbench.action.files.revert",
     "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+j shift+x",
+    "command": "workbench.action.closeWindow"
+  },
+  {
+    "key": "ctrl+j o",
+    "command": "outline.focus"
+  },
+  {
+    "key": "ctrl+;",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+j g",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active"
+  },
+  {
+    "key": "ctrl+j g",
+    "command": "workbench.scm.focus"
+  },
+  {
+    "key": "ctrl+j shift+\\",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "cmd+\\",
+    "command": "-workbench.action.terminal.split",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "ctrl+j shift+\\",
+    "command": "workbench.action.terminal.splitActiveTab",
+    "when": "terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "key": "cmd+\\",
+    "command": "-workbench.action.terminal.splitActiveTab",
+    "when": "terminalProcessSupported && terminalTabsFocus"
+  },
+  {
+    "key": "ctrl+j shift+\\",
+    "command": "workbench.action.splitEditor",
+    "when": "editorFocus || notebookEditorFocused"
+  },
+  {
+    "key": "cmd+\\",
+    "command": "-workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+j m",
+    "command": "workbench.action.toggleMaximizedPanel",
+    "when": "panelFocus"
+  },
+  {
+    "key": "ctrl+8",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+9",
+    "command": "workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+j q",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "search.action.focusSearchList",
+    "when": "searchViewletFocus && hasSearchResult"
+  },
+  {
+    "key": "ctrl+[",
+    "command": "notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+  },
+  {
+    "key": "ctrl+[",
+    "command": "workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "-deleteAllRight",
+    "when": "textInputFocus && !editorReadonly"
   }
 ]
