@@ -239,11 +239,11 @@
     "command": "workbench.action.joinAllGroups"
   },
   {
-    "key": "ctrl+j n",
+    "key": "ctrl+j 9",
     "command": "workbench.action.moveEditorToNextGroup"
   },
   {
-    "key": "ctrl+j b",
+    "key": "ctrl+j 8",
     "command": "workbench.action.moveEditorToPreviousGroup"
   },
   {
