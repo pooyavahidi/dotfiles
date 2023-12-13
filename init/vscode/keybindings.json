@@ -25,18 +25,6 @@
     "command": "-workbench.action.openSettings"
   },
   {
-    "key": "ctrl+j v",
-    "command": "editor.action.clipboardPasteAction"
-  },
-  {
-    "key": "ctrl+v",
-    "command": "-editor.action.clipboardPasteAction"
-  },
-  {
-    "key": "ctrl+j",
-    "command": "-workbench.action.togglePanel"
-  },
-  {
     "key": "ctrl+j z",
     "command": "workbench.action.toggleZenMode"
   },
@@ -223,7 +211,7 @@
     "when": "maximizedEditorGroup || multipleEditorGroups"
   },
   {
-    "key": "ctrl+j c",
+    "key": "ctrl+j v",
     "command": "workbench.panel.chat.view.copilot.focus"
   },
   {
@@ -247,11 +235,7 @@
     "command": "workbench.action.moveEditorToPreviousGroup"
   },
   {
-    "key": "ctrl+j \\",
-    "command": "workbench.action.togglePanel"
-  },
-  {
-    "key": "ctrl+j ctrl+\\",
+    "key": "ctrl+j shift+\\",
     "command": "workbench.action.togglePanel"
   },
   {
@@ -288,10 +272,6 @@
     "when": "editorFocus || editorIsOpen"
   },
   {
-    "key": "cmd+j",
-    "command": "-workbench.action.togglePanel"
-  },
-  {
     "key": "shift+cmd+r",
     "command": "workbench.action.files.revert",
     "when": "editorFocus"
@@ -318,7 +298,7 @@
     "command": "workbench.scm.focus"
   },
   {
-    "key": "ctrl+j shift+\\",
+    "key": "ctrl+j shift+-",
     "command": "workbench.action.terminal.split",
     "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
   },
@@ -328,17 +308,7 @@
     "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
   },
   {
-    "key": "ctrl+j shift+\\",
-    "command": "workbench.action.terminal.splitActiveTab",
-    "when": "terminalProcessSupported && terminalTabsFocus"
-  },
-  {
-    "key": "cmd+\\",
-    "command": "-workbench.action.terminal.splitActiveTab",
-    "when": "terminalProcessSupported && terminalTabsFocus"
-  },
-  {
-    "key": "ctrl+j shift+\\",
+    "key": "ctrl+j shift+-",
     "command": "workbench.action.splitEditor",
     "when": "editorFocus || notebookEditorFocused"
   },
@@ -384,5 +354,22 @@
     "key": "ctrl+k",
     "command": "-deleteAllRight",
     "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+cmd+=",
+    "command": "-workbench.action.zoomIn"
+  },
+  {
+    "key": "shift+cmd+-",
+    "command": "-workbench.action.zoomOut"
+  },
+  {
+    "key": "ctrl+j h",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+j \\",
+    "command": "workbench.action.terminal.focus"
   }
 ]

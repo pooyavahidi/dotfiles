@@ -37,6 +37,7 @@
   "editor.acceptSuggestionOnEnter": "off",
   "editor.formatOnSave": true,
   "editor.multiDocumentOccurrencesHighlight": true,
+  "editor.occurrencesHighlight": "multiFile",
   //// explorer
   "explorer.openEditors.visible": 0,
   //// debug
@@ -44,8 +45,9 @@
   //// terminal
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.tabs.enabled": false,
+  "terminal.integrated.stickyScroll.enabled": true,
   //// vscodevim extension settings
-  "vim.useSystemClipboard": true,
+  "vim.useSystemClipboard": false,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
       "before": [
