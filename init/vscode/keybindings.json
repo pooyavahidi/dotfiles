@@ -95,8 +95,9 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+\\",
-    "command": "workbench.action.terminal.focus"
+    "key": "ctrl+j l",
+    "command": "workbench.action.terminal.focus",
+    "when": "activeEditorGroupLast && panelVisible"
   },
   {
     "key": "ctrl+\\",
@@ -125,7 +126,7 @@
   {
     "key": "ctrl+j l",
     "command": "workbench.action.focusRightGroup",
-    "when": "multipleEditorGroups"
+    "when": "multipleEditorGroups && !activeEditorGroupLast"
   },
   {
     "key": "ctrl+j h",
