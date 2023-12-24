@@ -1,0 +1,4 @@
+# Enable vi mode and tab completion for libedit
+# https://github.com/python/cpython/blob/main/Doc/library/readline.rst
+bind -v
+bind ^I rl_complete
