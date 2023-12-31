@@ -23,17 +23,17 @@ function __rprompt_add_text() {
 
 # Initial prefix and final suffix. Initial prefix shows green if previous
 # command exited without error, otherwise shows red.
-SHELL_PROMPT_INITIAL_PREFIX="%B%(?:%F{green}➜%f:%F{red}➜%f)%b"
+SHELL_PROMPT_INITIAL_PREFIX="%B%(?:%F{green}➜%f:%F{red}${emoji[right_arrow_small]}%f)%b"
 SHELL_PROMPT_FINAL_SUFFIX=" "
 
 # Git Prompt Info
 SHELL_PROMPT_GIT_BRANCH_PREFIX=" %B%F{blue}(%f%F{red}"
 SHELL_PROMPT_GIT_BRANCH_SUFFIX="%f%F{blue})%f%b"
-SHELL_PROMPT_GIT_DIRTY="%F{yellow}✗%f"
+SHELL_PROMPT_GIT_DIRTY="%F{yellow}${emoji[cross_mark_small]}%f"
 SHELL_PROMPT_GIT_STATUS_PREFIX=" "
 SHELL_PROMPT_GIT_STATUS_SUFFIX=""
-SHELL_PROMPT_GIT_AHEAD="%F{yellow}⇡%f"
-SHELL_PROMPT_GIT_BEHIND="%F{yellow}⇣%f"
+SHELL_PROMPT_GIT_AHEAD="%F{yellow}${emoji[up_arrow_dotted]}%f"
+SHELL_PROMPT_GIT_BEHIND="%F{yellow}${emoji[down_arrow_dotted]}%f"
 
 # user@hostname
 SHELL_PROMPT_USER_HOST="%F{green}%n@%m%f"
