@@ -47,7 +47,7 @@
   "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.stickyScroll.enabled": true,
   //// vscodevim extension settings
-  "vim.useSystemClipboard": false,
+  "vim.useSystemClipboard": true,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
       "before": [

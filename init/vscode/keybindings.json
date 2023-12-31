@@ -13,7 +13,7 @@
     "command": "workbench.files.action.focusFilesExplorer"
   },
   {
-    "key": "ctrl+j shift+r",
+    "key": "ctrl+j shift+a",
     "command": "workbench.action.toggleSidebarVisibility"
   },
   {
@@ -95,15 +95,6 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+j l",
-    "command": "workbench.action.terminal.focus",
-    "when": "activeEditorGroupLast && panelVisible"
-  },
-  {
-    "key": "ctrl+\\",
-    "command": "-workbench.action.splitEditor"
-  },
-  {
     "key": "ctrl+k",
     "command": "workbench.action.quickOpen"
   },
@@ -131,7 +122,7 @@
   {
     "key": "ctrl+j h",
     "command": "workbench.action.focusLeftGroup",
-    "when": "multipleEditorGroups"
+    "when": "multipleEditorGroups && !panelFocus"
   },
   {
     "key": "ctrl+j s",
@@ -240,23 +231,16 @@
     "command": "workbench.action.togglePanel"
   },
   {
-    "key": "ctrl+\\",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "terminalFocus"
-  },
-  {
     "key": "ctrl+0",
     "command": "-workbench.action.lastEditorInGroup"
   },
   {
     "key": "ctrl+9",
-    "command": "workbench.action.nextEditor",
-    "when": "!terminalFocus"
+    "command": "workbench.action.nextEditor"
   },
   {
     "key": "ctrl+8",
-    "command": "workbench.action.previousEditor",
-    "when": "!terminalFocus"
+    "command": "workbench.action.previousEditor"
   },
   {
     "key": "ctrl+j p",
@@ -299,38 +283,9 @@
     "command": "workbench.scm.focus"
   },
   {
-    "key": "ctrl+j shift+-",
-    "command": "workbench.action.terminal.split",
-    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
-  },
-  {
-    "key": "cmd+\\",
-    "command": "-workbench.action.terminal.split",
-    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
-  },
-  {
-    "key": "ctrl+j shift+-",
-    "command": "workbench.action.splitEditor",
-    "when": "editorFocus || notebookEditorFocused"
-  },
-  {
-    "key": "cmd+\\",
-    "command": "-workbench.action.splitEditor"
-  },
-  {
     "key": "ctrl+j m",
     "command": "workbench.action.toggleMaximizedPanel",
     "when": "panelFocus"
-  },
-  {
-    "key": "ctrl+8",
-    "command": "workbench.action.terminal.focusNextPane",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-  },
-  {
-    "key": "ctrl+9",
-    "command": "workbench.action.terminal.focusNextPane",
-    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   },
   {
     "key": "ctrl+j q",
@@ -365,12 +320,28 @@
     "command": "-workbench.action.zoomOut"
   },
   {
-    "key": "ctrl+j h",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "terminalFocus"
+    "key": "ctrl+j shift+-",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+j shift+-",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "workbench.action.increaseViewWidth"
   },
   {
     "key": "ctrl+j \\",
-    "command": "workbench.action.terminal.focus"
+    "command": "workbench.action.focusPanel"
+  },
+  {
+    "key": "ctrl+shift+h",
+    "command": "workbench.action.decreaseViewWidth"
+  },
+  {
+    "key": "ctrl+j shift+t",
+    "command": "workbench.action.createTerminalEditor"
   }
 ]
