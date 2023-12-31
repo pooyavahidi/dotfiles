@@ -171,17 +171,22 @@ function git::prompt_info() {
 
     local prompt_info
     prompt_info="${SHELL_PROMPT_GIT_BRANCH_PREFIX}${ref}"
-    prompt_info+="${SHELL_PROMPT_GIT_BRANCH_SUFFIX}$(git::__parse_git_status)"
+    prompt_info+="${SHELL_PROMPT_GIT_BRANCH_SUFFIX}$(git::__format_repo_status_prompt)"
 
     echo $prompt_info
 }
 
-# Check the git status and return the status prompt and the dirty flag
-function git::__parse_git_status() {
+# Get the repository's status, returns a string with the status. If the
+# repository is clean, not behind nor ahead of the remote, then it returns
+# an empty string.
+function git::repo_status() {
     local STATUS
+    local repo_status
     local -a FLAGS
+
+    # Setting flags for git status
     FLAGS=('--porcelain' '--branch')
-    if [[ "${DISABLE_UNTRACKED_FILES_DIRTY:-}" == "true" ]]; then
+    if [[ "${GIT_DISABLE_UNTRACKED_FILES_DIRTY:-}" == "true" ]]; then
         FLAGS+='--untracked-files=no'
     fi
     case "${GIT_STATUS_IGNORE_SUBMODULES:-}" in
@@ -195,33 +200,45 @@ function git::__parse_git_status() {
             ;;
     esac
 
+    # Get the git status with the necessary flags
     STATUS=$(git::__prompt_git status ${FLAGS} 2> /dev/null)
 
-    local is_dirty=false
-    # Remove the first line (branch info) from the status output and then 
-    # check if the last line has some value. If yes, then it is dirty.
+    # Check for dirty status
     if [[ -n $(echo "$STATUS" | sed "1d" | tail -1 2> /dev/null) ]]; then
-        is_dirty=true
+        repo_status+="D"
     fi
-
-    local status_prompt
 
     # Check if branch is ahead
     if $(echo "$STATUS" | grep '^## [^ ]\+ .*ahead' &> /dev/null); then
-        status_prompt+=$SHELL_PROMPT_GIT_AHEAD
+        repo_status+="A"
     fi
 
     # Check if branch is behind
     if $(echo "$STATUS" | grep '^## [^ ]\+ .*behind' &> /dev/null); then
+        repo_status+="B"
+    fi
+
+    echo "$repo_status"
+}
+
+function git::__format_repo_status_prompt() {
+    local status_prompt
+    local repo_status
+
+    repo_status=$(git::repo_status)
+
+    # Construct the status prompt based on the repo status
+    if echo "$repo_status" | grep -q "A"; then
+        status_prompt+=$SHELL_PROMPT_GIT_AHEAD
+    fi
+
+    if echo "$repo_status" | grep -q "B"; then
         status_prompt+=$SHELL_PROMPT_GIT_BEHIND
     fi
 
-    # Add dirty flag to the status prompt
-    if [[ "$is_dirty" == true ]]; then
+    if echo "$repo_status" | grep -q "D"; then
         # If status prompt is not empty, add a space in front.
-        if [[ -n $status_prompt ]]; then
-            status_prompt+=" "
-        fi
+        [[ -n $status_prompt ]] && status_prompt+=" "
         status_prompt+=$SHELL_PROMPT_GIT_DIRTY
     fi
 
@@ -272,21 +289,65 @@ function git::remote_url_minified() {
         | sed -e "s/:/_/g"
 }
 
-# Check for git status of all the subdirectories of the given path.
-# This function goes through the first-level subdirectories.
-function git::working_dir_status {
-    local __dir
+# Get the status of the given working directory path(s).
+# More than one directory can be passed by separating them with space.
+function git::working_dir_status() {
+    local -a __repos=("$@")
+    local __repo_status
+    local __repo
+    local __status_string
 
-    [[ -z "${__dir:=$1}" ]] && __dir=$(pwd)
+    # Keep the current directory to navigate back to it later
+    local __current_dir=$(pwd)
 
-    # If the directory is not tracked by git, then return
-    if ! git::is_git_working_dir $__dir ; then
-        return 1
-    fi
+    for __repo in "${__repos[@]}"
+    do
+        # Check if the path is valid
+        if [[ ! -d "$__repo" ]]; then
+            __err "$__repo is not a valid directory"
+            continue
+        fi
 
-    git::__prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
-        fetch
+        cd "$__repo"
 
-    git::__prompt_git --work-tree=$__dir --git-dir=$__dir/.git \
-        status --short --branch
+        if ! git::is_git_working_dir "$__repo"; then
+            __err "$__repo is not a git working directory"
+            continue
+        fi
+
+        # Fetch without printing to stdout
+        git fetch > /dev/null 2>&1
+
+        # Get the repository status for the current working directory
+        __repo_status=$(git::repo_status)
+
+        __status_string=""
+        if [[ -z $__repo_status ]]; then
+            # If the status is an empty string, the repository is clean
+            __status_string="${emoji[check_mark_button]}"
+        else
+            # Dirty
+            if echo "$__repo_status" | grep -q "D"; then
+                __status_string+=" ${emoji[cross_mark]}"
+            fi
+
+            #Ahead
+            if echo "$__repo_status" | grep -q "A"; then
+                __status_string+=" ${emoji[up_arrow_dotted]}"
+            fi
+
+            #Behind
+            if echo "$__repo_status" | grep -q "B"; then
+                __status_string+=" ${emoji[down_arrow_dotted]} "
+            fi
+        fi
+
+        # Remove the leading spaces if any
+        __status_string=$(echo "$__status_string" | sed -e 's/^ *//')
+
+        echo "${__status_string}\t$__repo"
+    done
+
+    # Navigate back to the original directory
+    cd "$__current_dir"
 }
