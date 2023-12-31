@@ -79,10 +79,10 @@ function c() {
         # If the first argument is an alias, use the path for that alias.
         # Remove the first argument and pass the rest to code.
         shift 1
-        code "$__path" "$@"
+        command code "$__path" "$@"
     else
         # If the first argument is not an alias, then just run code as is.
-        code "$@"
+        command code "$@"
     fi
 }
 
