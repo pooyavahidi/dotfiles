@@ -129,7 +129,7 @@
     "command": "workbench.action.findInFiles"
   },
   {
-    "key": "ctrl+i",
+    "key": "ctrl+o",
     "command": "workbench.action.debug.stepOver",
     "when": "debugState == 'stopped'"
   },
@@ -161,7 +161,7 @@
     "when": "!inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'node' || !inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'pwa-extensionHost' || !inDebugMode && activeViewlet == 'workbench.view.debug' && debugConfigurationType == 'pwa-node'"
   },
   {
-    "key": "ctrl+o",
+    "key": "ctrl+i",
     "command": "workbench.action.debug.stepInto",
     "when": "debugState != 'inactive'"
   },
