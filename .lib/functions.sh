@@ -200,7 +200,8 @@ function checksumdir() {
         | shasum -a 256)
     else
         # By default, include all files.
-        __hash=$(find $__dir -type f \
+        # Remove the './' from the beginning of the file paths, in case __dir="."
+        __hash=$(find $__dir -type f | sed 's|^\./||' \
         | LC_ALL=C sort \
         | xargs shasum -a 256 \
         | shasum -a 256)
