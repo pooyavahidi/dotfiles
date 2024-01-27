@@ -9,16 +9,8 @@
     "command": "-workbench.action.terminal.new"
   },
   {
-    "key": "ctrl+j r",
+    "key": "ctrl+j f",
     "command": "workbench.files.action.focusFilesExplorer"
-  },
-  {
-    "key": "ctrl+j shift+a",
-    "command": "workbench.action.toggleSidebarVisibility"
-  },
-  {
-    "key": "ctrl+b",
-    "command": "-workbench.action.toggleSidebarVisibility"
   },
   {
     "key": "ctrl+,",
@@ -257,9 +249,9 @@
     "when": "editorFocus || editorIsOpen"
   },
   {
-    "key": "shift+cmd+r",
+    "key": "ctrl+j shift+r",
     "command": "workbench.action.files.revert",
-    "when": "editorFocus"
+    "when": "editorFocus || notebookEditorFocused"
   },
   {
     "key": "ctrl+j shift+x",
@@ -343,5 +335,9 @@
   {
     "key": "ctrl+j shift+t",
     "command": "workbench.action.createTerminalEditor"
+  },
+  {
+    "key": "ctrl+j shift+b",
+    "command": "workbench.action.toggleSidebarVisibility"
   }
 ]
