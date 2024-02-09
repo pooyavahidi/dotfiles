@@ -186,10 +186,6 @@
     "command": "editor.action.toggleWordWrap"
   },
   {
-    "key": "ctrl+j u",
-    "command": "testing.runAll"
-  },
-  {
     "key": "ctrl+j m",
     "command": "workbench.action.toggleMaximizeEditorGroup",
     "when": "maximizedEditorGroup || multipleEditorGroups"
@@ -339,5 +335,30 @@
   {
     "key": "ctrl+j shift+b",
     "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+j c",
+    "command": "editor.fold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "ctrl+j shift+c",
+    "command": "editor.foldAll",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "ctrl+j u",
+    "command": "editor.unfold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "ctrl+j shift+u",
+    "command": "editor.unfoldAll",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "ctrl+j shift+c",
+    "command": "list.collapseAll",
+    "when": "listFocus && !inputFocus && !treestickyScrollFocused"
   }
 ]
