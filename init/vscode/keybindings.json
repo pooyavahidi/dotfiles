@@ -191,7 +191,7 @@
     "when": "maximizedEditorGroup || multipleEditorGroups"
   },
   {
-    "key": "ctrl+j v",
+    "key": "ctrl+j n",
     "command": "workbench.panel.chat.view.copilot.focus"
   },
   {
