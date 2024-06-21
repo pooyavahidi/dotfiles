@@ -21,6 +21,9 @@ function __set_gitconfig() {
 
 # Set the defaults for macOS finder
 function __set_macos_defaults() {
+    # Disable Press and Hold
+    defaults write com.google.Chrome ApplePressAndHoldEnabled -bool false
+
     # Finder: show path bar
     defaults write com.apple.finder ShowPathbar -bool true
 
