@@ -333,7 +333,7 @@
     "command": "workbench.action.createTerminalEditor"
   },
   {
-    "key": "ctrl+j shift+b",
+    "key": "ctrl+j a",
     "command": "workbench.action.toggleSidebarVisibility"
   },
   {
