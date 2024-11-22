@@ -2,7 +2,7 @@
   //// workbench
   "workbench.activityBar.location": "top",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "One Monokai",
+  "workbench.colorTheme": "GitHub Dark Dimmed",
   "workbench.layoutControl.enabled": false,
   "workbench.panel.defaultLocation": "right",
   "workbench.editor.centeredLayoutAutoResize": false,
@@ -38,6 +38,7 @@
   "editor.formatOnSave": true,
   "editor.multiDocumentOccurrencesHighlight": true,
   "editor.occurrencesHighlight": "multiFile",
+  "editor.stickyScroll.enabled": false,
   //// explorer
   "explorer.openEditors.visible": 0,
   //// debug
@@ -154,6 +155,7 @@
       "strings": true
     },
     "editor.stickyScroll.enabled": true,
+    "files.trimTrailingWhitespace": false
   },
   //// python settings
   "[python]": {
@@ -183,6 +185,7 @@
   "notebook.output.scrolling": true,
   "notebook.output.wordWrap": true,
   "notebook.lineNumbers": "on",
+  "notebook.output.minimalErrorRendering": true,
   //// copilot settings
   "github.copilot.enable": {
     "*": true,
@@ -190,14 +193,19 @@
     "markdown": true,
     "scminput": false
   },
+  "github.copilot.editor.enableAutoCompletions": true,
   //// files
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
+  //// git
+  "git.openRepositoryInParentFolders": "always",
+  "git.autofetch": true,
+  "git.decorations.enabled": true,
   //// other settings
   "breadcrumbs.enabled": true,
-  "git.openRepositoryInParentFolders": "always",
   "extensions.ignoreRecommendations": true,
   "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.hideUnchangedRegions.enabled": false
 }
