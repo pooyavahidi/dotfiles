@@ -333,7 +333,7 @@
     "command": "workbench.action.createTerminalEditor"
   },
   {
-    "key": "ctrl+j a",
+    "key": "ctrl+j shift+f",
     "command": "workbench.action.toggleSidebarVisibility"
   },
   {
@@ -360,5 +360,9 @@
     "key": "ctrl+j shift+c",
     "command": "list.collapseAll",
     "when": "listFocus && !inputFocus && !treestickyScrollFocused"
+  },
+  {
+    "key": "ctrl+j shift+n",
+    "command": "workbench.action.toggleAuxiliaryBar"
   }
 ]
