@@ -186,7 +186,7 @@
     "command": "editor.action.toggleWordWrap"
   },
   {
-    "key": "ctrl+j m",
+    "key": "ctrl+j a",
     "command": "workbench.action.toggleMaximizeEditorGroup",
     "when": "maximizedEditorGroup || multipleEditorGroups"
   },
@@ -271,7 +271,7 @@
     "command": "workbench.scm.focus"
   },
   {
-    "key": "ctrl+j m",
+    "key": "ctrl+j a",
     "command": "workbench.action.toggleMaximizedPanel",
     "when": "panelFocus"
   },
@@ -364,5 +364,15 @@
   {
     "key": "ctrl+j shift+n",
     "command": "workbench.action.toggleAuxiliaryBar"
+  },
+  {
+    "key": "ctrl+j m",
+    "command": "workbench.action.chat.openEditSession",
+    "when": "chatEditingParticipantRegistered && chatIsEnabled && view != 'workbench.panel.chat.view.edits'"
+  },
+  {
+    "key": "ctrl+j shift+m",
+    "command": "workbench.panel.chatEditing",
+    "when": "workbench.panel.chat.view.edits.active"
   }
 ]
