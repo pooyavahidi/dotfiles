@@ -207,6 +207,13 @@ function aws::set_original_env_variables() {
     return 0
 }
 
+# Print the current aws env variables to the console
+function aws::print_env_variables() {
+    echo "export AWS_REGION=$AWS_REGION"
+    echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID"
+    echo "export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY"
+    echo "export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN"
+}
 
 # AWS SSM functions
 # Put (upsert) a secure string into the Parameter Store.
