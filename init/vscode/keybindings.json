@@ -374,5 +374,9 @@
     "key": "ctrl+j shift+m",
     "command": "workbench.panel.chatEditing",
     "when": "workbench.panel.chat.view.edits.active"
+  },
+  {
+    "key": "cmd+q",
+    "command": "-workbench.action.quit"
   }
 ]
