@@ -50,7 +50,7 @@
   "terminal.integrated.mouseWheelZoom": false,
   "terminal.integrated.enableMultiLinePasteWarning": "auto",
   //// vscodevim extension settings
-  "vim.useSystemClipboard": true,
+  "vim.useSystemClipboard": false,
   "vim.insertModeKeyBindingsNonRecursive": [
     {
       "before": [
