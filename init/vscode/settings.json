@@ -1,7 +1,6 @@
 {
   //// workbench
   "workbench.activityBar.location": "top",
-  "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "GitHub Dark Dimmed",
   "workbench.layoutControl.enabled": false,
   "workbench.panel.defaultLocation": "right",
@@ -154,8 +153,7 @@
       "comments": false,
       "strings": true
     },
-    "editor.stickyScroll.enabled": true,
-    "files.trimTrailingWhitespace": false
+    "editor.stickyScroll.enabled": true
   },
   //// python settings
   "[python]": {
