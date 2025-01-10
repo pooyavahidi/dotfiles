@@ -61,8 +61,8 @@ disable=
     too-few-public-methods,
     missing-module-docstring,
     missing-function-docstring,
-    broad-except
-
+    broad-except,
+    redefined-outer-name
 
 [REPORTS]
 
