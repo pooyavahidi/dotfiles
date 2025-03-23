@@ -351,3 +351,33 @@ function git::working_dir_status() {
     # Navigate back to the original directory
     cd "$__current_dir"
 }
+
+function git::working_dir_pull() {
+    # array of directories can be passed by separating them with space.
+    local -a __repos=("$@")
+    local __repo
+
+    # Ensure we return to original directory even if an error occurs
+    local __current_dir=$(pwd)
+    trap "cd \"$__current_dir\"" EXIT
+
+    for __repo in "${__repos[@]}"
+    do
+        # Check if the path is valid
+        if [[ ! -d "$__repo" ]]; then
+            __err "$__repo is not a valid directory"
+            continue
+        fi
+
+        cd "$__repo"
+
+        if ! git::is_git_working_dir "$__repo"; then
+            __err "$__repo is not a git working directory"
+            continue
+        fi
+
+        # Pull
+        echo ">>> Pulling $__repo"
+        git pull
+    done
+}
