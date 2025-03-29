@@ -379,5 +379,6 @@ function git::working_dir_pull() {
         # Pull
         echo ">>> Pulling $__repo"
         git pull
+        echo "------------------------------"
     done
 }
