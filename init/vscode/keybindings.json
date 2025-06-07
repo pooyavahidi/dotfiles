@@ -191,7 +191,7 @@
     "when": "maximizedEditorGroup || multipleEditorGroups"
   },
   {
-    "key": "ctrl+j n",
+    "key": "ctrl+j m",
     "command": "workbench.panel.chat.view.copilot.focus"
   },
   {
@@ -360,15 +360,6 @@
     "key": "ctrl+j shift+c",
     "command": "list.collapseAll",
     "when": "listFocus && !inputFocus && !treestickyScrollFocused"
-  },
-  {
-    "key": "ctrl+j shift+n",
-    "command": "workbench.action.toggleAuxiliaryBar"
-  },
-  {
-    "key": "ctrl+j m",
-    "command": "workbench.action.chat.openEditSession",
-    "when": "chatEditingParticipantRegistered && chatIsEnabled && view != 'workbench.panel.chat.view.edits'"
   },
   {
     "key": "cmd+q",
