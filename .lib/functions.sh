@@ -220,3 +220,36 @@ function is-int() {
         return 1
     fi
 }
+
+# Securely prompt for and export an environment variable
+function export-secure-env-var() {
+    local env_var="$1"
+    local value=""
+
+    # Validation
+    if [[ -z "$env_var" ]]; then
+        __err "environment variable name is required"
+        return 1
+    fi
+
+    # Prompt for the value (input will be hidden)
+    printf "$env_var="
+
+    # Use read with -s flag to hide input (works on both Mac and Linux)
+    if read -s value; then
+        # empty line to avoid echoing in the same line
+        echo
+
+        # Return error if value is empty
+        if [[ -z "$value" ]]; then
+            __err "empty value provided for $env_var"
+            return 1
+        fi
+
+        # Export the environment variable
+        export "$env_var"="$value"
+    else
+        __err "failed to read input for $env_var"
+        return 1
+    fi
+}
